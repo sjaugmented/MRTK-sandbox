@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LWDMX : MonoBehaviour {
-
+    /*
     public string x_pos_channel = "";
     public string y_pos_channel = "";
     public string z_pos_channel = "";
@@ -53,4 +53,5 @@ public class LWDMX : MonoBehaviour {
 
         _sceneController.SendDMX(address, Mathf.FloorToInt(value));
     }
+    */
 }

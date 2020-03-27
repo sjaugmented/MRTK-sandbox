@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MainController : MonoBehaviour {
-
+    /*
     ArtNet.Engine _artNet;
 
     byte[] _dmxData;
@@ -196,7 +196,8 @@ public class MainController : MonoBehaviour {
         _dmxData = GetEmpty512();
         _artNet.SendDMX(_dmxData);
     }
-
+    */
+    /*
     void GazeChanged(GameObject previousObject, GameObject newObject)
     {
         // Gaze is handled with Focus Implementation
@@ -212,8 +213,8 @@ public class MainController : MonoBehaviour {
             newObject.SendMessage("OnGazeEnter");
         }
         */
-    }
-
+    //}
+/*
     public static string VectorToString(Vector3 v)
     {
         return "x:" + v.x.ToString("0.0000") + " y:" + v.y.ToString("0.0000") + " z:" + v.z.ToString("0.0000");
@@ -298,5 +299,5 @@ public class MainController : MonoBehaviour {
 
         SetHandsUp(which, false);
     }
-
+*/
 }

@@ -6,7 +6,7 @@ using System;
 public class SceneController : MonoBehaviour {
 
 
-
+    /*
     MainController _mc;
     OscOut _oscOut;
     string _scenesJson = "";
@@ -442,4 +442,5 @@ public class SceneController : MonoBehaviour {
         public List<LWDevice> devices;
         public List<LWScene> scenes;
     }
+    */
 }

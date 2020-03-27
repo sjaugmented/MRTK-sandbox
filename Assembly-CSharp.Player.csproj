@@ -1282,6 +1282,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ArtNet\Engine.cs" />
+    <Compile Include="Assets\DMXcontroller1.cs" />
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\EyeTrackingTutorialDemo.cs" />
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\HandInteractionTouch.cs" />
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\LaunchLunarModule.cs" />
@@ -1289,8 +1291,8 @@
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\MoveWithPan.cs" />
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\PartAssemblyDemo.cs" />
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\TogglePlacementHints.cs" />
-    <Compile Include="Assets\Scripts\DMXcontroller.cs" />
-    <Compile Include="Assets\Scripts\Engine.cs" />
+    <Compile Include="Assets\Scripts\DMXcontrol.cs" />
+    <Compile Include="Assets\Scripts\DMXcontroller1.cs" />
     <Compile Include="Assets\Scripts\LWDMX.cs" />
     <Compile Include="Assets\Scripts\MainController.cs" />
     <Compile Include="Assets\Scripts\SceneController.cs" />

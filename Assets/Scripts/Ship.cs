@@ -7,6 +7,13 @@ public class Ship : MonoBehaviour
     bool isActive = false;
     [SerializeField] GameObject explosionFX;
 
+    DMXcontrol dmx;
+
+    private void Awake()
+    {
+        dmx = FindObjectOfType<DMXcontrol>();
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
