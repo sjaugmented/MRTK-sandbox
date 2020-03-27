@@ -1289,6 +1289,7 @@
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\MoveWithPan.cs" />
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\PartAssemblyDemo.cs" />
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\TogglePlacementHints.cs" />
+    <Compile Include="Assets\Scripts\DMXcontroller.cs" />
     <Compile Include="Assets\Scripts\Engine.cs" />
     <Compile Include="Assets\Scripts\LWDMX.cs" />
     <Compile Include="Assets\Scripts\MainController.cs" />
