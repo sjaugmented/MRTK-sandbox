@@ -66,21 +66,6 @@
     <Compile Include="Assets\MixedRealityToolkit\Utilities\Gltf\Serialization\Importers\GlbAssetImporter.cs" />
     <Compile Include="Assets\MixedRealityToolkit\Utilities\Gltf\Serialization\Importers\GltfAssetImporter.cs" />
     <Compile Include="Assets\MixedRealityToolkit\Utilities\Gltf\Serialization\Importers\GltfEditorImporter.cs" />
-    <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.TestRunner">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -662,6 +647,26 @@
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Editor.Utilities.csproj">
       <Project>{6E7A5F3B-FA31-EE85-74D8-7CB04FBB8A48}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Editor.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{DCF21F6C-D221-C792-8BB1-BA9E364784AB}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Tilemap.Editor.csproj">
+      <Project>{7C5A7326-8DBD-3D0D-9B30-C435F8CBAF2C}</Project>
+      <Name>Unity.2D.Tilemap.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{A7944FC0-5B57-91EF-8235-B9355EACEDCB}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.TestRunner.csproj">
+      <Project>{B08CBC36-6CBD-9C29-10F1-4B1EF207B902}</Project>
+      <Name>UnityEditor.TestRunner</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.TestRunner.csproj">
+      <Project>{E9B71A4D-EE3C-EAB0-F04E-806725ECB1F5}</Project>
+      <Name>UnityEngine.TestRunner</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

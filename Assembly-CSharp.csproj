@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ArtNet\Engine.cs" />
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\EyeTrackingTutorialDemo.cs" />
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\HandInteractionTouch.cs" />
     <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\LaunchLunarModule.cs" />
@@ -93,72 +94,6 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="MSBuildForUnity">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/MSBuildForUnity.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.WindowsMR.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.WindowsMR.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.WindowsMR">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.WindowsMR.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -699,6 +634,10 @@
       <Project>{22DB51AB-48AD-0747-6BE1-34FB17B491C2}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Editor.ServiceInspectors</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.Editor.csproj">
+      <Project>{CD127B91-213B-CD45-D14D-6FBA3EF376D5}</Project>
+      <Name>Unity.Timeline.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Services.SceneSystem.csproj">
       <Project>{39A8C45F-59EF-1328-DD40-FBF74D6403FD}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.SceneSystem</Name>
@@ -718,6 +657,14 @@
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Async.csproj">
       <Project>{589C06F4-0456-6963-9A39-917396411983}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Async</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.multiplayer-hlapi.Editor.csproj">
+      <Project>{09FACD32-CA3F-7592-057E-E91C2DDA15C0}</Project>
+      <Name>com.unity.multiplayer-hlapi.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VSCode.Editor.csproj">
+      <Project>{16051477-5098-CB2A-C092-83F41E44720E}</Project>
+      <Name>Unity.VSCode.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Providers.WindowsVoiceInput.csproj">
       <Project>{244B3EB0-3CB0-3407-5F4C-136C454C85ED}</Project>
@@ -747,13 +694,25 @@
       <Project>{609E6987-B2DA-D8FC-5A10-4B40D632A980}</Project>
       <Name>Microsoft.MixedReality.Toolkit</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
+      <Project>{F0974020-6C2C-A19D-1FA2-3C0DC52135E6}</Project>
+      <Name>Unity.TextMeshPro.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.SDK.Inspectors.csproj">
       <Project>{A47C0455-AFF4-E4D4-CF61-5524A566C6E1}</Project>
       <Name>Microsoft.MixedReality.Toolkit.SDK.Inspectors</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{A7944FC0-5B57-91EF-8235-B9355EACEDCB}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Services.SpatialAwarenessSystem.csproj">
       <Project>{0985ED03-30D2-E733-C47E-5271337BDB7D}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.SpatialAwarenessSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.csproj">
+      <Project>{D2C8744F-24DD-1D5B-2E2B-31EC217ADC13}</Project>
+      <Name>Unity.Timeline</Name>
     </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Services.InputSimulation.Editor.csproj">
       <Project>{F182A4A1-4FCB-C820-AB54-090000371E18}</Project>
@@ -763,9 +722,21 @@
       <Project>{38F6A7AB-8F9E-069A-71BB-8591FD962640}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.CameraSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.CollabProxy.Editor.csproj">
+      <Project>{09942516-1316-7894-6226-E32EC6C928AB}</Project>
+      <Name>Unity.CollabProxy.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.SDK.csproj">
       <Project>{465B19D1-AB7D-4040-0E76-FCE580A4E42A}</Project>
       <Name>Microsoft.MixedReality.Toolkit.SDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.multiplayer-weaver.Editor.csproj">
+      <Project>{096E769D-FFAD-FF64-1CBB-BFA42FA5D0EE}</Project>
+      <Name>com.unity.multiplayer-weaver.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.csproj">
+      <Project>{B6698555-8738-4C86-FF8F-932A08E09D4D}</Project>
+      <Name>UnityEngine.XR.LegacyInputHelpers</Name>
     </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Providers.OpenVR.csproj">
       <Project>{AC8A5A23-9995-AD13-7F4C-3BDEFC33C699}</Project>
@@ -779,6 +750,10 @@
       <Project>{52FE32A6-2AD2-DEBA-3C17-81FDFFCE1FB0}</Project>
       <Name>Microsoft.MixedReality.Toolkit.SDK.Experimental.Inspectors</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Rider.Editor.csproj">
+      <Project>{3C44EA39-DFD2-3EA5-C47A-06B4C56A7717}</Project>
+      <Name>Unity.Rider.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Services.DiagnosticsSystem.csproj">
       <Project>{4BFE08C5-56D7-142F-BA43-D7F79353BADA}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.DiagnosticsSystem</Name>
@@ -787,21 +762,45 @@
       <Project>{60BF090D-17A5-ECB0-1446-3D8082382F35}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.InputSystem.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="MSBuildForUnity.csproj">
+      <Project>{D0432827-6E2A-4E96-9620-B861B9EE5EBB}</Project>
+      <Name>MSBuildForUnity</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Services.InputSystem.csproj">
       <Project>{E1ADB783-B689-1308-658A-FC612768EE9A}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.InputSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
+      <Project>{434FB44D-B320-C408-B0D7-7C4B1D7E4591}</Project>
+      <Name>Unity.2D.Sprite.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Gltf.Importers.csproj">
       <Project>{C96A4957-6A44-55F1-F114-D7E507F1729A}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Gltf.Importers</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.2D.Tilemap.Editor.csproj">
+      <Project>{7C5A7326-8DBD-3D0D-9B30-C435F8CBAF2C}</Project>
+      <Name>Unity.2D.Tilemap.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Providers.WindowsMixedReality.Editor.csproj">
       <Project>{34E03EDB-9F64-E1C1-F1C0-78822C2E4B23}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Providers.WindowsMixedReality.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityEditor.SpatialTracking.csproj">
+      <Project>{32315A81-17FA-8022-878C-319A594709E0}</Project>
+      <Name>UnityEditor.SpatialTracking</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.XR.WindowsMR.Editor.csproj">
+      <Project>{EB486B30-A3CC-2C96-6BA6-3B552889405C}</Project>
+      <Name>Unity.XR.WindowsMR.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Providers.XRSDK.WindowsMixedReality.Editor.csproj">
       <Project>{49354087-A0F5-8D98-5D57-76C741FE8C03}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Providers.XRSDK.WindowsMixedReality.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.SpatialTracking.csproj">
+      <Project>{8B5BDA0E-F223-3E78-AD36-469D4C9CE862}</Project>
+      <Name>UnityEngine.SpatialTracking</Name>
     </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Services.InputAnimation.csproj">
       <Project>{7AF07AE0-719D-8E7C-A9C8-718CBB90AEB6}</Project>
@@ -827,13 +826,37 @@
       <Project>{4800D534-A91A-B5E3-7E07-595AD7016F1B}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.BoundarySystem</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.TextMeshPro.csproj">
+      <Project>{1BF05F73-DF0C-8ED8-E032-EFE72ED52D58}</Project>
+      <Name>Unity.TextMeshPro</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Providers.UnityAR.ConfigCheck.csproj">
       <Project>{2D8F199D-3F48-E801-52AD-883160975DB5}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Providers.UnityAR.ConfigCheck</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Analytics.DataPrivacy.csproj">
+      <Project>{A1692358-1D46-1D95-36C8-76D334E242DA}</Project>
+      <Name>Unity.Analytics.DataPrivacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.XR.LegacyInputHelpers.csproj">
+      <Project>{B485B34C-E592-FA68-106E-38744BED6EF3}</Project>
+      <Name>UnityEditor.XR.LegacyInputHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.XR.WindowsMR.csproj">
+      <Project>{5935D7AA-AD63-E13A-1266-E927B78115A4}</Project>
+      <Name>Unity.XR.WindowsMR</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Services.InputSimulation.csproj">
       <Project>{CA9C9E8C-0E9E-DE7D-2283-9EC8ADBD3A72}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.InputSimulation</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{DCF21F6C-D221-C792-8BB1-BA9E364784AB}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.multiplayer-hlapi.Runtime.csproj">
+      <Project>{4B53272F-F50E-12A7-89FE-0D42B8CD815A}</Project>
+      <Name>com.unity.multiplayer-hlapi.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

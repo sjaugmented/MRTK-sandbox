@@ -79,15 +79,6 @@
     <Compile Include="Assets\MixedRealityToolkit.Services\InputSystem\NearInteractionTouchableVolume.cs" />
     <Compile Include="Assets\MixedRealityToolkit.Services\InputSystem\Utilities\CanvasUtility.cs" />
     <Compile Include="Assets\MixedRealityToolkit.Services\InputSystem\Utilities\ScaleMeshEffect.cs" />
-    <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -652,6 +643,18 @@
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Async.csproj">
       <Project>{589C06F4-0456-6963-9A39-917396411983}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Async</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{DCF21F6C-D221-C792-8BB1-BA9E364784AB}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Tilemap.Editor.csproj">
+      <Project>{7C5A7326-8DBD-3D0D-9B30-C435F8CBAF2C}</Project>
+      <Name>Unity.2D.Tilemap.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{A7944FC0-5B57-91EF-8235-B9355EACEDCB}</Project>
+      <Name>UnityEngine.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
