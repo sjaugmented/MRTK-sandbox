@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +8,11 @@ public class Ship : MonoBehaviour
     bool isActive = false;
     [SerializeField] GameObject explosionFX;
 
-    
+    DMXcontroller dmxCont;
 
     private void Awake()
     {
-        
+        dmxCont = FindObjectOfType<DMXcontroller>();
     }
 
     // Start is called before the first frame update
@@ -45,7 +46,7 @@ public class Ship : MonoBehaviour
 
     public void DestroyShip()
     {
-        Debug.Log("ship clicked");
+        Debug.Log("ship clicked"); //todo remove
         if (isActive)
         {
             StartCoroutine(Explode());
@@ -54,10 +55,22 @@ public class Ship : MonoBehaviour
 
     IEnumerator Explode()
     {
-        Debug.Log("ship destroyed");
+        Debug.Log("ship destroyed"); //todo remove
         Instantiate(explosionFX, transform.position, Quaternion.identity);
+        RedLightOn();
         yield return new WaitForSeconds(1.5f);
         isActive = false;
+        RedLightOff();
         gameObject.SetActive(false);
+    }
+
+    private void RedLightOn()
+    {
+        dmxCont.SetAddress(1, 255);
+    }
+
+    private void RedLightOff()
+    {
+        dmxCont.SetAddress(1, 0);
     }
 }
