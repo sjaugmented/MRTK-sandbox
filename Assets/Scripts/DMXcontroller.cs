@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class DMXcontroller : MonoBehaviour
 {
+    
+
+    void Awake()
+    {
+
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
