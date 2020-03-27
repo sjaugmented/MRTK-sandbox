@@ -29,7 +29,7 @@ public class Ship : MonoBehaviour
 
     public void InstantiateShip()
     {
-        Debug.Log("button pressed");
+        Debug.Log("button pressed"); // todo remove
         
         if (!isActive)
         {
