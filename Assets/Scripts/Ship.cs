@@ -10,6 +10,8 @@ public class Ship : MonoBehaviour
 
     DMXcontroller dmxCont;
 
+    Vector3 instancePos;
+
     private void Awake()
     {
         dmxCont = FindObjectOfType<DMXcontroller>();
@@ -18,6 +20,7 @@ public class Ship : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        instancePos = transform.position;
         gameObject.SetActive(false);
     }
 
@@ -34,6 +37,7 @@ public class Ship : MonoBehaviour
         if (!isActive)
         {
             gameObject.SetActive(true);
+            transform.position = instancePos;
             isActive = true;
         }
         else

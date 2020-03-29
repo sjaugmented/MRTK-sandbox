@@ -830,6 +830,38 @@
       <Project>{CA9C9E8C-0E9E-DE7D-2283-9EC8ADBD3A72}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.InputSimulation</Name>
     </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Demos.Gltf.Inspectors.csproj">
+      <Project>{626D257A-B9B7-941A-EFDB-2ACEB052FDBD}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Demos.Gltf.Inspectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Demos.Gltf.csproj">
+      <Project>{FD629384-DE63-DE12-1FB2-15412DBE63EE}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Demos.Gltf</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Demos.UX.Interactables.csproj">
+      <Project>{889B8FAA-AD08-12DB-5909-E56BA41AF1A1}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Demos.UX.Interactables</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Demos.InspectorFields.Inspectors.csproj">
+      <Project>{409C07A8-C8F7-9B6F-E161-8F83B189E7A4}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Demos.InspectorFields.Inspectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Examples.Editor.Inspectors.csproj">
+      <Project>{FC550F79-5137-5161-B0A7-21BCE0E94E2F}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Examples.Editor.Inspectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Demos.InspectorFields.csproj">
+      <Project>{629944B4-ED03-4479-6DCC-E6E8C3BE48D6}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Demos.InspectorFields</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Demos.StandardShader.Inspectors.csproj">
+      <Project>{4118E399-74F0-8224-28E4-F14EF50555F6}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Demos.StandardShader.Inspectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Examples.csproj">
+      <Project>{3F7D9C0F-8A48-ABD6-C93F-CF7B5BDF3726}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Examples</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
