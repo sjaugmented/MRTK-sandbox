@@ -27,10 +27,11 @@ public class LightSliderTest : MonoBehaviour
     {
         // pass through slider value * 255 to corresponding channel
         float sliderValue = pinch.SliderValue;
-        Debug.Log(sliderValue);
-        /*int brightness = Mathf.RoundToInt(sliderValue * 255);
 
-        dmx.SetAddress(lightChannel, brightness);*/
+        int brightness = Mathf.RoundToInt(sliderValue * 255);
+        //Debug.Log(brightness); //remove
+
+        dmx.SetAddress(lightChannel, brightness);
 
     }
 
