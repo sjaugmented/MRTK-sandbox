@@ -14,7 +14,7 @@ public class LightSliderTest : MonoBehaviour
     void Start()
     {
         dmx = FindObjectOfType<DMXcontroller>();
-        pinch = FindObjectOfType<PinchSlider>();
+        pinch = GetComponent<PinchSlider>();
     }
 
     // Update is called once per frame
@@ -33,15 +33,5 @@ public class LightSliderTest : MonoBehaviour
 
         dmx.SetAddress(lightChannel, brightness);
 
-    }
-
-    public void SliderGrabbed()
-    {
-        Debug.Log("slider grabbed");
-    }
-
-    public void SliderReleased()
-    {
-        Debug.Log("slider released");
     }
 }
