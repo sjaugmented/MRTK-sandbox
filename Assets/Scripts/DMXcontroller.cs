@@ -29,13 +29,13 @@ public class DMXcontroller : MonoBehaviour
         _artNet.SendDMX(_dmxData);
     }
 
-    private void ResetDMX()
+    private void ResetDMX() // set lights to zero
     {
         _dmxData = GetEmpty512();
         _artNet.SendDMX(_dmxData);
     }
 
-    public static byte[] GetEmpty512()
+    public static byte[] GetEmpty512() // set channel/byte arrays to zero
     {
         byte[] DMXData = new byte[512];
         for (int i = 0; i < DMXData.Length; i++)
@@ -46,7 +46,7 @@ public class DMXcontroller : MonoBehaviour
         return DMXData;
     }
 
-    public void SetAddress(int channel, int brightness)
+    public void SetAddress(int channel, int brightness) // send channel and brightness info
     {
         Debug.Log("DMXcontroller received channel: " + channel + ", brightness: " + brightness); //todo remove
 
