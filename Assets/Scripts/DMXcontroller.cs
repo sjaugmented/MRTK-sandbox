@@ -29,7 +29,7 @@ public class DMXcontroller : MonoBehaviour
         _artNet.SendDMX(_dmxData);
     }
 
-    private void ResetDMX() // set lights to zero
+    public void ResetDMX() // set lights to zero
     {
         _dmxData = GetEmpty512();
         _artNet.SendDMX(_dmxData);

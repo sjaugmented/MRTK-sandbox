@@ -64,6 +64,7 @@
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\PartAssemblyDemo.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\TogglePlacementHints.cs" />
      <Compile Include="Assets\Scripts\DMXcontroller.cs" />
+     <Compile Include="Assets\Scripts\LightMinMaxToggle.cs" />
      <Compile Include="Assets\Scripts\LightSliderTest.cs" />
      <Compile Include="Assets\Scripts\Ship.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
