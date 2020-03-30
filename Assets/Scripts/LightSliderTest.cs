@@ -5,7 +5,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 
 public class LightSliderTest : MonoBehaviour
 {
-    [SerializeField] int lightChannel;
+    [SerializeField] int lightChannel = 0;
 
     public bool isMaxBright = false;
 
