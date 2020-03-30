@@ -7,6 +7,8 @@ public class LightSliderTest : MonoBehaviour
 {
     [SerializeField] int lightChannel;
 
+    public bool isMaxBright = false;
+
     DMXcontroller dmx;
     PinchSlider pinch;
     
@@ -31,7 +33,16 @@ public class LightSliderTest : MonoBehaviour
         int brightness = Mathf.RoundToInt(sliderValue * 255);
         //Debug.Log(brightness); //remove
 
+        if (brightness == 255) isMaxBright = true;
+        else isMaxBright = false;
+
         dmx.SetAddress(lightChannel, brightness);
 
+    }
+
+    public void MinMaxToggle()
+    {
+        if (!isMaxBright) dmx.SetAddress(lightChannel, 255); isMaxBright = true;
+        if (isMaxBright) dmx.SetAddress(lightChannel, 0); isMaxBright = false;
     }
 }
