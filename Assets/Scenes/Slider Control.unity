@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inPort: 6969
-  outIP: 10.0.1.17
+  outIP: 10.0.1.7
   outPort: 8000
 --- !u!4 &101167628
 Transform:
@@ -3710,25 +3710,180 @@ PrefabInstance:
       propertyPath: m_text
       value: Say "Fart"
       objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].EventValue.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[1].Options.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2057271400}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SendFartOSC
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].ClassName
+      value: InteractableOnPressReceiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].AssemblyQualifiedName
+      value: Microsoft.MixedReality.Toolkit.UI.InteractableOnPressReceiver, Microsoft.MixedReality.Toolkit.SDK
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].Type
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].Label
+      value: On Release
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].Name
+      value: OnRelease
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].Tooltip
+      value: The button is released
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].EventValue.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2057271401}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].EventValue.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayOneShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].EventValue.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].EventValue.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 40ae713ddf420714bbc1a3b5c3f2eac1, type: 3}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].EventValue.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.AudioClip, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[0].EventValue.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[1].Type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[1].Label
+      value: Interaction Filter
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[1].Name
+      value: InteractionFilter
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[1].Tooltip
+      value: Specify whether press event is for near or far interaction
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[1].IntValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[1].Options.Array.data[0]
+      value: Near and Far
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[1].Options.Array.data[1]
+      value: Near Only
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: Events.Array.data[2].Settings.Array.data[1].Options.Array.data[2]
+      value: Far Only
+      objectReference: {fileID: 0}
     - target: {fileID: 6039152662795605825, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.016246
+      value: 0.041813
       objectReference: {fileID: 0}
     - target: {fileID: 6039152662795605825, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.0307
+      value: 5.226581
       objectReference: {fileID: 0}
     - target: {fileID: 6039152662795605825, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.0307
+      value: 5.226581
       objectReference: {fileID: 0}
     - target: {fileID: 6039152662795605825, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.0307
+      value: 5.226581
       objectReference: {fileID: 0}
     - target: {fileID: 6039152662795605825, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
@@ -3740,6 +3895,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.0173
       objectReference: {fileID: 0}
+    - target: {fileID: 6050210212601859677, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.573783
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050210212601859677, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.573783
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050210212601859677, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.573783
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050210212601859677, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00000011921
+      objectReference: {fileID: 0}
     - target: {fileID: 6162226177400937586, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_Mesh
@@ -3748,22 +3923,22 @@ PrefabInstance:
     - target: {fileID: 7626507506265861809, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.016246
+      value: 0.041813
       objectReference: {fileID: 0}
     - target: {fileID: 7626507506265861809, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.0307
+      value: 5.226581
       objectReference: {fileID: 0}
     - target: {fileID: 7626507506265861809, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.0307
+      value: 5.226581
       objectReference: {fileID: 0}
     - target: {fileID: 7626507506265861809, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.0307
+      value: 5.226581
       objectReference: {fileID: 0}
     - target: {fileID: 7626507506265861809, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
@@ -3783,7 +3958,7 @@ PrefabInstance:
     - target: {fileID: 8422832243634261290, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8422832243634261290, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
@@ -3840,6 +4015,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.0173
       objectReference: {fileID: 0}
+    - target: {fileID: 8422832244559077553, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.573783
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422832244559077553, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.573783
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422832244559077553, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.573783
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422832244559077553, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00000011921
+      objectReference: {fileID: 0}
     - target: {fileID: 8422832244641126969, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: m_IsActive
@@ -3876,3 +4071,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7934d25bf7ef88949898c35afa04a41d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &2057271401 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8422832244188433354, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
+    type: 3}
+  m_PrefabInstance: {fileID: 2057271397}
+  m_PrefabAsset: {fileID: 0}
