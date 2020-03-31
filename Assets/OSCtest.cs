@@ -6,6 +6,8 @@ public class OSCtest : MonoBehaviour
 {
     OSC osc;
 
+    int messageValue = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +24,8 @@ public class OSCtest : MonoBehaviour
     {
         OscMessage message = new OscMessage();
         message.address = "/fart";
-        message.values.Add(1);
+        message.values.Add(messageValue++); // ++ makes sure subsequent presses register in OSCulator
         osc.Send(message);
-        Debug.Log("Fart"); //todo remove
+        Debug.Log("Fart"); //todo remove 
     }
 }

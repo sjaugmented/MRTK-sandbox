@@ -42,7 +42,15 @@ public class LightSliderTest : MonoBehaviour
 
     public void MinMaxToggle()
     {
-        if (!isMaxBright) dmx.SetAddress(lightChannel, 255); isMaxBright = true;
-        if (isMaxBright) dmx.SetAddress(lightChannel, 0); isMaxBright = false;
+        if (!isMaxBright)
+        {
+            dmx.SetAddress(lightChannel, 255);
+            isMaxBright = true;
+        }
+        else
+        {
+            dmx.SetAddress(lightChannel, 0); 
+            isMaxBright = false;
+        }
     }
 }
