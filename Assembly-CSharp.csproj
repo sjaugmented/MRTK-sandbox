@@ -64,6 +64,7 @@
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\PartAssemblyDemo.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\TogglePlacementHints.cs" />
      <Compile Include="Assets\OSC.cs" />
+     <Compile Include="Assets\OSCtest.cs" />
      <Compile Include="Assets\ReceivePosition.cs" />
      <Compile Include="Assets\Scripts\DMXcontroller.cs" />
      <Compile Include="Assets\Scripts\LightMinMaxToggle.cs" />
