@@ -28,9 +28,9 @@ public class LightSliderTest : MonoBehaviour
     public void SliderUpdate()
     {
         // pass through slider value * 255 to corresponding channel
-        float sliderValue = pinch.SliderValue;
+        float sliderVal = pinch.SliderValue;
 
-        int brightness = Mathf.RoundToInt(sliderValue * 255);
+        int brightness = Mathf.RoundToInt(sliderVal * 255);
         //Debug.Log(brightness); //remove
 
         if (brightness == 255) isMaxBright = true;
