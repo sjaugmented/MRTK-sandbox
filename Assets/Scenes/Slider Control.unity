@@ -3994,7 +3994,7 @@ PrefabInstance:
     - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
       propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SendFartOSC
+      value: SendOSCMessage
       objectReference: {fileID: 0}
     - target: {fileID: 1414378504363861352, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,
         type: 3}
@@ -4332,6 +4332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7934d25bf7ef88949898c35afa04a41d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OSCmessage: /fart
+  messageValue: 1
 --- !u!82 &2057271401 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8422832244188433354, guid: 2ba5d9246f2c88f48a938fa66e6d3eef,

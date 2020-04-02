@@ -5,8 +5,9 @@ using UnityEngine;
 public class OSCtest : MonoBehaviour
 {
     OSC osc;
-    
-    int messageValue = 0;
+
+    [SerializeField] string OSCmessage = "/fart";
+    [SerializeField] int messageValue = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -20,11 +21,11 @@ public class OSCtest : MonoBehaviour
         
     }
 
-    public void SendFartOSC()
+    public void SendOSCMessage()
     {
         OscMessage message = new OscMessage();
-        message.address = "/fart";
-        message.values.Add(messageValue++); // ++ makes sure subsequent presses register in OSCulator
+        message.address = OSCmessage;
+        message.values.Add(messageValue);
         osc.Send(message);
         Debug.Log("Fart"); //todo remove 
     }
