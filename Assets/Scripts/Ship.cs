@@ -7,6 +7,7 @@ public class Ship : MonoBehaviour
 {
     bool isActive = false;
     [SerializeField] GameObject explosionFX;
+    [SerializeField] bool hasButton = true;
 
     DMXcontroller dmxCont;
 
@@ -21,7 +22,8 @@ public class Ship : MonoBehaviour
     private void Start()
     {
         spawnPos = transform.position;
-        gameObject.SetActive(false);
+
+        if (hasButton) gameObject.SetActive(false);
     }
 
     // Update is called once per frame
