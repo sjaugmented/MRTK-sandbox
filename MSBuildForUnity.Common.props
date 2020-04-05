@@ -22,8 +22,8 @@
     <UnityCurrentTargetFramework>net46</UnityCurrentTargetFramework>
     
     <UnityMajorVersion>2019</UnityMajorVersion>
-    <UnityMinorVersion>2</UnityMinorVersion>
-    <UnityEditorInstallPath>C:\Program Files\Unity\Hub\Editor\2019.2.21f1\Editor</UnityEditorInstallPath>
+    <UnityMinorVersion>3</UnityMinorVersion>
+    <UnityEditorInstallPath>C:\Program Files\Unity\Hub\Editor\2019.3.7f1\Editor</UnityEditorInstallPath>
   </PropertyGroup>
   
   <PropertyGroup>
