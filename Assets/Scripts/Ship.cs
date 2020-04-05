@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    bool isActive = false;
+    bool isActive = true;
     [SerializeField] GameObject explosionFX;
     [SerializeField] bool hasButton = true;
 
@@ -23,7 +23,12 @@ public class Ship : MonoBehaviour
     {
         spawnPos = transform.position;
 
-        if (hasButton) gameObject.SetActive(false);
+        if (hasButton)
+        {
+            gameObject.SetActive(false);
+            isActive = false;
+        }
+            
     }
 
     // Update is called once per frame
@@ -78,5 +83,32 @@ public class Ship : MonoBehaviour
     private void RedLightOff()
     {
         dmxCont.SetAddress(1, 0);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Spell"))
+        {
+            DestroyShip();
+            SendBoomOSC();
+        }
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        Debug.Log("particle hit");
+        DestroyShip();
+        SendBoomOSC();
+    }
+
+    private void SendBoomOSC()
+    {
+        OSC osc = FindObjectOfType<OSC>();
+
+        OscMessage message = new OscMessage();
+        message.address = "/boom";
+        message.values.Add(1);
+        osc.Send(message);
+        Debug.Log("Boom"); //todo remove
     }
 }

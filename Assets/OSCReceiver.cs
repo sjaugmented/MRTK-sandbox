@@ -17,7 +17,6 @@ public class OSCReceiver : MonoBehaviour
 
         ship = FindObjectOfType<Ship>();
 
-        Debug.Log(OSCmess);
     }
 
     // Update is called once per frame
