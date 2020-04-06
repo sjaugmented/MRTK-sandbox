@@ -27,6 +27,5 @@ public class OSCtest : MonoBehaviour
         message.address = OSCmessage;
         message.values.Add(messageValue);
         osc.Send(message);
-        Debug.Log("Fart"); //todo remove 
     }
 }

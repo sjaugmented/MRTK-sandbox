@@ -6,17 +6,21 @@ using Microsoft.MixedReality.Toolkit.UI;
 public class LightSliderTest : MonoBehaviour
 {
     [SerializeField] int lightChannel = 0;
+    [SerializeField] string messageOSC = "/test";
+    [SerializeField] int valueOSC = 1;
 
-    public bool isMaxBright = false;
+    public bool isMaxBright = false; // todo remove public
 
     DMXcontroller dmx;
     PinchSlider pinch;
+    OSC osc;
     
     // Start is called before the first frame update
     void Start()
     {
         dmx = FindObjectOfType<DMXcontroller>();
         pinch = GetComponent<PinchSlider>();
+        osc = FindObjectOfType<OSC>();
     }
 
     // Update is called once per frame
@@ -30,14 +34,25 @@ public class LightSliderTest : MonoBehaviour
         // pass through slider value * 255 to corresponding channel
         float sliderVal = pinch.SliderValue;
 
-        int brightness = Mathf.RoundToInt(sliderVal * 255);
-        //Debug.Log(brightness); //remove
+        int sliderValInt = Mathf.RoundToInt(sliderVal * 255);
 
-        if (brightness == 255) isMaxBright = true;
+        if (sliderValInt == 255) isMaxBright = true;
         else isMaxBright = false;
 
-        dmx.SetAddress(lightChannel, brightness);
+        dmx.SetAddress(lightChannel, sliderValInt);
+        SendOSCMessage(sliderValInt);
 
+    }
+
+    private void SendOSCMessage(int sliderValInt)
+    {
+        valueOSC = sliderValInt;
+        
+        OscMessage message = new OscMessage();
+        message.address = messageOSC;
+        message.values.Add(valueOSC);
+        osc.Send(message);
+        Debug.Log(message); //todo remove
     }
 
     public void MinMaxToggle()
