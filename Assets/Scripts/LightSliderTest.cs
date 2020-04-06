@@ -7,7 +7,7 @@ public class LightSliderTest : MonoBehaviour
 {
     [SerializeField] int lightChannel = 0;
     [SerializeField] string messageOSC = "/test";
-    [SerializeField] int valueOSC = 1;
+    [SerializeField] float valueOSC = 0;
 
     public bool isMaxBright = false; // todo remove public
 
@@ -40,13 +40,13 @@ public class LightSliderTest : MonoBehaviour
         else isMaxBright = false;
 
         dmx.SetAddress(lightChannel, sliderValInt);
-        SendOSCMessage(sliderValInt);
+        SendOSCMessage(sliderVal);
 
     }
 
-    private void SendOSCMessage(int sliderValInt)
+    private void SendOSCMessage(float sliderVal)
     {
-        valueOSC = sliderValInt;
+        valueOSC = sliderVal;
         
         OscMessage message = new OscMessage();
         message.address = messageOSC;
