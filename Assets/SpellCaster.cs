@@ -8,6 +8,8 @@ public class SpellCaster : MonoBehaviour
 
     Rigidbody rigidBody;
 
+    [SerializeField] Transform targetRef;
+
     // Start is called before the first frame update
     void Start()
     {
