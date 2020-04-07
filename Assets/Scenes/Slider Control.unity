@@ -157,9 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462b2c66c6bc4174496cd2ab8f5329ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inPort: 8000
+  inPort: 7000
   outIP: 255.255.255.255
-  outPort: 7000
+  outPort: 8000
 --- !u!4 &101167628
 Transform:
   m_ObjectHideFlags: 0
