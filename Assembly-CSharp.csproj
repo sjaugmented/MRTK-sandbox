@@ -56,7 +56,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ArtNet\Engine.cs" />
-     <Compile Include="Assets\HandPositionTest.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\EyeTrackingTutorialDemo.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\HandInteractionTouch.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\LaunchLunarModule.cs" />
