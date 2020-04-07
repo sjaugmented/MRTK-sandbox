@@ -6,12 +6,7 @@ using Microsoft.MixedReality.Toolkit.Input;
 
 public class HandTracker : MonoBehaviour
 {
-    MixedRealityPose hands;
-    public enum TrackedHandJoint
-    {
-        IndexDistalJoint,
-        IndexTip
-    }
+   
     
     // Start is called before the first frame update
     void Start()
@@ -25,15 +20,5 @@ public class HandTracker : MonoBehaviour
 
     }
 
-    public void OnSourceDetected(SourceStateEventData eventData)
-    {
-        var hand = eventData.Controller as IMixedRealityHand;
-        if (hand != null)
-        {
-            if (hand.TryGetJoint(TrackedHandJoint.IndexTip, out MixedRealityPose jointPose)
-            {
-                // ...
-            }
-        }
-    }
+    
 }
