@@ -39,5 +39,16 @@ public class HandTrackerTest : MonoBehaviour
         {
             handTracking = false;
         }
+
+        MixedRealityPose pose;
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out pose))
+        {
+            // This runs if you're "try get join pose" succeeds. If you get into this block, then pose will be defined
+            // Take a look at this
+            // https://microsoft.github.io/MixedRealityToolkit-Unity/api/Microsoft.MixedReality.Toolkit.Utilities.MixedRealityPose.html#Microsoft_MixedReality_Toolkit_Utilities_MixedRealityPose_Position
+
+            Debug.Log(pose.Position);
+            //Debug.Log(pose.Up);
+        }
     }
 }
