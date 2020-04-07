@@ -18,7 +18,5 @@ namespace Microsoft.MixedReality.Toolkit.Input
         /// i.e. joints rotate primarily around the X-axis.
         /// </remarks>
         bool TryGetJoint(TrackedHandJoint joint, out MixedRealityPose pose);
-        bool TryGetJoint(global::HandTracker.TrackedHandJoint indexTip, out MixedRealityPose jointPose);
-        bool TryGetJoint(global::HandTracker.TrackedHandJoint indexTip, out MixedRealityPose jointPose);
     }
 }
