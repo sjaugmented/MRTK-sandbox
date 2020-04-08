@@ -5718,7 +5718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f46a8172ad403498e738987de08f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castThreshold: 5
+  castThreshold: 3
   spellCastObj: {fileID: 459208306}
   spellHolo: {fileID: 5418862387724200070, guid: 8b61e4f2b9dcdbe4b937c2728571b5b5,
     type: 3}
