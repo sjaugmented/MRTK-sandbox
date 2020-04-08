@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Slider Control.unity
-    guid: 7038cfeca4717dc44b04294c1b1a2c72
+    path: Assets/Scenes/Sandbox.unity
+    guid: fb9549b65d759814d927d42c9d4e4390
   m_configObjects: {}
