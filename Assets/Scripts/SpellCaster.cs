@@ -21,8 +21,8 @@ public class SpellCaster : MonoBehaviour
 
     public void CastSpell(Vector3 position, float forwardVel)
     {
-        //spellParticle.Play();
+        spellParticle.Play();
         Instantiate(spellHolo, position, Quaternion.identity);
-        spellHolo.GetComponent<Rigidbody>().velocity = spellHolo.transform.forward * forwardVel;
+        spellHolo.GetComponent<Rigidbody>().velocity = spellHolo.transform.forward * (forwardVel * 10);
     }
 }

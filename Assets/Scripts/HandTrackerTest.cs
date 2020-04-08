@@ -8,11 +8,12 @@ using UnityEngine;
 public class HandTrackerTest : MonoBehaviour
 {
     [Tooltip("Velocity at which spells are cast")] [SerializeField] float castThreshold = 0.5f;
-    //[Tooltip("GameObject that casts spells")] [SerializeField] GameObject spellCastObj;
+    [Tooltip("GameObject that casts spells")] [SerializeField] GameObject spellCastObj;
     [SerializeField] GameObject spellHolo;
 
+    bool fingerHolo = false;
 
-    public float prevHandCamDist; //
+    float prevHandCamDist;
     public float awayVelocity;    // todo remove public
 
     //SpellCaster spellCaster;
@@ -20,8 +21,7 @@ public class HandTrackerTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*spellCaster = FindObjectOfType<SpellCaster>();
-        spellCaster.gameObject.SetActive(false);*/
+        spellCastObj.SetActive(false);
 
     }
 
@@ -36,13 +36,15 @@ public class HandTrackerTest : MonoBehaviour
             // Take a look at this
             // https://microsoft.github.io/MixedRealityToolkit-Unity/api/Microsoft.MixedReality.Toolkit.Utilities.MixedRealityPose.html#Microsoft_MixedReality_Toolkit_Utilities_MixedRealityPose_Position
 
-            //Debug.Log(pose.Position);
-            //Debug.Log(pose.Up);
-
-            //Debug.Log("tracking single hand"); //todo remove
-
-            //spellCaster.gameObject.SetActive(true);
             TrackHandVelocity(pose);
+            if (!fingerHolo)
+            {
+                spellCastObj.SetActive(true);
+            } else
+            {
+                spellCastObj.SetActive(false);
+            }
+            
 
         }
         else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out rightPose) && HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out leftPose))
@@ -55,12 +57,15 @@ public class HandTrackerTest : MonoBehaviour
             //Debug.Log(pose.Up);
 
             Debug.Log("tracking two index fingers");
-            //spellCaster.gameObject.SetActive(false);
+            fingerHolo = false;
+            spellCastObj.SetActive(false);
 
         }
         else
         {
-            //spellCaster.gameObject.SetActive(false);
+            fingerHolo = false; 
+            spellCastObj.SetActive(false);
+            
         }
     }
 
@@ -74,23 +79,22 @@ public class HandTrackerTest : MonoBehaviour
         awayVelocity = (handCamDist - prevHandCamDist) / Time.deltaTime;
         prevHandCamDist = Vector3.Distance(cameraPos, pose.Position);
 
-        
-
-        //Debug.Log(awayVelocity); //todo remove
-
         if (awayVelocity >= castThreshold)
         {
             Debug.Log("casting spell"); //todo remove
-            CastSpell(pose.Position, pose.Rotation, awayVelocity);
+            CastSpell(pose.Position, Camera.main.transform.rotation, awayVelocity);
 
         }
     }
 
-    public void CastSpell(Vector3 position, Quaternion rotation, float forwardVel)
+    public void CastSpell(Vector3 pos, Quaternion rot, float forwardVel)
     {
         //spellParticle.Play();
-        Instantiate(spellHolo, position, rotation);
-        spellHolo.GetComponent<Rigidbody>().velocity = spellHolo.transform.forward * forwardVel;
+        if (!fingerHolo)
+        {
+            GameObject holo = Instantiate(spellHolo, pos, rot);
+            fingerHolo = true;
+        }
     }
 
 }

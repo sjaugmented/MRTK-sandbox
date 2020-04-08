@@ -76,6 +76,7 @@
      <Compile Include="Assets\Scripts\Ship.cs" />
      <Compile Include="Assets\Scripts\SpellCaster.cs" />
      <Compile Include="Assets\Scripts\SpellCasterRef.cs" />
+     <Compile Include="Assets\SphereController.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

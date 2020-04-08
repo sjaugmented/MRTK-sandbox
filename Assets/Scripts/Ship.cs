@@ -91,6 +91,7 @@ public class Ship : MonoBehaviour
         {
             DestroyShip();
             SendBoomOSC();
+            Destroy(other);
         }
     }
 
