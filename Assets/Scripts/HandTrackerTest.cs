@@ -7,59 +7,83 @@ using UnityEngine;
 
 public class HandTrackerTest : MonoBehaviour
 {
-    [SerializeField] float castThreshold = 0.5f;
+    [Tooltip("Velocity at which spells are cast")] [SerializeField] float castThreshold = 0.5f;
+    //[Tooltip("GameObject that casts spells")] [SerializeField] GameObject spellCastObj;
 
-    Vector3 cameraPos;
-    float prevHandPosZ;
-    float Zvelocity;
+    public float prevHandCamDist; //
+    public float awayVelocity;    // todo remove public
+
+    SpellCaster spellCaster;
+    GameObject spellCastObj;
 
     // Start is called before the first frame update
     void Start()
     {
+        spellCaster = FindObjectOfType<SpellCaster>();
+        spellCaster.gameObject.SetActive(false);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        MixedRealityPose pose;
+        MixedRealityPose pose, rightPose, leftPose;
         
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out pose) || HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out pose))
         {
+            // This runs if your "try get joint pose" succeeds. If you get into this block, then pose will be defined
+            // Take a look at this
+            // https://microsoft.github.io/MixedRealityToolkit-Unity/api/Microsoft.MixedReality.Toolkit.Utilities.MixedRealityPose.html#Microsoft_MixedReality_Toolkit_Utilities_MixedRealityPose_Position
+
+            //Debug.Log(pose.Position);
+            //Debug.Log(pose.Up);
+
             //Debug.Log("tracking single hand"); //todo remove
 
-            cameraPos = Camera.main.transform.position;
-            
-            Zvelocity = pose.Position.z - prevHandPosZ;
-            prevHandPosZ = pose.Position.z;
-
-            //Debug.Log("velocity = " + velocity); //todo remove
-
-            if (Zvelocity >= castThreshold)
-            {
-                Debug.Log("casting spell");
-            }
+            spellCaster.gameObject.SetActive(true);
+            TrackHandVelocity(pose);
 
         }
-        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out pose) || HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out pose))
+        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out rightPose) && HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out leftPose))
         {
+            // This runs if your "try get joint pose" succeeds. If you get into this block, then pose will be defined
+            // Take a look at this
+            // https://microsoft.github.io/MixedRealityToolkit-Unity/api/Microsoft.MixedReality.Toolkit.Utilities.MixedRealityPose.html#Microsoft_MixedReality_Toolkit_Utilities_MixedRealityPose_Position
+
+            //Debug.Log(pose.Position);
+            //Debug.Log(pose.Up);
+
             Debug.Log("tracking two index fingers");
+            spellCaster.gameObject.SetActive(false);
+
         }
         else
         {
-            return;
+            spellCaster.gameObject.SetActive(false);
         }
     }
 
-    private void TrackHand(MixedRealityPose pose)
+    private void TrackHandVelocity(MixedRealityPose pose)
     {
-        // This runs if your "try get joint pose" succeeds. If you get into this block, then pose will be defined
-        // Take a look at this
-        // https://microsoft.github.io/MixedRealityToolkit-Unity/api/Microsoft.MixedReality.Toolkit.Utilities.MixedRealityPose.html#Microsoft_MixedReality_Toolkit_Utilities_MixedRealityPose_Position
+        // tracks velocity of joint away from camera; if greater than castThreshold then cast spell
+        
+        Vector3 cameraPos = Camera.main.transform.position;
 
-        //Debug.Log(pose.Position);
-        //Debug.Log(pose.Up);
+        float handCamDist = Vector3.Distance(cameraPos, pose.Position);
+        awayVelocity = (handCamDist - prevHandCamDist) / Time.deltaTime;
+        prevHandCamDist = Vector3.Distance(cameraPos, pose.Position);
 
         
+
+        //Debug.Log(awayVelocity); //todo remove
+
+        if (awayVelocity >= castThreshold)
+        {
+            Debug.Log("casting spell"); //todo remove
+            spellCaster.CastSpell();
+
+        }
     }
+
+    
 }
