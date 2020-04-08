@@ -26,6 +26,8 @@ public class PlateController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        dmx.ResetDMX();
+
         if (other.CompareTag("Spell"))
         {
             Destroy(other);
