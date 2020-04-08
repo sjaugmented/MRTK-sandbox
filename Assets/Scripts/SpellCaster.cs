@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpellCaster : MonoBehaviour
 {
     [SerializeField] ParticleSystem spellParticle;
-
+    [SerializeField] GameObject spellHolo;
     [SerializeField] Transform targetRef;
 
     // Start is called before the first frame update
@@ -19,8 +19,10 @@ public class SpellCaster : MonoBehaviour
         
     }
 
-    public void CastSpell()
+    public void CastSpell(Vector3 position, float forwardVel)
     {
-        spellParticle.Play();
+        //spellParticle.Play();
+        Instantiate(spellHolo, position, Quaternion.identity);
+        spellHolo.GetComponent<Rigidbody>().velocity = spellHolo.transform.forward * forwardVel;
     }
 }

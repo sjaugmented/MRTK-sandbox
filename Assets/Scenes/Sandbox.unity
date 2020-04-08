@@ -355,6 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellParticle: {fileID: 785906985}
+  spellHolo: {fileID: 0}
   targetRef: {fileID: 0}
 --- !u!114 &459208309
 MonoBehaviour:
@@ -5578,6 +5579,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castThreshold: 15
+  spellHolo: {fileID: 5418862387724200070, guid: 8b61e4f2b9dcdbe4b937c2728571b5b5,
+    type: 3}
   prevHandCamDist: 0
   awayVelocity: 0
 --- !u!4 &1222994576

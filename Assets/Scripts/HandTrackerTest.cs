@@ -9,18 +9,19 @@ public class HandTrackerTest : MonoBehaviour
 {
     [Tooltip("Velocity at which spells are cast")] [SerializeField] float castThreshold = 0.5f;
     //[Tooltip("GameObject that casts spells")] [SerializeField] GameObject spellCastObj;
+    [SerializeField] GameObject spellHolo;
+
 
     public float prevHandCamDist; //
     public float awayVelocity;    // todo remove public
 
-    SpellCaster spellCaster;
-    GameObject spellCastObj;
+    //SpellCaster spellCaster;
 
     // Start is called before the first frame update
     void Start()
     {
-        spellCaster = FindObjectOfType<SpellCaster>();
-        spellCaster.gameObject.SetActive(false);
+        /*spellCaster = FindObjectOfType<SpellCaster>();
+        spellCaster.gameObject.SetActive(false);*/
 
     }
 
@@ -40,7 +41,7 @@ public class HandTrackerTest : MonoBehaviour
 
             //Debug.Log("tracking single hand"); //todo remove
 
-            spellCaster.gameObject.SetActive(true);
+            //spellCaster.gameObject.SetActive(true);
             TrackHandVelocity(pose);
 
         }
@@ -54,12 +55,12 @@ public class HandTrackerTest : MonoBehaviour
             //Debug.Log(pose.Up);
 
             Debug.Log("tracking two index fingers");
-            spellCaster.gameObject.SetActive(false);
+            //spellCaster.gameObject.SetActive(false);
 
         }
         else
         {
-            spellCaster.gameObject.SetActive(false);
+            //spellCaster.gameObject.SetActive(false);
         }
     }
 
@@ -80,10 +81,16 @@ public class HandTrackerTest : MonoBehaviour
         if (awayVelocity >= castThreshold)
         {
             Debug.Log("casting spell"); //todo remove
-            spellCaster.CastSpell();
+            CastSpell(pose.Position, pose.Rotation, awayVelocity);
 
         }
     }
 
-    
+    public void CastSpell(Vector3 position, Quaternion rotation, float forwardVel)
+    {
+        //spellParticle.Play();
+        Instantiate(spellHolo, position, rotation);
+        spellHolo.GetComponent<Rigidbody>().velocity = spellHolo.transform.forward * forwardVel;
+    }
+
 }
