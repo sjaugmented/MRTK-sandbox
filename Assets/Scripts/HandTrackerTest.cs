@@ -10,8 +10,8 @@ public class HandTrackerTest : MonoBehaviour
     [SerializeField] float castThreshold = 0.5f;
 
     Vector3 cameraPos;
-    Vector3 prevHandPos;
-    float velocity;
+    float prevHandPosZ;
+    float Zvelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -22,23 +22,28 @@ public class HandTrackerTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MixedRealityPose right;
-        //MixedRealityPose left;
-
-        var rightHand = HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out right);
-        //var leftHand = HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out left);
-
-
-        if (rightHand)
+        MixedRealityPose pose;
+        
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out pose) || HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out pose))
         {
-            Debug.Log("tracking single hand");
+            //Debug.Log("tracking single hand"); //todo remove
 
             cameraPos = Camera.main.transform.position;
-            prevHandPos = right.Position;
-            velocity = (right.Position - prevHandPos).magnitude;
+            
+            Zvelocity = pose.Position.z - prevHandPosZ;
+            prevHandPosZ = pose.Position.z;
 
-            Debug.Log("velocity = " + velocity);
+            //Debug.Log("velocity = " + velocity); //todo remove
 
+            if (Zvelocity >= castThreshold)
+            {
+                Debug.Log("casting spell");
+            }
+
+        }
+        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out pose) || HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out pose))
+        {
+            Debug.Log("tracking two index fingers");
         }
         else
         {

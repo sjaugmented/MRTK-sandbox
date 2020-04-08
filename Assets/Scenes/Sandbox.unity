@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f46a8172ad403498e738987de08f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castThreshold: 0.5
+  castThreshold: 0.03
 --- !u!4 &1222994576
 Transform:
   m_ObjectHideFlags: 0
