@@ -100,7 +100,7 @@ MonoBehaviour:
     type: 2}
   inputActionRulesProfile: {fileID: 11400000, guid: 03945385d89102f41855bc8f5116b199,
     type: 2}
-  pointerProfile: {fileID: 11400000, guid: 48aa63a9725047b28d4137fd0834bc31, type: 2}
+  pointerProfile: {fileID: 11400000, guid: 3583223eb9302034fa393dc227dd7729, type: 2}
   gesturesProfile: {fileID: 11400000, guid: 1dd25b1da7100354e990bb8ee45938c5, type: 2}
   speechCommandsProfile: {fileID: 11400000, guid: c4c02c12377ad08409ea567a934e721f,
     type: 2}
