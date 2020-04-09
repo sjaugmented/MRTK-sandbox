@@ -34,7 +34,6 @@ public class PlateController : MonoBehaviour
             Destroy(other);
             StartCoroutine("TimedLight");
             SendOSCMessage();
-            FindObjectOfType<HandTrackerTest>().castIsActive = false;
         }
     }
 

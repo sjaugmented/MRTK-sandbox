@@ -8,13 +8,13 @@ using UnityEngine;
 public class HandTrackerTest : MonoBehaviour
 {
     [Tooltip("Velocity at which spells are cast")] [SerializeField] float castThreshold = 0.5f;
-    [SerializeField] GameObject spellCastObj;
+    [Tooltip("GameObject that casts spells")] [SerializeField] GameObject spellCastObj;
     [SerializeField] GameObject spellHolo;
 
-    public bool castIsActive = false;
+    bool fingerHolo = false;
 
     float prevHandCamDist;
-    float awayVelocity;
+    public float awayVelocity;    // todo remove public
 
     //SpellCaster spellCaster;
 
@@ -37,7 +37,15 @@ public class HandTrackerTest : MonoBehaviour
             // https://microsoft.github.io/MixedRealityToolkit-Unity/api/Microsoft.MixedReality.Toolkit.Utilities.MixedRealityPose.html#Microsoft_MixedReality_Toolkit_Utilities_MixedRealityPose_Position
 
             TrackHandVelocity(pose);
+<<<<<<< HEAD
+<<<<<<< HEAD
             /*if (!castIsActive)
+=======
+            if (!fingerHolo)
+>>>>>>> parent of 935877e... added castIsActive to handtracker script
+=======
+            if (!fingerHolo)
+>>>>>>> parent of 935877e... added castIsActive to handtracker script
             {
                 spellCastObj.SetActive(true);
             } else
@@ -57,13 +65,13 @@ public class HandTrackerTest : MonoBehaviour
             //Debug.Log(pose.Up);
 
             Debug.Log("tracking two index fingers");
-            castIsActive = false;
+            fingerHolo = false;
             spellCastObj.SetActive(false);
 
         }
         else
         {
-            castIsActive = false; 
+            fingerHolo = false; 
             spellCastObj.SetActive(false);
             
         }
@@ -81,13 +89,17 @@ public class HandTrackerTest : MonoBehaviour
 
         if (awayVelocity >= castThreshold)
         {
+            Debug.Log("casting spell"); //todo remove
             CastSpell(pose.Position, Camera.main.transform.rotation, awayVelocity);
+
         }
     }
 
     public void CastSpell(Vector3 pos, Quaternion rot, float forwardVel)
     {
         //spellParticle.Play();
+<<<<<<< HEAD
+<<<<<<< HEAD
         GameObject holo = Instantiate(spellHolo, pos, rot);
 
         /*if (!castIsActive)
@@ -95,6 +107,18 @@ public class HandTrackerTest : MonoBehaviour
             GameObject holo = Instantiate(spellHolo, pos, rot);
             castIsActive = true;
         }*/
+=======
+        if (!fingerHolo)
+        {
+            GameObject holo = Instantiate(spellHolo, pos, rot);
+=======
+        if (!fingerHolo)
+        {
+            GameObject holo = Instantiate(spellHolo, pos, rot);
+>>>>>>> parent of 935877e... added castIsActive to handtracker script
+            fingerHolo = true;
+        }
+>>>>>>> parent of 935877e... added castIsActive to handtracker script
     }
 
 }
