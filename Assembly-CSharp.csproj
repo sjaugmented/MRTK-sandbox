@@ -143,9 +143,6 @@
  <Reference Include="UnityEditor.SpatialTracking">
  <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
- <Reference Include="Unity.XR.WindowsMR.Editor">
- <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.WindowsMR.Editor.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
@@ -158,14 +155,35 @@
  <Reference Include="UnityEditor.XR.LegacyInputHelpers">
  <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
- <Reference Include="Unity.XR.WindowsMR">
- <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.WindowsMR.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Runtime">
  <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.XR.Management">
+ <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Subsystem.Registration">
+ <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.XR.Management.Editor">
+ <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.Management.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.XR.ARSubsystems">
+ <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.XR.ARSubsystems.Editor">
+ <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.ARSubsystems.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.XR.InteractionSubsystems">
+ <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.InteractionSubsystems.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.XR.WindowsMixedReality.Editor">
+ <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.XR.WindowsMixedReality">
+ <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
