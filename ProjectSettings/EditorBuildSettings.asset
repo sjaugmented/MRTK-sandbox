@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Slider Control.unity
-    guid: 7038cfeca4717dc44b04294c1b1a2c72
+    path: Assets/Scenes/Gestures.unity
+    guid: 13f0b7c86c975bf42beaa6ca6c418fae
   m_configObjects: {}
