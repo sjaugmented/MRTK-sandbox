@@ -29,7 +29,7 @@ public class HandTrackerTest : MonoBehaviour
     void Update()
     {
         MixedRealityPose pose, rightPose, leftPose;
-        
+
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out pose) || HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out pose))
         {
             // This runs if your "try get joint pose" succeeds. If you get into this block, then pose will be defined
@@ -37,22 +37,17 @@ public class HandTrackerTest : MonoBehaviour
             // https://microsoft.github.io/MixedRealityToolkit-Unity/api/Microsoft.MixedReality.Toolkit.Utilities.MixedRealityPose.html#Microsoft_MixedReality_Toolkit_Utilities_MixedRealityPose_Position
 
             TrackHandVelocity(pose);
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             /*if (!castIsActive)
-=======
-            if (!fingerHolo)
->>>>>>> parent of 935877e... added castIsActive to handtracker script
-=======
-            if (!fingerHolo)
->>>>>>> parent of 935877e... added castIsActive to handtracker script
+
             {
                 spellCastObj.SetActive(true);
-            } else
+            }
+            else
             {
                 spellCastObj.SetActive(false);
             }*/
-            
+
 
         }
         else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out rightPose) && HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out leftPose))
@@ -71,16 +66,16 @@ public class HandTrackerTest : MonoBehaviour
         }
         else
         {
-            fingerHolo = false; 
+            fingerHolo = false;
             spellCastObj.SetActive(false);
-            
+
         }
     }
 
     private void TrackHandVelocity(MixedRealityPose pose)
     {
         // tracks velocity of joint away from camera; if greater than castThreshold then cast spell
-        
+
         Vector3 cameraPos = Camera.main.transform.position;
 
         float handCamDist = Vector3.Distance(cameraPos, pose.Position);
@@ -98,8 +93,7 @@ public class HandTrackerTest : MonoBehaviour
     public void CastSpell(Vector3 pos, Quaternion rot, float forwardVel)
     {
         //spellParticle.Play();
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         GameObject holo = Instantiate(spellHolo, pos, rot);
 
         /*if (!castIsActive)
@@ -107,18 +101,6 @@ public class HandTrackerTest : MonoBehaviour
             GameObject holo = Instantiate(spellHolo, pos, rot);
             castIsActive = true;
         }*/
-=======
-        if (!fingerHolo)
-        {
-            GameObject holo = Instantiate(spellHolo, pos, rot);
-=======
-        if (!fingerHolo)
-        {
-            GameObject holo = Instantiate(spellHolo, pos, rot);
->>>>>>> parent of 935877e... added castIsActive to handtracker script
-            fingerHolo = true;
-        }
->>>>>>> parent of 935877e... added castIsActive to handtracker script
-    }
 
+    }
 }
