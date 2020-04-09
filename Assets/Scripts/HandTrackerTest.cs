@@ -37,13 +37,13 @@ public class HandTrackerTest : MonoBehaviour
             // https://microsoft.github.io/MixedRealityToolkit-Unity/api/Microsoft.MixedReality.Toolkit.Utilities.MixedRealityPose.html#Microsoft_MixedReality_Toolkit_Utilities_MixedRealityPose_Position
 
             TrackHandVelocity(pose);
-            if (!castIsActive)
+            /*if (!castIsActive)
             {
                 spellCastObj.SetActive(true);
             } else
             {
                 spellCastObj.SetActive(false);
-            }
+            }*/
             
 
         }
@@ -88,11 +88,13 @@ public class HandTrackerTest : MonoBehaviour
     public void CastSpell(Vector3 pos, Quaternion rot, float forwardVel)
     {
         //spellParticle.Play();
-        if (!castIsActive)
+        GameObject holo = Instantiate(spellHolo, pos, rot);
+
+        /*if (!castIsActive)
         {
             GameObject holo = Instantiate(spellHolo, pos, rot);
             castIsActive = true;
-        }
+        }*/
     }
 
 }
