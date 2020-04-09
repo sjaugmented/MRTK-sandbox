@@ -1,21 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chase\\Documents\\Version Control Test 02\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj": {}
+    "C:\\Users\\Seth\\Documents\\MRTK\\MRTK tutorials\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chase\\Documents\\Version Control Test 02\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj": {
+    "C:\\Users\\Seth\\Documents\\MRTK\\MRTK tutorials\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chase\\Documents\\Version Control Test 02\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj",
+        "projectUniqueName": "C:\\Users\\Seth\\Documents\\MRTK\\MRTK tutorials\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj",
         "projectName": "DotNetAdapter",
-        "projectPath": "C:\\Users\\chase\\Documents\\Version Control Test 02\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj",
-        "packagesPath": "C:\\Users\\chase\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chase\\Documents\\Version Control Test 02\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\.obj\\",
+        "projectPath": "C:\\Users\\Seth\\Documents\\MRTK\\MRTK tutorials\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj",
+        "packagesPath": "C:\\Users\\Seth\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Seth\\Documents\\MRTK\\MRTK tutorials\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\.obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\chase\\Documents\\Version Control Test 02\\Assets\\NuGet.Config",
-          "C:\\Users\\chase\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Seth\\Documents\\MRTK\\MRTK tutorials\\Assets\\NuGet.Config",
+          "C:\\Users\\Seth\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -46,7 +46,11 @@
               "version": "[0.5.1045, )"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+>>>>>>> d68963882e93a5e7ef0d7af1ba915d74e3a4418d
         }
       }
     }
