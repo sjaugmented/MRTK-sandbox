@@ -38,7 +38,11 @@ public class HandTrackerTest : MonoBehaviour
 
             TrackHandVelocity(pose);
 <<<<<<< HEAD
+<<<<<<< HEAD
             /*if (!castIsActive)
+=======
+            if (!fingerHolo)
+>>>>>>> parent of 935877e... added castIsActive to handtracker script
 =======
             if (!fingerHolo)
 >>>>>>> parent of 935877e... added castIsActive to handtracker script
@@ -95,6 +99,7 @@ public class HandTrackerTest : MonoBehaviour
     {
         //spellParticle.Play();
 <<<<<<< HEAD
+<<<<<<< HEAD
         GameObject holo = Instantiate(spellHolo, pos, rot);
 
         /*if (!castIsActive)
@@ -106,6 +111,11 @@ public class HandTrackerTest : MonoBehaviour
         if (!fingerHolo)
         {
             GameObject holo = Instantiate(spellHolo, pos, rot);
+=======
+        if (!fingerHolo)
+        {
+            GameObject holo = Instantiate(spellHolo, pos, rot);
+>>>>>>> parent of 935877e... added castIsActive to handtracker script
             fingerHolo = true;
         }
 >>>>>>> parent of 935877e... added castIsActive to handtracker script
