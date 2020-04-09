@@ -8,13 +8,13 @@ using UnityEngine;
 public class HandTrackerTest : MonoBehaviour
 {
     [Tooltip("Velocity at which spells are cast")] [SerializeField] float castThreshold = 0.5f;
-    [Tooltip("GameObject that casts spells")] [SerializeField] GameObject spellCastObj;
+    [SerializeField] GameObject spellCastObj;
     [SerializeField] GameObject spellHolo;
 
-    bool fingerHolo = false;
+    public bool castIsActive = false;
 
     float prevHandCamDist;
-    public float awayVelocity;    // todo remove public
+    float awayVelocity;
 
     //SpellCaster spellCaster;
 
@@ -37,7 +37,7 @@ public class HandTrackerTest : MonoBehaviour
             // https://microsoft.github.io/MixedRealityToolkit-Unity/api/Microsoft.MixedReality.Toolkit.Utilities.MixedRealityPose.html#Microsoft_MixedReality_Toolkit_Utilities_MixedRealityPose_Position
 
             TrackHandVelocity(pose);
-            if (!fingerHolo)
+            if (!castIsActive)
             {
                 spellCastObj.SetActive(true);
             } else
@@ -57,13 +57,13 @@ public class HandTrackerTest : MonoBehaviour
             //Debug.Log(pose.Up);
 
             Debug.Log("tracking two index fingers");
-            fingerHolo = false;
+            castIsActive = false;
             spellCastObj.SetActive(false);
 
         }
         else
         {
-            fingerHolo = false; 
+            castIsActive = false; 
             spellCastObj.SetActive(false);
             
         }
@@ -81,19 +81,17 @@ public class HandTrackerTest : MonoBehaviour
 
         if (awayVelocity >= castThreshold)
         {
-            Debug.Log("casting spell"); //todo remove
             CastSpell(pose.Position, Camera.main.transform.rotation, awayVelocity);
-
         }
     }
 
     public void CastSpell(Vector3 pos, Quaternion rot, float forwardVel)
     {
         //spellParticle.Play();
-        if (!fingerHolo)
+        if (!castIsActive)
         {
             GameObject holo = Instantiate(spellHolo, pos, rot);
-            fingerHolo = true;
+            castIsActive = true;
         }
     }
 

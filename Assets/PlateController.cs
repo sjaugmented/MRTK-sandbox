@@ -33,6 +33,7 @@ public class PlateController : MonoBehaviour
             Destroy(other);
             dmx.SetAddress(DMXchannel, 255);
             SendOSCMessage();
+            FindObjectOfType<HandTrackerTest>().castIsActive = false;
         }
     }
 

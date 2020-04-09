@@ -11,6 +11,7 @@ public class SphereController : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        FindObjectOfType<HandTrackerTest>().castIsActive = true;
     }
 
     void FixedUpdate()
