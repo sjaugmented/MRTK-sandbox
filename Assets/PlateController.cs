@@ -7,6 +7,7 @@ public class PlateController : MonoBehaviour
     [SerializeField] string messageOSC = "/test/";
     [SerializeField] float valueOSC = 1;
     [SerializeField] int DMXchannel = 1;
+    [SerializeField] float timingOfBlackout = 1;
 
     DMXcontroller dmx;
     OSC osc;
@@ -31,10 +32,17 @@ public class PlateController : MonoBehaviour
         if (other.CompareTag("Spell"))
         {
             Destroy(other);
-            dmx.SetAddress(DMXchannel, 255);
+            StartCoroutine("TimedLight");
             SendOSCMessage();
             FindObjectOfType<HandTrackerTest>().castIsActive = false;
         }
+    }
+
+    IEnumerator TimedLight()
+    {
+        dmx.SetAddress(DMXchannel, 255);
+        yield return new WaitForSeconds(timingOfBlackout);
+        dmx.ResetDMX();
     }
 
     private void SendOSCMessage()
