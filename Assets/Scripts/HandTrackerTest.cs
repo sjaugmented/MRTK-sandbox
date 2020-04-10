@@ -47,9 +47,32 @@ public class HandTrackerTest : MonoBehaviour
         MixedRealityPose index, middle, ring, pinky, thumb;
         float fingerUp = 0.3f;
 
-        /*if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index))
+
+        
+        
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.ThumbTip, Handedness.Any, out thumb))
         {
-            Debug.Log("index: " + index.Up);    //
+
+            if (index.Position.y > 0 && middle.Position.y > 0)
+            {
+                SetCasters(waterCaster);
+                TrackHandVelocity(index, waterSpell);
+            }
+
+        }
+        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.ThumbTip, Handedness.Any, out thumb))
+        {
+
+            if (index.Up.y >= fingerUp)
+            {
+                SetCasters(fireCaster);
+                TrackHandVelocity(index, fireSpell);
+            }
+
+        }
+        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index))
+        {
+
             if (index.Up.y >= fingerUp)
             {
                 SetCasters(lightCaster);
@@ -57,16 +80,7 @@ public class HandTrackerTest : MonoBehaviour
             }
 
         }
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle))
-        {
-            if (index.Position.y > 0 && middle.Position.y > 0)
-            {
-                SetCasters(fireCaster);
-                TrackHandVelocity(index, fireSpell);
-            }
-
-        }
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring))
+        /*if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring))
         {
             if (index.Position.y > 0 && middle.Position.y > 0.4 && ring.Position.y > 0)
             {
@@ -81,7 +95,7 @@ public class HandTrackerTest : MonoBehaviour
                 SetCasters(windCaster);
                 TrackHandVelocity(index, windSpell);
             }
-        }*/
+        }
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Any, out pinky) && HandJointUtils.TryGetJointPose(TrackedHandJoint.ThumbTip, Handedness.Any, out thumb))
         {
             if (index.Up.y >= fingerUp)
@@ -110,6 +124,11 @@ public class HandTrackerTest : MonoBehaviour
                 SetCasters(earthCaster);
                 TrackHandVelocity(index, earthSpell);
             }
+            else if (index.Up.y > fingerUp && thumb.Up.x < 0) //
+            {                                                   //
+                SetCasters(earthCaster);                        // todo remove
+                TrackHandVelocity(index, earthSpell);           //
+            }                                                   //
             else
             {
                 return;
@@ -119,7 +138,7 @@ public class HandTrackerTest : MonoBehaviour
             Debug.Log("ring: " + ring.Up);      //
             Debug.Log("pinky: " + pinky.Up);    //
             Debug.Log("thumb: " + thumb.Up);    //
-        }
+        }*/
 
         /*else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Both, out rightPose))
         {
@@ -138,7 +157,7 @@ public class HandTrackerTest : MonoBehaviour
 
     private void SetCasters(GameObject trueCaster)
     {
-        lightCaster.SetActive(true);
+        lightCaster.SetActive(false);
         fireCaster.SetActive(false);
         waterCaster.SetActive(false);
         windCaster.SetActive(false);
