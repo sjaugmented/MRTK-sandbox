@@ -40,63 +40,72 @@ public class HandTrackerTest : MonoBehaviour
     void Update()
     {
         ListenForFingers();
-
-        MixedRealityPose pose;
-
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Any, out pose))
-        {
-
-        }
     }
 
     private void ListenForFingers()
     {
         MixedRealityPose index, middle, ring, pinky, thumb;
+        float fingerUp = 0.3f;
 
         /*if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index))
         {
-            SetCasters(lightCaster);
-            TrackHandVelocity(index, lightSpell);
-        }
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle))
-        {
-            SetCasters(fireCaster);
-            TrackHandVelocity(index, fireSpell);
-            
-        }
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring))
-        {
-            SetCasters(waterCaster);
-            TrackHandVelocity(index, waterSpell);
-        }
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Any, out pinky))
-        {
-            SetCasters(windCaster);
-            TrackHandVelocity(index, windSpell);
-        }*/
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Any, out pinky) && HandJointUtils.TryGetJointPose(TrackedHandJoint.ThumbTip, Handedness.Any, out thumb))
-        {
-            if (index.Position.y >= 0.4)
+            Debug.Log("index: " + index.Up);    //
+            if (index.Up.y >= fingerUp)
             {
                 SetCasters(lightCaster);
                 TrackHandVelocity(index, lightSpell);
             }
-            else if (index.Position.y >= 0.4 && middle.Position.y >= 0.4)
+
+        }
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle))
+        {
+            if (index.Position.y > 0 && middle.Position.y > 0)
             {
                 SetCasters(fireCaster);
                 TrackHandVelocity(index, fireSpell);
             }
-            else if (index.Position.y >= 0.4 && middle.Position.y >= 0.4 && ring.Position.y >= 0.4)
+
+        }
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring))
+        {
+            if (index.Position.y > 0 && middle.Position.y > 0.4 && ring.Position.y > 0)
             {
                 SetCasters(waterCaster);
                 TrackHandVelocity(index, waterSpell);
             }
-            else if (index.Position.y >= 0.4 && middle.Position.y >= 0.4 && ring.Position.y >= 0.4 && ring.Position.y >= 0.4)
+        }
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Any, out pinky))
+        {
+            if (index.Position.y > 0 && middle.Position.y > 0 && ring.Position.y > 0 && ring.Position.y > 0)
             {
                 SetCasters(windCaster);
                 TrackHandVelocity(index, windSpell);
             }
-            else if (index.Position.y >= 0.4 && middle.Position.y >= 0.4 && ring.Position.y >= 0.4 && ring.Position.y >= 0.4 && thumb.Position.y >= 0.4)
+        }*/
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Any, out pinky) && HandJointUtils.TryGetJointPose(TrackedHandJoint.ThumbTip, Handedness.Any, out thumb))
+        {
+            if (index.Up.y >= fingerUp)
+            {
+                SetCasters(lightCaster);
+                TrackHandVelocity(index, lightSpell);
+            }
+            else if (index.Up.y >= fingerUp && middle.Up.y >= fingerUp)
+            {
+                SetCasters(fireCaster);
+                TrackHandVelocity(index, fireSpell);
+            }
+            else if (index.Up.y >= fingerUp && middle.Up.y >= fingerUp && ring.Up.y >= fingerUp)
+            {
+                SetCasters(waterCaster);
+                TrackHandVelocity(index, waterSpell);
+            }
+            else if (index.Up.y >= fingerUp && middle.Up.y >= fingerUp && ring.Up.y >= fingerUp && ring.Up.y >= fingerUp)
+            {
+                SetCasters(windCaster);
+                TrackHandVelocity(index, windSpell);
+            }
+            else
+            if (index.Up.y > fingerUp && middle.Up.y > fingerUp && ring.Up.y > fingerUp && ring.Up.y > fingerUp && thumb.Up.x < 0)
             {
                 SetCasters(earthCaster);
                 TrackHandVelocity(index, earthSpell);
