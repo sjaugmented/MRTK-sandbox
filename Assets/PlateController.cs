@@ -9,16 +9,19 @@ public class PlateController : MonoBehaviour
     [Tooltip("DMX channels to control")] [SerializeField] int[] DMXchannels;
     [Tooltip("Brightness value for corresponding channel - !ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0, 255)] [SerializeField] int[] DMXvalues;
     [SerializeField] bool timedEffect = true;
-    [SerializeField] float timingOfBlackout = 1;
+    [SerializeField] float timingOfBlackout = 1f;
+    [SerializeField] float holoFlashDuration = 0.2f;
 
     DMXcontroller dmx;
     OSC osc;
+    Renderer rend;
 
     // Start is called before the first frame update
     void Start()
     {
         dmx = FindObjectOfType<DMXcontroller>();
         osc = FindObjectOfType<OSC>();
+        rend = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -33,7 +36,7 @@ public class PlateController : MonoBehaviour
 
         if (other.CompareTag("Spell"))
         {
-            Destroy(other);
+            StartCoroutine("FlashHolo");
             SendDMX();
             SendOSCMessage();
 
@@ -42,11 +45,19 @@ public class PlateController : MonoBehaviour
                 StartCoroutine("TimedLight");
             }
 
-            if (!other.GetComponent<SphereController>().isBullet)
+            if (other.GetComponent<SphereController>().isBullet == false)
             {
                 Destroy(other);
             }
         }
+    }
+
+    IEnumerator FlashHolo()
+    {
+        Color currColor = rend.material.color;
+        rend.material.SetColor("_Color", Color.white);
+        yield return new WaitForSeconds(holoFlashDuration);
+        rend.material.SetColor("_Color", currColor);
     }
     private void SendDMX()
     {
