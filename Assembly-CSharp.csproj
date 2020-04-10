@@ -839,6 +839,14 @@
       <Project>{CA9C9E8C-0E9E-DE7D-2283-9EC8ADBD3A72}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.InputSimulation</Name>
     </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Tools.csproj">
+      <Project>{2BFC63EE-290D-46F0-5131-A58B3A593682}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Tools.Runtime.csproj">
+      <Project>{3C2D137C-4CE1-5850-6C17-A3C69ED11574}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Tools.Runtime</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

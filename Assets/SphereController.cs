@@ -80,10 +80,7 @@ public class SphereController : MonoBehaviour
     private void DimLight()
     {
         for (int i = 0; i < DMXchannels.Length; i++)
-        {
-            int dimPercentage = DMXvalues[i] * (rateOfDim / 100);
-            int newDMXval = DMXvalues[i] -= Mathf.RoundToInt(Time.deltaTime * dimPercentage);
-            
+        {   
             if (DMXvalues[i] > 0)
             {
                 DMXvalues[i] -= rateOfDim;
