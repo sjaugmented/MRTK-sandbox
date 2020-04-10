@@ -62,6 +62,7 @@ public class HandTrackerTest : MonoBehaviour
         {
             SetCasters(fireCaster);
             TrackHandVelocity(index, fireSpell);
+            
         }
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring))
         {
@@ -77,6 +78,11 @@ public class HandTrackerTest : MonoBehaviour
         {
             SetCasters(earthCaster);
             TrackHandVelocity(index, earthSpell);
+            Debug.Log(index.Up);    //
+            Debug.Log(middle.Up);   // todo remove
+            Debug.Log(ring.Up);    //
+            Debug.Log(pinky.Up);   //
+            Debug.Log(thumb.Up);    //
         }
 
         /*else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Both, out rightPose))

@@ -514,7 +514,7 @@ PrefabInstance:
     - target: {fileID: 5418862387724200070, guid: 8b61e4f2b9dcdbe4b937c2728571b5b5,
         type: 3}
       propertyPath: m_Name
-      value: Light
+      value: Light Caster
       objectReference: {fileID: 0}
     - target: {fileID: 5418862387724200070, guid: 8b61e4f2b9dcdbe4b937c2728571b5b5,
         type: 3}
@@ -653,7 +653,7 @@ PrefabInstance:
     - target: {fileID: 5418862387724200070, guid: bb545500ae0731445a3327fb48b7b8b9,
         type: 3}
       propertyPath: m_Name
-      value: Fire
+      value: Fire Caster
       objectReference: {fileID: 0}
     - target: {fileID: 5418862387724200070, guid: bb545500ae0731445a3327fb48b7b8b9,
         type: 3}
@@ -1091,7 +1091,7 @@ PrefabInstance:
     - target: {fileID: 5418862387724200070, guid: b3277739cc0bbd3429217280049545a1,
         type: 3}
       propertyPath: m_Name
-      value: Wind
+      value: Wind Caster
       objectReference: {fileID: 0}
     - target: {fileID: 5418862387724200070, guid: b3277739cc0bbd3429217280049545a1,
         type: 3}
@@ -1230,7 +1230,7 @@ PrefabInstance:
     - target: {fileID: 5418862387724200070, guid: 717079b7b12fbb445aec744bf849e0c0,
         type: 3}
       propertyPath: m_Name
-      value: Water
+      value: Water Caster
       objectReference: {fileID: 0}
     - target: {fileID: 5418862387724200070, guid: 717079b7b12fbb445aec744bf849e0c0,
         type: 3}
@@ -1520,7 +1520,7 @@ PrefabInstance:
     - target: {fileID: 5418862387724200070, guid: 75684dd42016791468ba72dd9b6226b3,
         type: 3}
       propertyPath: m_Name
-      value: Earth
+      value: Earth Caster
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75684dd42016791468ba72dd9b6226b3, type: 3}
