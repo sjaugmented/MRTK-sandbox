@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: 'Circus Bounce '
-  productName: Throw World 10
+  productName: MRTK Sandbox
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -153,7 +153,7 @@ PlayerSettings:
       protectedContext: 0
       v2Signing: 0
     enable360StereoCapture: 0
-  isWsaHolographicRemotingEnabled: 1
+  isWsaHolographicRemotingEnabled: 0
   enableFrameTimingStats: 0
   useHDRDisplay: 0
   D3DHDRBitDepth: 0
@@ -603,7 +603,7 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: ThrowWorld10
+  metroPackageName: MRTKsandbox
   metroPackageVersion: 1.0.0.0
   metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
@@ -612,7 +612,7 @@ PlayerSettings:
   metroCertificateNotAfter: 808dfdb65820d701
   metroApplicationDescription: 'Throw World is fun '
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: MRTKsandbox
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

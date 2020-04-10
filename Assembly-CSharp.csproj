@@ -82,6 +82,7 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\MixedRealityToolkit.Extensions\Version.txt" />
      <None Include="Assets\MixedRealityToolkit.Providers\Version.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
@@ -100,6 +101,7 @@
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
      <None Include="Assets\MixedRealityToolkit.Services\License.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+     <None Include="Assets\MixedRealityToolkit.Extensions\License.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/Seth/Documents/MRTK/MRTK tutorials/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
@@ -711,6 +713,10 @@
       <Project>{24EC843D-B64B-4562-7469-7C76E4EE2C44}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Providers.WindowsMixedReality.ConfigCheck</Name>
     </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Tools.csproj">
+      <Project>{2BFC63EE-290D-46F0-5131-A58B3A593682}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Async.csproj">
       <Project>{589C06F4-0456-6963-9A39-917396411983}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Async</Name>
@@ -730,6 +736,10 @@
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Providers.XRSDK.WindowsMixedReality.csproj">
       <Project>{3452515F-EB93-9FD3-CBD8-B95661057D32}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Providers.XRSDK.WindowsMixedReality</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Tools.Runtime.csproj">
+      <Project>{3C2D137C-4CE1-5850-6C17-A3C69ED11574}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Tools.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Microsoft.MixedReality.Toolkit.Providers.XRSDK.ConfigCheck.csproj">
       <Project>{980A17A5-EF31-1FD1-5724-9870D9930E3D}</Project>
@@ -839,13 +849,21 @@
       <Project>{CA9C9E8C-0E9E-DE7D-2283-9EC8ADBD3A72}</Project>
       <Name>Microsoft.MixedReality.Toolkit.Services.InputSimulation</Name>
     </ProjectReference>
-    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Tools.csproj">
-      <Project>{2BFC63EE-290D-46F0-5131-A58B3A593682}</Project>
-      <Name>Microsoft.MixedReality.Toolkit.Tools</Name>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Extensions.SceneTransitionService.csproj">
+      <Project>{6517CA8C-AB3B-51E4-040A-A22F5769025F}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Extensions.SceneTransitionService</Name>
     </ProjectReference>
-    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Tools.Runtime.csproj">
-      <Project>{3C2D137C-4CE1-5850-6C17-A3C69ED11574}</Project>
-      <Name>Microsoft.MixedReality.Toolkit.Tools.Runtime</Name>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Extensions.Tracking.csproj">
+      <Project>{4F11CCEF-D52C-B0D3-493B-CF5BA73507A9}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Extensions.Tracking</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Extensions.HandPhysics.csproj">
+      <Project>{2DC01B80-D18D-34E4-B9C8-F3E2DBF5E621}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Extensions.HandPhysics</Name>
+    </ProjectReference>
+    <ProjectReference Include="Microsoft.MixedReality.Toolkit.Extensions.Tracking.Editor.csproj">
+      <Project>{234B9E1F-3A5C-4C69-7E02-770D84E0E2A5}</Project>
+      <Name>Microsoft.MixedReality.Toolkit.Extensions.Tracking.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
