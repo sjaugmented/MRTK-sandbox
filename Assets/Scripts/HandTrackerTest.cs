@@ -53,7 +53,7 @@ public class HandTrackerTest : MonoBehaviour
     {
         MixedRealityPose index, middle, ring, pinky, thumb;
 
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index))
+        /*if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index))
         {
             SetCasters(lightCaster);
             TrackHandVelocity(index, lightSpell);
@@ -73,16 +73,43 @@ public class HandTrackerTest : MonoBehaviour
         {
             SetCasters(windCaster);
             TrackHandVelocity(index, windSpell);
-        }
+        }*/
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Any, out pinky) && HandJointUtils.TryGetJointPose(TrackedHandJoint.ThumbTip, Handedness.Any, out thumb))
         {
-            SetCasters(earthCaster);
-            TrackHandVelocity(index, earthSpell);
-            Debug.Log(index.Up);    //
-            Debug.Log(middle.Up);   // todo remove
-            Debug.Log(ring.Up);    //
-            Debug.Log(pinky.Up);   //
-            Debug.Log(thumb.Up);    //
+            if (index.Position.y >= 0.4)
+            {
+                SetCasters(lightCaster);
+                TrackHandVelocity(index, lightSpell);
+            }
+            else if (index.Position.y >= 0.4 && middle.Position.y >= 0.4)
+            {
+                SetCasters(fireCaster);
+                TrackHandVelocity(index, fireSpell);
+            }
+            else if (index.Position.y >= 0.4 && middle.Position.y >= 0.4 && ring.Position.y >= 0.4)
+            {
+                SetCasters(waterCaster);
+                TrackHandVelocity(index, waterSpell);
+            }
+            else if (index.Position.y >= 0.4 && middle.Position.y >= 0.4 && ring.Position.y >= 0.4 && ring.Position.y >= 0.4)
+            {
+                SetCasters(windCaster);
+                TrackHandVelocity(index, windSpell);
+            }
+            else if (index.Position.y >= 0.4 && middle.Position.y >= 0.4 && ring.Position.y >= 0.4 && ring.Position.y >= 0.4 && thumb.Position.y >= 0.4)
+            {
+                SetCasters(earthCaster);
+                TrackHandVelocity(index, earthSpell);
+            }
+            else
+            {
+                return;
+            }
+            Debug.Log("index: " + index.Up);    //
+            Debug.Log("middle: " + middle.Up);  // todo remove
+            Debug.Log("ring: " + ring.Up);      //
+            Debug.Log("pinky: " + pinky.Up);    //
+            Debug.Log("thumb: " + thumb.Up);    //
         }
 
         /*else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Both, out rightPose))

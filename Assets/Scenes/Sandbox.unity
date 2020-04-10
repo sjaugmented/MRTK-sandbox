@@ -1324,7 +1324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castThreshold: 3
-  castFreq: 0.5
+  castFreq: 0.2
   lightCaster: {fileID: 386890671}
   fireCaster: {fileID: 501066002}
   waterCaster: {fileID: 1187254813}

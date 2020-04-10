@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6360468339990746815}
   - component: {fileID: 1903618674103314817}
   m_Layer: 0
-  m_Name: Earth
+  m_Name: Earth Spell
   m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,4 +123,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032d36eb42f0b8d43a313833fed17105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeSpan: 5
   force: 25
+  messageOSC:
+  - /green/
+  valueOSC: 1
+  lockOSCValueToDMX: 1
+  DMXchannels: 02000000
+  DMXvalues: ff000000
+  timedEffect: 0
+  timingOfBlackout: 1
+  dimOverTime: 1
+  rateOfDim: 20
+  isBullet: 1
