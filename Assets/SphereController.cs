@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class SphereController : MonoBehaviour
 {
+    [Header("General")]
     [Tooltip("Time before self-destruct")] [SerializeField] float lifeSpan;
     [SerializeField] float force = 50;
+    
+    [Header("DMX/OSC")]
     [SerializeField] string[] messageOSC;
     [Tooltip("This value is overriden if 'Lock OSC Value to DMX' is true")] [SerializeField] float valueOSC = 1f;
     [Tooltip("Converts DMX values to OSC floats")] [SerializeField] bool lockOSCValueToDMX = false;
+
     [Tooltip("DMX channels to control")] [SerializeField] int[] DMXchannels;
     [Tooltip("Brightness value for corresponding channel - !ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0,255)] [SerializeField] int[] DMXvalues;
+
+    [Header("Misc Controls")]
     [SerializeField] bool timedEffect = true;
     [SerializeField] float timingOfBlackout = 1;
     [Tooltip("Dim light(s) over time or leave at set values?")] [SerializeField] bool dimOverTime = true;
     [Tooltip("Percent of dimming per frame")] [Range(0, 100)] [SerializeField] int rateOfDim = 20;
+
     public bool isBullet = true;
 
     Rigidbody rigidBody;
@@ -85,9 +92,9 @@ public class SphereController : MonoBehaviour
 
                 if (lockOSCValueToDMX)
                 {
-                    float oscDmxConvert = DMXvalues[i] / 255;
-                    Debug.Log("OSC float from DMX = " + oscDmxConvert);
-                    //SendOSCMessage(i, oscDmxConvert);
+                    float maxOSCval = 255;
+                    float oscDmxConvert = DMXvalues[i] / maxOSCval;
+                    SendOSCMessage(i, oscDmxConvert);
                 }
             }
 

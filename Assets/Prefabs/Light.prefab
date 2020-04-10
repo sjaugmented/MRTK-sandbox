@@ -131,7 +131,7 @@ MonoBehaviour:
   valueOSC: 1
   lockOSCValueToDMX: 1
   DMXchannels: 0100000003000000
-  DMXvalues: ff000000ff000000
+  DMXvalues: ff0000007d000000
   timedEffect: 0
   timingOfBlackout: 1
   dimOverTime: 1
