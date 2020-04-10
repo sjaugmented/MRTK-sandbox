@@ -83,7 +83,7 @@ public class SphereController : MonoBehaviour
 
     private void DimLight()
     {
-        if (DMXchannels.Length == 0) return;
+        if (DMXchannels.Length == 0) return; 
 
         for (int i = 0; i < DMXchannels.Length; i++)
         {   
@@ -107,7 +107,10 @@ public class SphereController : MonoBehaviour
 
     IEnumerator TimedLight()
     {
-        if (DMXchannels.Length == 0) return;
+        if (DMXchannels.Length == 0)
+        {
+            // do nothing
+        }
 
         yield return new WaitForSeconds(timingOfBlackout);
         dmx.ResetDMX();
