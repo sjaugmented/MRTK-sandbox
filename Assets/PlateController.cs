@@ -6,7 +6,9 @@ public class PlateController : MonoBehaviour
 {
     [SerializeField] string messageOSC = "/test/";
     [SerializeField] float valueOSC = 1;
-    [SerializeField] int DMXchannel = 1;
+    [Tooltip("DMX channels to control")] [SerializeField] int[] DMXchannels;
+    [Tooltip("Brightness value for corresponding channel - !ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0, 255)] [SerializeField] int[] DMXvalues;
+    [SerializeField] bool timedEffect = true;
     [SerializeField] float timingOfBlackout = 1;
 
     DMXcontroller dmx;
@@ -32,18 +34,29 @@ public class PlateController : MonoBehaviour
         if (other.CompareTag("Spell"))
         {
             Destroy(other);
-            StartCoroutine("TimedLight");
+            SendDMX();
             SendOSCMessage();
+
+            if (timedEffect)
+            {
+                StartCoroutine("TimedLight");
+            }
         }
     }
-
-    IEnumerator TimedLight()
+    private void SendDMX()
     {
-        dmx.SetAddress(DMXchannel, 255);
-        yield return new WaitForSeconds(timingOfBlackout);
-        dmx.ResetDMX();
+        if (DMXchannels.Length == DMXvalues.Length)
+        {
+            for (int i = 0; i < DMXchannels.Length; i++)
+            {
+                dmx.SetAddress(DMXchannels[i], DMXvalues[i]);
+            }
+        }
+        else
+        {
+            Debug.LogError("Mismatch between channels and values arrays - check inspector fields.");
+        }
     }
-
     private void SendOSCMessage()
     {
         OscMessage message = new OscMessage();
@@ -52,4 +65,12 @@ public class PlateController : MonoBehaviour
         osc.Send(message);
         Debug.Log(message); //todo remove
     }
+
+    IEnumerator TimedLight()
+    {
+        yield return new WaitForSeconds(timingOfBlackout);
+        dmx.ResetDMX();
+    }
+
+    
 }

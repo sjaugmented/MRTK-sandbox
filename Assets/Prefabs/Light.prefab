@@ -124,3 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 25
+  messageOSC: /test/
+  valueOSC: 1
+  DMXchannels: 0000000000000000
+  DMXvalues: 0000000000000000

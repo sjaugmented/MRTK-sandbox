@@ -8,21 +8,19 @@ using UnityEngine;
 public class HandTrackerTest : MonoBehaviour
 {
     [Tooltip("Velocity at which spells are cast")] [SerializeField] float castThreshold = 0.5f;
+    [Tooltip("Interval between spells cast")] [SerializeField] float castFreq = 0.5f;
     [Tooltip("GameObject that casts spells")] [SerializeField] GameObject spellCastObj;
     [SerializeField] GameObject spellHolo;
 
-    bool fingerHolo = false;
+    bool castIsActive = false;
 
     float prevHandCamDist;
     public float awayVelocity;    // todo remove public
-
-    //SpellCaster spellCaster;
 
     // Start is called before the first frame update
     void Start()
     {
         spellCastObj.SetActive(false);
-
     }
 
     // Update is called once per frame
@@ -37,18 +35,7 @@ public class HandTrackerTest : MonoBehaviour
             // https://microsoft.github.io/MixedRealityToolkit-Unity/api/Microsoft.MixedReality.Toolkit.Utilities.MixedRealityPose.html#Microsoft_MixedReality_Toolkit_Utilities_MixedRealityPose_Position
 
             TrackHandVelocity(pose);
-
-            /*if (!castIsActive)
-
-            {
-                spellCastObj.SetActive(true);
-            }
-            else
-            {
-                spellCastObj.SetActive(false);
-            }*/
-
-
+            spellCastObj.SetActive(true);
         }
         else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out rightPose) && HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out leftPose))
         {
@@ -60,13 +47,13 @@ public class HandTrackerTest : MonoBehaviour
             //Debug.Log(pose.Up);
 
             Debug.Log("tracking two index fingers");
-            fingerHolo = false;
+            castIsActive = false;
             spellCastObj.SetActive(false);
 
         }
         else
         {
-            fingerHolo = false;
+            castIsActive = false;
             spellCastObj.SetActive(false);
 
         }
@@ -82,25 +69,25 @@ public class HandTrackerTest : MonoBehaviour
         awayVelocity = (handCamDist - prevHandCamDist) / Time.deltaTime;
         prevHandCamDist = Vector3.Distance(cameraPos, pose.Position);
 
-        if (awayVelocity >= castThreshold)
+        if (awayVelocity >= castThreshold && !castIsActive)
         {
-            Debug.Log("casting spell"); //todo remove
             CastSpell(pose.Position, Camera.main.transform.rotation, awayVelocity);
 
         }
     }
 
-    public void CastSpell(Vector3 pos, Quaternion rot, float forwardVel)
+    private void CastSpell(Vector3 pos, Quaternion rot, float forwardVel)
     {
         //spellParticle.Play();
 
         GameObject holo = Instantiate(spellHolo, pos, rot);
+        StartCoroutine("CastDelay");
+    }
 
-        /*if (!castIsActive)
-        {
-            GameObject holo = Instantiate(spellHolo, pos, rot);
-            castIsActive = true;
-        }*/
-
+    IEnumerator CastDelay()
+    {
+        castIsActive = true;
+        yield return new WaitForSeconds(castFreq);
+        castIsActive = false;
     }
 }
