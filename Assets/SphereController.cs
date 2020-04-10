@@ -56,6 +56,8 @@ public class SphereController : MonoBehaviour
 
     private void SendDMX()
     {
+        if (DMXchannels.Length == 0) return;
+
         if(DMXchannels.Length == DMXvalues.Length)
         {
             for (int i = 0; i < DMXchannels.Length; i++)
@@ -70,6 +72,8 @@ public class SphereController : MonoBehaviour
     }
     private void SendOSCMessage(int messArrayIndex, float oscVal)
     {
+        if (messageOSC.Length == 0) return;
+
         OscMessage message = new OscMessage();
         message.address = messageOSC[messArrayIndex];
         message.values.Add(oscVal);
@@ -79,6 +83,8 @@ public class SphereController : MonoBehaviour
 
     private void DimLight()
     {
+        if (DMXchannels.Length == 0) return;
+
         for (int i = 0; i < DMXchannels.Length; i++)
         {   
             if (DMXvalues[i] > 0)
@@ -101,6 +107,8 @@ public class SphereController : MonoBehaviour
 
     IEnumerator TimedLight()
     {
+        if (DMXchannels.Length == 0) return;
+
         yield return new WaitForSeconds(timingOfBlackout);
         dmx.ResetDMX();
         Debug.Log("resetting DMX"); //todo remove
