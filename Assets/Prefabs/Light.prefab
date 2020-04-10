@@ -123,8 +123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032d36eb42f0b8d43a313833fed17105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeSpan: 5
   force: 25
   messageOSC: /test/
   valueOSC: 1
-  DMXchannels: 0000000000000000
-  DMXvalues: 0000000000000000
+  DMXchannels: 0100000003000000
+  DMXvalues: 8300000081000000
+  timedEffect: 1
+  timingOfBlackout: 3
+  isBullet: 0

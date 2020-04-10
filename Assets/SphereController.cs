@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SphereController : MonoBehaviour
 {
+    [Tooltip("Time before self-destruct")] [SerializeField] float lifeSpan;
     [SerializeField] float force = 50;
     [SerializeField] string messageOSC = "/test/";
     [SerializeField] float valueOSC = 1f;
@@ -11,20 +12,20 @@ public class SphereController : MonoBehaviour
     [Tooltip("Brightness value for corresponding channel - !ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0,255)] [SerializeField] int[] DMXvalues;
     [SerializeField] bool timedEffect = true;
     [SerializeField] float timingOfBlackout = 1;
-    [SerializeField] bool isTrigger = true;
+    public bool isBullet = true;
 
     Rigidbody rigidBody;
     DMXcontroller dmx;
     OSC osc;
     Collider collider;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         dmx = FindObjectOfType<DMXcontroller>();
         osc = FindObjectOfType<OSC>();
-        collider = GetComponent<Collider>();
+        collider = GetComponent<SphereCollider>();
         
         SendDMX();
         SendOSCMessage();
@@ -33,6 +34,8 @@ public class SphereController : MonoBehaviour
         {
             StartCoroutine("TimedLight");
         }
+
+        StartCoroutine("SelfDestruct");
     }
 
     private void SendDMX()
@@ -42,7 +45,6 @@ public class SphereController : MonoBehaviour
             for (int i = 0; i < DMXchannels.Length; i++)
             {
                 dmx.SetAddress(DMXchannels[i], DMXvalues[i]);
-                Debug.Log("sending DMX channel " + DMXchannels[i] + " value " + DMXvalues[i]); //todo remove
             }
         }
         else
@@ -66,15 +68,17 @@ public class SphereController : MonoBehaviour
         Debug.Log("resetting DMX"); //todo remove
     }
 
-    private void ProcessIsTrigger()
+    IEnumerator SelfDestruct()
     {
-        if (isTrigger)
+        yield return new WaitForSeconds(lifeSpan);
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (!isBullet)
         {
-            collider.isTrigger = true;
-        }
-        else
-        {
-            collider.isTrigger = false;
+            Destroy(gameObject);
         }
     }
 

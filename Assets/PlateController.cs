@@ -41,6 +41,11 @@ public class PlateController : MonoBehaviour
             {
                 StartCoroutine("TimedLight");
             }
+
+            if (!other.GetComponent<SphereController>().isBullet)
+            {
+                Destroy(other);
+            }
         }
     }
     private void SendDMX()
