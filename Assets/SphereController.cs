@@ -6,12 +6,15 @@ public class SphereController : MonoBehaviour
 {
     [Tooltip("Time before self-destruct")] [SerializeField] float lifeSpan;
     [SerializeField] float force = 50;
-    [SerializeField] string messageOSC = "/test/";
-    [SerializeField] float valueOSC = 1f;
+    [SerializeField] string[] messageOSC;
+    [Tooltip("This value is overriden if 'Lock OSC Value to DMX' is true")] [SerializeField] float valueOSC = 1f;
+    [Tooltip("Converts DMX values to OSC floats")] [SerializeField] bool lockOSCValueToDMX = false;
     [Tooltip("DMX channels to control")] [SerializeField] int[] DMXchannels;
     [Tooltip("Brightness value for corresponding channel - !ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0,255)] [SerializeField] int[] DMXvalues;
     [SerializeField] bool timedEffect = true;
     [SerializeField] float timingOfBlackout = 1;
+    [Tooltip("Dim light(s) over time or leave at set values?")] [SerializeField] bool dimOverTime = true;
+    [Tooltip("Percent of dimming per frame")] [Range(0, 100)] [SerializeField] int rateOfDim = 20;
     public bool isBullet = true;
 
     Rigidbody rigidBody;
@@ -28,7 +31,13 @@ public class SphereController : MonoBehaviour
         collider = GetComponent<SphereCollider>();
         
         SendDMX();
-        SendOSCMessage();
+        
+        if (!lockOSCValueToDMX)
+        {
+            if (messageOSC.Length == 0) return;
+            else SendOSCMessage(0, valueOSC);
+        }
+        
 
         if (timedEffect)
         {
@@ -52,13 +61,38 @@ public class SphereController : MonoBehaviour
             Debug.LogError("Mismatch between channels and values arrays - check inspector fields.");
         }  
     }
-    private void SendOSCMessage()
+    private void SendOSCMessage(int messArrayIndex, float oscVal)
     {
         OscMessage message = new OscMessage();
-        message.address = messageOSC;
-        message.values.Add(valueOSC);
+        message.address = messageOSC[messArrayIndex];
+        message.values.Add(oscVal);
         osc.Send(message);
-        Debug.Log("sending OSC: " + message); //todo remove
+        Debug.Log("sending OSC: " + message + oscVal); //todo remove
+    }
+
+    private void DimLight()
+    {
+        for (int i = 0; i < DMXchannels.Length; i++)
+        {
+            int dimPercentage = DMXvalues[i] * (rateOfDim / 100);
+            int newDMXval = DMXvalues[i] -= Mathf.RoundToInt(Time.deltaTime * dimPercentage);
+            
+            if (DMXvalues[i] > 0)
+            {
+                DMXvalues[i] -= rateOfDim;
+                if (DMXvalues[i] < 0) DMXvalues[i] = 0;
+                dmx.SetAddress(DMXchannels[i], DMXvalues[i]);
+
+                if (lockOSCValueToDMX)
+                {
+                    float oscDmxConvert = DMXvalues[i] / 255;
+                    Debug.Log("OSC float from DMX = " + oscDmxConvert);
+                    //SendOSCMessage(i, oscDmxConvert);
+                }
+            }
+
+            
+        }
     }
 
     IEnumerator TimedLight()
@@ -90,6 +124,9 @@ public class SphereController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (dimOverTime)
+        {
+            DimLight();
+        }
     }
 }
