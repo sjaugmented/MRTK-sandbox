@@ -49,25 +49,25 @@ public class HandTrackerTest : MonoBehaviour
 
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Any, out pinky) && HandJointUtils.TryGetJointPose(TrackedHandJoint.ThumbTip, Handedness.Any, out thumb))
         {
-            if (index.Up.y > fingerUp && middle.Up.y > fingerUp && ring.Up.y > fingerUp && ring.Up.y > fingerUp && thumb.Up.x < 0)
+            if (index.Up.y > fingerUp && middle.Up.y > fingerUp && ring.Up.y > fingerUp && pinky.Up.y > fingerUp && thumb.Up.x < 0)
             {
                 SetCasters(earthCaster);
-                TrackHandVelocity(index, earthSpell);
+                TrackHandVelocity(thumb, earthSpell);
             }
-            else if (index.Up.y >= fingerUp && middle.Up.y >= fingerUp && ring.Up.y >= fingerUp && ring.Up.y >= fingerUp)
+            else if (index.Up.y >= fingerUp && middle.Up.y >= fingerUp && ring.Up.y >= fingerUp && pinky.Up.y >= fingerUp)
             {
                 SetCasters(windCaster);
-                TrackHandVelocity(index, windSpell);
+                TrackHandVelocity(pinky, windSpell);
             }
             else if (index.Up.y >= fingerUp && middle.Up.y >= fingerUp && ring.Up.y >= fingerUp)
             {
                 SetCasters(waterCaster);
-                TrackHandVelocity(index, waterSpell);
+                TrackHandVelocity(ring, waterSpell);
             }
             else if (index.Up.y >= fingerUp && middle.Up.y >= fingerUp)
             {
                 SetCasters(fireCaster);
-                TrackHandVelocity(index, fireSpell);
+                TrackHandVelocity(middle, fireSpell);
             }
             else if (index.Up.y >= fingerUp)
             {
