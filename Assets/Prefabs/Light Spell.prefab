@@ -125,14 +125,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeSpan: 5
   force: 25
-  messageOSC:
-  - /white/
+  messageOSC: /index/
   valueOSC: 1
-  lockOSCValueToDMX: 1
+  lockOSCValueToDMX: 0
   DMXchannels: 04000000
   DMXvalues: ff000000
   timedEffect: 0
   timingOfBlackout: 1
-  dimOverTime: 1
+  dimOverTime: 0
   rateOfDim: 2
   isBullet: 1

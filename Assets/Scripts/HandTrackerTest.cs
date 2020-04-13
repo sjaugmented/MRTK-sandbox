@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class HandTrackerTest : MonoBehaviour
 {
-    [Tooltip("Velocity at which spells are cast")] [SerializeField] float castThreshold = 0.5f;
+    [Tooltip("Min Velocity at which spells are cast")] [SerializeField] float castThreshold = 2f;
+    [Tooltip("Max Velocity at which spells are cast")] [SerializeField] float castThresholdCap = 5f;
     [Tooltip("Interval between spells cast")] [SerializeField] float castFreq = 0.5f;
     [Header("Casting and Spell prefabs")]
     [Tooltip("Visual representation of Light spell")] [SerializeField] GameObject lightCaster;
@@ -20,8 +21,10 @@ public class HandTrackerTest : MonoBehaviour
     [Tooltip("Water spell prefab to cast")] [SerializeField] GameObject waterSpell;
     [Tooltip("Wind spell prefab to cast")] [SerializeField] GameObject windSpell;
     [Tooltip("Earth spell prefab to cast")] [SerializeField] GameObject earthSpell;
+    [Header("Left Palm menu object")]
+    [SerializeField] GameObject palmMenu;
 
-    bool castIsActive = false;
+    public bool ableToCast = true;
 
     float prevHandCamDist;
     float awayVelocity;
@@ -34,6 +37,7 @@ public class HandTrackerTest : MonoBehaviour
         waterCaster.SetActive(false);
         windCaster.SetActive(false);
         earthCaster.SetActive(false);
+        palmMenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -75,15 +79,27 @@ public class HandTrackerTest : MonoBehaviour
                 TrackHandVelocity(index, lightSpell);
             } else
             {
-                castIsActive = false;
+                ableToCast = false;
                 SetCasters(null);
             }
         }
         else
         {
-            castIsActive = false;
+            ableToCast = true;
             SetCasters(null);
 
+        }
+    }
+
+    private void ListenForLeftPalm()
+    {
+        MixedRealityPose leftPalm;
+
+        if(HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out leftPalm))
+        {
+            Debug.Log("Palm rotation x: " + leftPalm.Position.x);
+            Debug.Log("Palm rotation y: " + leftPalm.Position.y);
+            Debug.Log("Palm rotation z: " + leftPalm.Position.z);
         }
     }
 
@@ -109,10 +125,12 @@ public class HandTrackerTest : MonoBehaviour
         awayVelocity = (handCamDist - prevHandCamDist) / Time.deltaTime;
         prevHandCamDist = Vector3.Distance(cameraPos, pose.Position);
 
-        if (awayVelocity >= castThreshold && !castIsActive)
+        //Debug.Log(awayVelocity); // todo remove
+
+        if (awayVelocity >= castThreshold && awayVelocity <= castThresholdCap && ableToCast)
         {
             CastSpell(spellToCast ,pose.Position, Camera.main.transform.rotation, awayVelocity);
-
+            //Debug.Log("casting"); //todo remove
         }
     }
 
@@ -126,8 +144,8 @@ public class HandTrackerTest : MonoBehaviour
 
     IEnumerator CastDelay()
     {
-        castIsActive = true;
+        ableToCast = false;
         yield return new WaitForSeconds(castFreq);
-        castIsActive = false;
+        ableToCast = true;
     }
 }

@@ -125,16 +125,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeSpan: 5
   force: 25
-  messageOSC:
-  - /blue/
-  - /green/
-  - /white/
+  messageOSC: /pinky/
   valueOSC: 1
-  lockOSCValueToDMX: 1
+  lockOSCValueToDMX: 0
   DMXchannels: 030000000200000004000000
   DMXvalues: ff000000390000005e000000
   timedEffect: 0
   timingOfBlackout: 1
-  dimOverTime: 1
+  dimOverTime: 0
   rateOfDim: 20
   isBullet: 1
