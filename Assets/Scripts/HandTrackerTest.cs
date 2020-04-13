@@ -56,27 +56,27 @@ public class HandTrackerTest : MonoBehaviour
             if (index.Up.y > fingerUp && middle.Up.y > fingerUp && ring.Up.y > fingerUp && pinky.Up.y > fingerUp && thumb.Up.x < 0)
             {
                 SetCasters(earthCaster);
-                TrackHandVelocity(thumb, earthSpell);
+                TrackHandVelocity(index, thumb, earthSpell);
             }
             else if (index.Up.y >= fingerUp && middle.Up.y >= fingerUp && ring.Up.y >= fingerUp && pinky.Up.y >= fingerUp)
             {
                 SetCasters(windCaster);
-                TrackHandVelocity(pinky, windSpell);
+                TrackHandVelocity(index, pinky, windSpell);
             }
             else if (index.Up.y >= fingerUp && middle.Up.y >= fingerUp && ring.Up.y >= fingerUp)
             {
                 SetCasters(waterCaster);
-                TrackHandVelocity(ring, waterSpell);
+                TrackHandVelocity(index, ring, waterSpell);
             }
             else if (index.Up.y >= fingerUp && middle.Up.y >= fingerUp)
             {
                 SetCasters(fireCaster);
-                TrackHandVelocity(middle, fireSpell);
+                TrackHandVelocity(index, middle, fireSpell);
             }
             else if (index.Up.y >= fingerUp)
             {
                 SetCasters(lightCaster);
-                TrackHandVelocity(index, lightSpell);
+                TrackHandVelocity(index, index, lightSpell);
             } else
             {
                 ableToCast = false;
@@ -115,21 +115,21 @@ public class HandTrackerTest : MonoBehaviour
         else trueCaster.SetActive(true);
     }
 
-    private void TrackHandVelocity(MixedRealityPose pose, GameObject spellToCast)
+    private void TrackHandVelocity(MixedRealityPose castFinger, MixedRealityPose velFinger, GameObject spellToCast)
     {
         // tracks velocity of joint away from camera; if greater than castThreshold then cast spell
 
         Vector3 cameraPos = Camera.main.transform.position;
 
-        float handCamDist = Vector3.Distance(cameraPos, pose.Position);
+        float handCamDist = Vector3.Distance(cameraPos, velFinger.Position);
         awayVelocity = (handCamDist - prevHandCamDist) / Time.deltaTime;
-        prevHandCamDist = Vector3.Distance(cameraPos, pose.Position);
+        prevHandCamDist = Vector3.Distance(cameraPos, velFinger.Position);
 
         //Debug.Log(awayVelocity); // todo remove
 
         if (awayVelocity >= castThreshold && awayVelocity <= castThresholdCap && ableToCast)
         {
-            CastSpell(spellToCast ,pose.Position, Camera.main.transform.rotation, awayVelocity);
+            CastSpell(spellToCast, castFinger.Position, Camera.main.transform.rotation, awayVelocity);
             //Debug.Log("casting"); //todo remove
         }
     }
