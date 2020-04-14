@@ -8,6 +8,7 @@ public class FingerTracker : MonoBehaviour
 {
     [Tooltip("Min Velocity at which spells are cast")] [SerializeField] float minVelocity = 2f;
     [Tooltip("Max Velocity at which spells are cast")] [SerializeField] float maxVelocity = 5f;
+    [SerializeField] GameObject palmMenu;
 
     // used to index tracking & velocity
     MixedRealityPose index; 
@@ -30,7 +31,7 @@ public class FingerTracker : MonoBehaviour
     void Update()
     {
         // only tracks index if menu is closed
-        if (!menuOpen)
+        if (!palmMenu.activeInHierarchy)
         {
             TrackIndexFinger();
         }
@@ -39,7 +40,7 @@ public class FingerTracker : MonoBehaviour
 
     private void TrackIndexFinger()
     {
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index))
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out index))
         {
             if (index.Up.y >= fingerUp)
             {

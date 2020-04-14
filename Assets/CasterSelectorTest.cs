@@ -15,14 +15,19 @@ public class CasterSelectorTest : MonoBehaviour
     [Tooltip("Visual representation of Wind spell")] [SerializeField] GameObject windCaster;
     [Tooltip("Visual representation of Earth spell")] [SerializeField] GameObject earthCaster;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         lightCaster.SetActive(false);
         fireCaster.SetActive(false);
         waterCaster.SetActive(false);
         windCaster.SetActive(false);
         earthCaster.SetActive(false);
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame

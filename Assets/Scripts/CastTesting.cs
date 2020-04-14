@@ -65,6 +65,7 @@ public class CastTesting : MonoBehaviour
 
     public void CastTestSpell()
     {
+        if (spellToCast = null) return;
         if (!ableToCast) return;
         if (ableToCast)
         {
