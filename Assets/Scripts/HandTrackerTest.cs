@@ -22,35 +22,61 @@ public class HandTrackerTest : MonoBehaviour
     [Tooltip("Wind spell prefab to cast")] [SerializeField] GameObject windSpell;
     [Tooltip("Earth spell prefab to cast")] [SerializeField] GameObject earthSpell;
     [Header("Left Palm menu object")]
-    [SerializeField] GameObject palmMenu;
+    [SerializeField] bool palmMenuForSpellbook = false;
 
-    public bool ableToCast = true;
+    GameObject spellFromPalm;
+    
+    bool ableToCast = true;
+    public bool spellbookIsOpen = false;
 
     float prevHandCamDist;
     float awayVelocity;
 
+    MixedRealityPose index, middle, ring, pinky, thumb;
+    float fingerUp = 0.3f;
+
     // Start is called before the first frame update
     void Start()
     {
-        lightCaster.SetActive(false);
-        fireCaster.SetActive(false);
-        waterCaster.SetActive(false);
-        windCaster.SetActive(false);
-        earthCaster.SetActive(false);
-        palmMenu.SetActive(false);
+        SetCasters(null);
     }
 
     // Update is called once per frame
     void Update()
     {
-        ListenForFingers();
+        if (palmMenuForSpellbook)
+        {
+            ProcessPalmSpellbook();
+        } else
+        {
+            ProcessFingerSpellbook();
+        }
+    }
+    private void ProcessPalmSpellbook()
+    {
+        if (spellbookIsOpen) ableToCast = false;
+        else
+        {
+            ableToCast = true;
+
+            if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index))
+            {
+                if (index.Up.y >= fingerUp)
+                {
+                    if (spellFromPalm = null) return;
+                    else
+                    {
+                        TrackHandVelocity(index, index, spellFromPalm);
+                    }
+                }
+                else return;
+            }
+            else return;
+        }
     }
 
-    private void ListenForFingers()
+    private void ProcessFingerSpellbook()
     {
-        MixedRealityPose index, middle, ring, pinky, thumb;
-        float fingerUp = 0.3f;
-
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out index) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Any, out middle) && HandJointUtils.TryGetJointPose(TrackedHandJoint.RingTip, Handedness.Any, out ring) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Any, out pinky) && HandJointUtils.TryGetJointPose(TrackedHandJoint.ThumbTip, Handedness.Any, out thumb))
         {
             if (index.Up.y > fingerUp && middle.Up.y > fingerUp && ring.Up.y > fingerUp && pinky.Up.y > fingerUp && thumb.Up.x < 0)
@@ -77,7 +103,8 @@ public class HandTrackerTest : MonoBehaviour
             {
                 SetCasters(lightCaster);
                 TrackHandVelocity(index, index, lightSpell);
-            } else
+            }
+            else
             {
                 ableToCast = false;
                 SetCasters(null);
@@ -89,18 +116,7 @@ public class HandTrackerTest : MonoBehaviour
             SetCasters(null);
 
         }
-    }
 
-    private void ListenForLeftPalm()
-    {
-        MixedRealityPose leftPalm;
-
-        if(HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out leftPalm))
-        {
-            Debug.Log("Palm rotation x: " + leftPalm.Position.x);
-            Debug.Log("Palm rotation y: " + leftPalm.Position.y);
-            Debug.Log("Palm rotation z: " + leftPalm.Position.z);
-        }
     }
 
     private void SetCasters(GameObject trueCaster)
@@ -147,5 +163,31 @@ public class HandTrackerTest : MonoBehaviour
         ableToCast = false;
         yield return new WaitForSeconds(castFreq);
         ableToCast = true;
+    }
+
+    public void CastLight()
+    {
+        SetCasters(lightCaster);
+        spellFromPalm = lightSpell;
+    }
+    public void CastFire()
+    {
+        SetCasters(fireCaster);
+        spellFromPalm = fireSpell;
+    }
+    public void CastWater()
+    {
+        SetCasters(waterCaster);
+        spellFromPalm = waterSpell;
+    }
+    public void CastWind()
+    {
+        SetCasters(windCaster);
+        spellFromPalm = windSpell;
+    }
+    public void CastEarth()
+    {
+        SetCasters(earthCaster);
+        spellFromPalm = earthSpell;
     }
 }
