@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ArtNet\Engine.cs" />
+     <Compile Include="Assets\CasterSelectorTest.cs" />
+     <Compile Include="Assets\FingerTracker.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\EyeTrackingTutorialDemo.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\HandInteractionTouch.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\LaunchLunarModule.cs" />
@@ -63,13 +65,14 @@
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\MoveWithPan.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\PartAssemblyDemo.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\TogglePlacementHints.cs" />
-     <Compile Include="Assets\Scripts\DMXcontroller.cs" />
+     <Compile Include="Assets\Scripts\CastTesting.cs" />
+     <Compile Include="Assets\Scripts\DMX OSC\DMXcontroller.cs" />
+     <Compile Include="Assets\Scripts\DMX OSC\OSC.cs" />
+     <Compile Include="Assets\Scripts\DMX OSC\OSCReceiver.cs" />
+     <Compile Include="Assets\Scripts\DMX OSC\OSCtest.cs" />
      <Compile Include="Assets\Scripts\HandTrackerTest.cs" />
      <Compile Include="Assets\Scripts\LightMinMaxToggle.cs" />
      <Compile Include="Assets\Scripts\LightSliderTest.cs" />
-     <Compile Include="Assets\Scripts\OSC.cs" />
-     <Compile Include="Assets\Scripts\OSCReceiver.cs" />
-     <Compile Include="Assets\Scripts\OSCtest.cs" />
      <Compile Include="Assets\Scripts\PalmMenuSelector.cs" />
      <Compile Include="Assets\Scripts\PalmMenuTest.cs" />
      <Compile Include="Assets\Scripts\PlateController.cs" />
