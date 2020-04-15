@@ -19,60 +19,101 @@ public class CastTesting : MonoBehaviour
     // used to create rate of fire for spells
     bool ableToCast = true;
 
+    int casterID = 0;
     Transform castPosition;
     GameObject spellToCast;
+
+    FingerTracker fingerTracker;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        fingerTracker = FindObjectOfType<FingerTracker>();
+        ResetCasters();
+    }
+
+    private void ResetCasters()
+    {
+        lightCaster.SetActive(false);
+        fireCaster.SetActive(false);
+        waterCaster.SetActive(false);
+        windCaster.SetActive(false);
+        earthCaster.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckForActiveCaster();
+        Debug.Log(fingerTracker.GetFingerUp());//remove
+        if (fingerTracker.GetFingerUp() == true) ActivateCaster();
+        else ResetCasters();
     }
 
-    private void CheckForActiveCaster()
+    public void ActivateCaster()
     {
-        if (lightCaster.activeInHierarchy)
+        ResetCasters();
+
+        if (casterID == 1)
         {
-            spellToCast = lightSpell;
+            lightCaster.SetActive(true);
             castPosition = lightCaster.transform;
         }
-        else if (fireCaster.activeInHierarchy)
+        else if (casterID == 2)
         {
-            spellToCast = fireSpell;
+            fireCaster.SetActive(true);
             castPosition = fireCaster.transform;
         }
-        else if (waterCaster.activeInHierarchy)
+        else if (casterID == 3)
         {
-            spellToCast = waterSpell;
+            waterCaster.SetActive(true);
             castPosition = waterCaster.transform;
         }
-        else if (windCaster.activeInHierarchy)
+        else if (casterID == 4)
         {
-            spellToCast = windSpell;
+            windCaster.SetActive(true);
             castPosition = windCaster.transform;
         }
-        else if(earthCaster.activeInHierarchy)
+        else if (casterID == 5)
         {
-            spellToCast = earthSpell;
+            earthCaster.SetActive(true);
             castPosition = earthCaster.transform;
         }
+        else return;
     }
 
     public void CastTestSpell()
     {
-        if (spellToCast = null) return;
-        if (!ableToCast) return;
         if (ableToCast)
         {
-            Instantiate(spellToCast, castPosition.position, Camera.main.transform.rotation);
-            StartCoroutine("CastDelay");
+            if (casterID == 1)
+            {
+                Instantiate(lightSpell, castPosition.position, Camera.main.transform.rotation);
+                StartCoroutine("CastDelay");
+            }
+            else if (casterID == 2)
+            {
+                Instantiate(fireSpell, castPosition.position, Camera.main.transform.rotation);
+                StartCoroutine("CastDelay");
+            }
+            else if (casterID == 3)
+            {
+                Instantiate(waterSpell, castPosition.position, Camera.main.transform.rotation);
+                StartCoroutine("CastDelay");
+            }
+            else if (casterID == 4)
+            {
+                Instantiate(windSpell, castPosition.position, Camera.main.transform.rotation);
+                StartCoroutine("CastDelay");
+            }
+            else if (casterID == 5)
+            {
+                Instantiate(earthSpell, castPosition.position, Camera.main.transform.rotation);
+                StartCoroutine("CastDelay");
+            }
+            else return;
         }
-
+        else return;
+        
     }
 
     IEnumerator CastDelay()
@@ -81,4 +122,29 @@ public class CastTesting : MonoBehaviour
         yield return new WaitForSeconds(delayBetweenCasts);
         ableToCast = true;
     }
+    public void SetLight()
+    {
+        casterID = 1;
+    }
+
+    public void SetFire()
+    {
+        casterID = 2;
+    }
+
+    public void SetWater()
+    {
+        casterID = 3;
+    }
+
+    public void SetWind()
+    {
+        casterID = 4;
+    }
+
+    public void SetEarth()
+    {
+        casterID = 5;
+    }
 }
+

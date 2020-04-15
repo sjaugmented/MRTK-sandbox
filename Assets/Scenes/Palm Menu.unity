@@ -177,11 +177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 111001950}
+      objectReference: {fileID: 1322613975}
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
       propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SelectCaster
+      value: SetFire
       objectReference: {fileID: 0}
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
@@ -361,45 +361,6 @@ MonoBehaviour:
   additionalOffset: {x: 0, y: 0, z: 0}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
---- !u!114 &111001949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111001946}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25ce996566d1b00488f166f2facee1a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: 0
-  fire: 1
-  water: 0
-  wind: 0
-  earth: 0
---- !u!114 &111001950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111001946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 389c6eeca14617c438a1011f21eefb24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: 0
-  fire: 1
-  water: 0
-  wind: 0
-  earth: 0
-  lightCaster: {fileID: 386890671}
-  fireCaster: {fileID: 501066002}
-  waterCaster: {fileID: 1187254813}
-  windCaster: {fileID: 1075712743}
-  earthCaster: {fileID: 1625310253}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,7 +568,7 @@ PrefabInstance:
     - target: {fileID: 5418862387724200070, guid: 8b61e4f2b9dcdbe4b937c2728571b5b5,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b61e4f2b9dcdbe4b937c2728571b5b5, type: 3}
@@ -752,7 +713,7 @@ PrefabInstance:
     - target: {fileID: 5418862387724200070, guid: bb545500ae0731445a3327fb48b7b8b9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb545500ae0731445a3327fb48b7b8b9, type: 3}
@@ -1021,11 +982,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 738131815}
+      objectReference: {fileID: 1322613975}
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
       propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectCaster
+      value: SetLight
       objectReference: {fileID: 0}
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
@@ -1305,51 +1266,12 @@ MonoBehaviour:
   additionalOffset: {x: 0, y: 0, z: 0}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
---- !u!114 &738131813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738131810}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25ce996566d1b00488f166f2facee1a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: 1
-  fire: 0
-  water: 0
-  wind: 0
-  earth: 0
 --- !u!82 &738131814 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8674287671906198892, guid: e1e3746d5067a614683084937319e0ba,
     type: 3}
   m_PrefabInstance: {fileID: 738131808}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &738131815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738131810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 389c6eeca14617c438a1011f21eefb24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: 1
-  fire: 0
-  water: 0
-  wind: 0
-  earth: 0
-  lightCaster: {fileID: 386890671}
-  fireCaster: {fileID: 501066002}
-  waterCaster: {fileID: 1187254813}
-  windCaster: {fileID: 1075712743}
-  earthCaster: {fileID: 1625310253}
 --- !u!1 &1003557382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1366,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1006426045}
+      objectReference: {fileID: 1322613975}
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
       propertyPath: Events.Array.data[1].Settings.Array.data[1].IntValue
@@ -1453,7 +1375,7 @@ PrefabInstance:
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
       propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SelectCaster
+      value: SetWater
       objectReference: {fileID: 0}
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
@@ -1633,45 +1555,6 @@ MonoBehaviour:
   additionalOffset: {x: 0, y: 0, z: 0}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
---- !u!114 &1006426044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006426041}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25ce996566d1b00488f166f2facee1a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: 0
-  fire: 0
-  water: 1
-  wind: 0
-  earth: 0
---- !u!114 &1006426045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006426041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 389c6eeca14617c438a1011f21eefb24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: 0
-  fire: 0
-  water: 1
-  wind: 0
-  earth: 0
-  lightCaster: {fileID: 386890671}
-  fireCaster: {fileID: 501066002}
-  waterCaster: {fileID: 1187254813}
-  windCaster: {fileID: 1075712743}
-  earthCaster: {fileID: 1625310253}
 --- !u!1001 &1075712742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1752,7 +1635,7 @@ PrefabInstance:
     - target: {fileID: 5418862387724200070, guid: b3277739cc0bbd3429217280049545a1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3277739cc0bbd3429217280049545a1, type: 3}
@@ -1897,7 +1780,7 @@ PrefabInstance:
     - target: {fileID: 5418862387724200070, guid: 717079b7b12fbb445aec744bf849e0c0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 717079b7b12fbb445aec744bf849e0c0, type: 3}
@@ -1992,7 +1875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minVelocity: 2
-  maxVelocity: 7
+  maxVelocity: 10
   palmMenu: {fileID: 1917638244}
 --- !u!4 &1222994576
 Transform:
@@ -2238,7 +2121,7 @@ PrefabInstance:
     - target: {fileID: 5418862387724200070, guid: 75684dd42016791468ba72dd9b6226b3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75684dd42016791468ba72dd9b6226b3, type: 3}
@@ -2408,11 +2291,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1838162072}
+      objectReference: {fileID: 1322613975}
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
       propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectCaster
+      value: SetEarth
       objectReference: {fileID: 0}
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
@@ -2707,51 +2590,12 @@ MonoBehaviour:
   additionalOffset: {x: 0, y: 0, z: 0}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
---- !u!114 &1838162070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1838162067}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25ce996566d1b00488f166f2facee1a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: 0
-  fire: 0
-  water: 0
-  wind: 0
-  earth: 1
 --- !u!82 &1838162071 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8674287671906198892, guid: e1e3746d5067a614683084937319e0ba,
     type: 3}
   m_PrefabInstance: {fileID: 1838162065}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1838162072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1838162067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 389c6eeca14617c438a1011f21eefb24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: 0
-  fire: 0
-  water: 0
-  wind: 0
-  earth: 1
-  lightCaster: {fileID: 386890671}
-  fireCaster: {fileID: 501066002}
-  waterCaster: {fileID: 1187254813}
-  windCaster: {fileID: 1075712743}
-  earthCaster: {fileID: 1625310253}
 --- !u!1 &1917638244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,6 +2610,7 @@ GameObject:
   - component: {fileID: 1917638249}
   - component: {fileID: 1917638248}
   - component: {fileID: 1917638247}
+  - component: {fileID: 1917638251}
   m_Layer: 0
   m_Name: Palm Menu
   m_TagString: Untagged
@@ -2851,7 +2696,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917638244}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 956af6ee031a2eb47b9c0ab5dcd50fd7, type: 3}
   m_Name: 
@@ -2912,7 +2757,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917638244}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 248664dc0e60dca4fb35d70cd0c5695b, type: 3}
   m_Name: 
@@ -2955,7 +2800,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917638244}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b55691ad5b034fe6966763a6e23818d2, type: 3}
   m_Name: 
@@ -2967,6 +2812,42 @@ MonoBehaviour:
   additionalOffset: {x: 0, y: 0, z: 0}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
+--- !u!114 &1917638251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917638244}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd43f06873cf8408515860553aefb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateLinkedTransform: 0
+  moveLerpTime: 0.1
+  rotateLerpTime: 0.1
+  scaleLerpTime: 0
+  maintainScale: 1
+  smoothing: 1
+  lifetime: 0
+  safeZone: 0
+  safeZoneBuffer: 0.15
+  updateWhenOppositeHandNear: 0
+  hideHandCursorsOnActivate: 1
+  rotationBehavior: 2
+  onHandActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  onHandDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  onFirstHandDetected:
+    m_PersistentCalls:
+      m_Calls: []
+  onLastHandLost:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &2099532917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3018,11 +2899,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 2099532923}
+      objectReference: {fileID: 1322613975}
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
       propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SelectCaster
+      value: SetWind
       objectReference: {fileID: 0}
     - target: {fileID: 2243437068443470798, guid: e1e3746d5067a614683084937319e0ba,
         type: 3}
@@ -3207,42 +3088,3 @@ MonoBehaviour:
   additionalOffset: {x: 0, y: 0, z: 0}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
---- !u!114 &2099532922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099532919}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25ce996566d1b00488f166f2facee1a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: 0
-  fire: 0
-  water: 0
-  wind: 1
-  earth: 0
---- !u!114 &2099532923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099532919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 389c6eeca14617c438a1011f21eefb24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: 0
-  fire: 0
-  water: 0
-  wind: 1
-  earth: 0
-  lightCaster: {fileID: 386890671}
-  fireCaster: {fileID: 501066002}
-  waterCaster: {fileID: 1187254813}
-  windCaster: {fileID: 1075712743}
-  earthCaster: {fileID: 1625310253}
