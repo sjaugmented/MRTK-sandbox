@@ -7,8 +7,8 @@ using UnityEngine;
 public class FingerTracker : MonoBehaviour
 {
     [Tooltip("Min Velocity at which spells are cast")] [SerializeField] float minVelocity = 2f;
-    [Tooltip("Max Velocity at which spells are cast")] [SerializeField] float maxVelocity = 5f;
-    [SerializeField] GameObject palmMenuVisuals;
+    [Tooltip("Max Velocity at which spells are cast")] [SerializeField] float maxVelocity = 10f;
+    [Tooltip("Parent object for the palm menu visuals")] [SerializeField] GameObject palmMenuVisuals;
 
     // used for index tracking & velocity
     MixedRealityPose index; 
@@ -21,12 +21,12 @@ public class FingerTracker : MonoBehaviour
     // used to disable index tracking when menu is open
     bool menuOpen = false;
 
-    CastTesting caster;
+    SpellManager caster;
 
     // Start is called before the first frame update
     void Start()
     {
-        caster = FindObjectOfType<CastTesting>();
+        caster = FindObjectOfType<SpellManager>();
     }
 
     // Update is called once per frame

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastTesting : MonoBehaviour
+[RequireComponent(typeof(FingerTracker))]  
+public class SpellManager : MonoBehaviour
 {
     [SerializeField] float delayBetweenCasts = 0.2f;
+    [Header("Caster and Spell management")]
     [Tooltip("Visual representation of Light spell")] [SerializeField] GameObject lightCaster;
     [Tooltip("Visual representation of Fire spell")] [SerializeField] GameObject fireCaster;
     [Tooltip("Visual representation of Water spell")] [SerializeField] GameObject waterCaster;
@@ -20,7 +22,7 @@ public class CastTesting : MonoBehaviour
     bool ableToCast = true;
 
     int casterID = 0;
-    Transform castPosition;
+    Vector3 castPosition;
     GameObject spellToCast;
 
     FingerTracker fingerTracker;
@@ -56,27 +58,27 @@ public class CastTesting : MonoBehaviour
         if (casterID == 1)
         {
             lightCaster.SetActive(true);
-            castPosition = lightCaster.transform;
+            castPosition = lightCaster.transform.position;
         }
         else if (casterID == 2)
         {
             fireCaster.SetActive(true);
-            castPosition = fireCaster.transform;
+            castPosition = fireCaster.transform.position;
         }
         else if (casterID == 3)
         {
             waterCaster.SetActive(true);
-            castPosition = waterCaster.transform;
+            castPosition = waterCaster.transform.position;
         }
         else if (casterID == 4)
         {
             windCaster.SetActive(true);
-            castPosition = windCaster.transform;
+            castPosition = windCaster.transform.position;
         }
         else if (casterID == 5)
         {
             earthCaster.SetActive(true);
-            castPosition = earthCaster.transform;
+            castPosition = earthCaster.transform.position;
         }
         else return;
     }
@@ -87,27 +89,27 @@ public class CastTesting : MonoBehaviour
         {
             if (casterID == 1)
             {
-                Instantiate(lightSpell, castPosition.position, Camera.main.transform.rotation);
+                Instantiate(lightSpell, castPosition, Camera.main.transform.rotation);
                 StartCoroutine("CastDelay");
             }
             else if (casterID == 2)
             {
-                Instantiate(fireSpell, castPosition.position, Camera.main.transform.rotation);
+                Instantiate(fireSpell, castPosition, Camera.main.transform.rotation);
                 StartCoroutine("CastDelay");
             }
             else if (casterID == 3)
             {
-                Instantiate(waterSpell, castPosition.position, Camera.main.transform.rotation);
+                Instantiate(waterSpell, castPosition, Camera.main.transform.rotation);
                 StartCoroutine("CastDelay");
             }
             else if (casterID == 4)
             {
-                Instantiate(windSpell, castPosition.position, Camera.main.transform.rotation);
+                Instantiate(windSpell, castPosition, Camera.main.transform.rotation);
                 StartCoroutine("CastDelay");
             }
             else if (casterID == 5)
             {
-                Instantiate(earthSpell, castPosition.position, Camera.main.transform.rotation);
+                Instantiate(earthSpell, castPosition, Camera.main.transform.rotation);
                 StartCoroutine("CastDelay");
             }
             else return;

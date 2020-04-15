@@ -5,22 +5,23 @@ using UnityEngine;
 public class SphereController : MonoBehaviour
 {
     [Header("General")]
-    [Tooltip("Time before self-destruct")] [SerializeField] float lifeSpan;
+    [Tooltip("Time before self-destruct")] [SerializeField] float lifeSpan = 5f;
     [SerializeField] float force = 50;
     
     [Header("DMX/OSC")]
-    [SerializeField] string messageOSC;
-    [Tooltip("This value is overriden if 'Lock OSC Value to DMX' is true")] [SerializeField] float valueOSC = 1f;
-    [Tooltip("Converts DMX values to OSC floats")] [SerializeField] bool lockOSCValueToDMX = false;
-
     [Tooltip("DMX channels to control")] [SerializeField] int[] DMXchannels;
-    [Tooltip("Brightness value for corresponding channel - !ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0,255)] [SerializeField] int[] DMXvalues;
+    [Tooltip("Brightness value for corresponding channel - !ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0, 255)] [SerializeField] int[] DMXvalues;
+
+    [Tooltip("Dim light(s) over time or leave at set values?")] [SerializeField] bool dimOverTime = true;
+    [Tooltip("Percent of dimming per rendered frame")] [Range(0, 100)] [SerializeField] int rateOfDim = 20;
+
+    [SerializeField] string messageOSC;
+    [SerializeField] float valueOSC = 1f;
+    [Tooltip("If Dim Over Time is true and you want OSC value to change with DMX. Converts the highest DMX value to an OSC float.")] [SerializeField] bool lockOSCValueToDMX = false;
 
     [Header("Misc Controls")]
-    [SerializeField] bool timedEffect = true;
-    [SerializeField] float timingOfBlackout = 1;
-    [Tooltip("Dim light(s) over time or leave at set values?")] [SerializeField] bool dimOverTime = true;
-    [Tooltip("Percent of dimming per frame")] [Range(0, 100)] [SerializeField] int rateOfDim = 20;
+    [SerializeField] bool timedBlackout = true;
+    [SerializeField] float blackoutDelay = 1;
 
     public bool isBullet = true;
 
@@ -40,7 +41,7 @@ public class SphereController : MonoBehaviour
         SendDMX();
         SendOSCMessage(valueOSC); //todo refactor for lockOSCvalueToDMX
 
-        if (timedEffect)
+        if (timedBlackout)
         {
             StartCoroutine("TimedLight");
         }
@@ -117,7 +118,7 @@ public class SphereController : MonoBehaviour
             // do nothing
         }
 
-        yield return new WaitForSeconds(timingOfBlackout);
+        yield return new WaitForSeconds(blackoutDelay);
         dmx.ResetDMX();
         //Debug.Log("resetting DMX"); //todo remove
     }

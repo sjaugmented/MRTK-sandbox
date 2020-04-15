@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Sandbox.unity
-    guid: fb9549b65d759814d927d42c9d4e4390
+    path: Assets/Scenes/Palm Menu.unity
+    guid: debeb6c76055d0b40856c6d60234ea47
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: cb0ec6f9500a99a4c887373bb6bc34d4,
       type: 2}
