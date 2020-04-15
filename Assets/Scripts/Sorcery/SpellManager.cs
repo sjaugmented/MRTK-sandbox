@@ -21,7 +21,7 @@ public class SpellManager : MonoBehaviour
     // used to create rate of fire for spells
     bool ableToCast = true;
 
-    int casterID = 0;
+    int casterID = 1;
     Vector3 castPosition;
     GameObject spellToCast;
 

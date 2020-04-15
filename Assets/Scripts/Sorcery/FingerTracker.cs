@@ -8,6 +8,7 @@ public class FingerTracker : MonoBehaviour
 {
     [Tooltip("Min Velocity at which spells are cast")] [SerializeField] float minVelocity = 2f;
     [Tooltip("Max Velocity at which spells are cast")] [SerializeField] float maxVelocity = 10f;
+    [SerializeField] bool usePalmMenu = true;
     [Tooltip("Parent object for the palm menu visuals")] [SerializeField] GameObject palmMenuVisuals;
 
     // used for index tracking & velocity
@@ -33,11 +34,15 @@ public class FingerTracker : MonoBehaviour
     void Update()
     {
         // only tracks index if menu is closed
-        if (!palmMenuVisuals.activeInHierarchy)
+        if (usePalmMenu)
+        {
+            if (palmMenuVisuals.activeInHierarchy) return;
+            else TrackIndexFinger();
+        }
+        else
         {
             TrackIndexFinger();
         }
-        else return;
 
     }
 
