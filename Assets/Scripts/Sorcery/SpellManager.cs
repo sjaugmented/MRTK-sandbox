@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,24 +7,39 @@ using UnityEngine;
 public class SpellManager : MonoBehaviour
 {
     [SerializeField] float delayBetweenCasts = 0.2f;
-    [Header("Caster and Spell management")]
-    [Tooltip("Visual representation of Light spell")] [SerializeField] GameObject lightCaster;
-    [Tooltip("Visual representation of Fire spell")] [SerializeField] GameObject fireCaster;
-    [Tooltip("Visual representation of Water spell")] [SerializeField] GameObject waterCaster;
-    [Tooltip("Visual representation of Wind spell")] [SerializeField] GameObject windCaster;
-    [Tooltip("Visual representation of Earth spell")] [SerializeField] GameObject earthCaster;
-    [Tooltip("Light spell prefab to cast")] [SerializeField] GameObject lightSpell;
-    [Tooltip("Fire spell prefab to cast")] [SerializeField] GameObject fireSpell;
-    [Tooltip("Water spell prefab to cast")] [SerializeField] GameObject waterSpell;
-    [Tooltip("Wind spell prefab to cast")] [SerializeField] GameObject windSpell;
-    [Tooltip("Earth spell prefab to cast")] [SerializeField] GameObject earthSpell;
+
+    [Header("Caster and Spell hook-ups")]
+    [Tooltip("Visual representation of Light spell")] 
+    [SerializeField] GameObject lightCaster;
+    [Tooltip("Visual representation of Fire spell")] 
+    [SerializeField] GameObject fireCaster;
+    [Tooltip("Visual representation of Water spell")] 
+    [SerializeField] GameObject waterCaster;
+    [Tooltip("Visual representation of Wind spell")] 
+    [SerializeField] GameObject windCaster;
+    [Tooltip("Visual representation of Earth spell")] 
+    [SerializeField] GameObject earthCaster;
+    [Tooltip("Light spell prefab to cast")] 
+    [SerializeField] GameObject lightSpell;
+    [Tooltip("Fire spell prefab to cast")] 
+    [SerializeField] GameObject fireSpell;
+    [Tooltip("Water spell prefab to cast")] 
+    [SerializeField] GameObject waterSpell;
+    [Tooltip("Wind spell prefab to cast")] 
+    [SerializeField] GameObject windSpell;
+    [Tooltip("Earth spell prefab to cast")] 
+    [SerializeField] GameObject earthSpell;
+
+    [Header("Two Finger Spellbook")]
+    [Tooltip("Distance between index fingers that activates Spellbook")]
+    [SerializeField] float spellbookDistThresh = 0.8f;
+    [SerializeField] int numOfSpells = 5;
 
     // used to create rate of fire for spells
     bool ableToCast = true;
 
     int casterID = 1;
     Vector3 castPosition;
-    GameObject spellToCast;
 
     FingerTracker fingerTracker;
 
@@ -46,11 +62,13 @@ public class SpellManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(fingerTracker.GetFingerUp());//remove
         if (fingerTracker.GetFingerUp() == true) ActivateCaster();
         else ResetCasters();
+
+        if (fingerTracker.GetTwoFingers() == true) ProcessFingerSpellbook();
     }
 
+   
     public void ActivateCaster()
     {
         ResetCasters();
@@ -82,6 +100,39 @@ public class SpellManager : MonoBehaviour
         }
         else return;
     }
+
+    private void ProcessFingerSpellbook()
+    {
+        float spellSlotSize = spellbookDistThresh / numOfSpells;
+
+        float fingerDist = fingerTracker.GetDistIndexes();
+
+        if (fingerDist > 0 && fingerDist <= spellbookDistThresh)
+        {
+            if (fingerDist > 0 && fingerDist <= spellbookDistThresh - spellSlotSize * 4)
+            {
+                casterID = 5;
+            }
+            else if (fingerDist > spellbookDistThresh - spellSlotSize * 4 && fingerDist <= spellbookDistThresh - spellSlotSize * 3)
+            {
+                casterID = 4;
+            }
+            else if (fingerDist > spellbookDistThresh - spellSlotSize * 3 && fingerDist <= spellbookDistThresh - spellSlotSize * 2)
+            {
+                casterID = 3;
+            }
+            else if (fingerDist > spellbookDistThresh - spellSlotSize * 2 && fingerDist <= spellbookDistThresh - spellSlotSize)
+            {
+                casterID = 2;
+            }
+            else
+            {
+                casterID = 1;
+            }
+        }
+        else return;
+    }
+
 
     public void CastTestSpell()
     {

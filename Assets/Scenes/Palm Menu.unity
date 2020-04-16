@@ -1092,31 +1092,71 @@ PrefabInstance:
         type: 3}
       propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1222994577}
+    - target: {fileID: 7151666277718109165, guid: 1f96bc08732324c47a39eec0ced4155d,
+        type: 3}
+      propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetEarth
       objectReference: {fileID: 0}
     - target: {fileID: 7151666277981052681, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
       propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1222994577}
+    - target: {fileID: 7151666277981052681, guid: 1f96bc08732324c47a39eec0ced4155d,
+        type: 3}
+      propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetWind
       objectReference: {fileID: 0}
     - target: {fileID: 7151666278339103268, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
       propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1222994577}
+    - target: {fileID: 7151666278339103268, guid: 1f96bc08732324c47a39eec0ced4155d,
+        type: 3}
+      propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetFire
       objectReference: {fileID: 0}
     - target: {fileID: 7151666278831879196, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
       propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1222994577}
+    - target: {fileID: 7151666278831879196, guid: 1f96bc08732324c47a39eec0ced4155d,
+        type: 3}
+      propertyPath: Events.Array.data[2].Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetLight
       objectReference: {fileID: 0}
     - target: {fileID: 7151666279100439755, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
       propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1222994577}
+    - target: {fileID: 7151666279100439755, guid: 1f96bc08732324c47a39eec0ced4155d,
+        type: 3}
+      propertyPath: Events.Array.data[1].Event.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetWater
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943472344320155156, guid: 1f96bc08732324c47a39eec0ced4155d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943472344320155157, guid: 1f96bc08732324c47a39eec0ced4155d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8943472344320155159, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
       propertyPath: m_Name
       value: Palm Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943472344320155162, guid: 1f96bc08732324c47a39eec0ced4155d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8943472344320155163, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
