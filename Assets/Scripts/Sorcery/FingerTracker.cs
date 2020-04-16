@@ -12,12 +12,6 @@ public class FingerTracker : MonoBehaviour
     [Tooltip("Max Velocity at which spells are cast")] 
     [SerializeField] float maxVelocity = 10f;
 
-    /*[Header("Palm Spellbook")]
-    [Tooltip("If false, turn off Palm Menu solvers")] 
-    [SerializeField] bool usePalmMenu = true;
-    [Tooltip("Parent object for the palm menu visuals")]
-    [SerializeField] GameObject palmMenuVisuals;*/
-
     // used for index tracking & velocity
     MixedRealityPose indexRight, indexLeft; 
     float castFingerUp = 0.3f;
@@ -38,17 +32,6 @@ public class FingerTracker : MonoBehaviour
     void Update()
     {
         ProcessIndexes();
-        
-        /*if (usePalmMenu)
-        {
-            // only track index if menu is closed
-            if (!palmMenuVisuals.activeInHierarchy) ProcessIndexes();
-            else return;
-        }
-        else
-        {
-            ProcessIndexes();
-        }*/
     }
 
     private void ProcessIndexes()
