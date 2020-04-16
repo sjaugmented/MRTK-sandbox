@@ -21,14 +21,10 @@ public class FingerTracker : MonoBehaviour
     // used for index tracking & velocity
     MixedRealityPose indexRight, indexLeft; 
     float fingerUp = 0.3f;
-    float distIndexes;
-    float prevHandCamDist;
-
     bool indexPresent = false;
     bool twoFingers = false;
-
-    // used to disable index tracking when menu is open
-    bool menuOpen = false;
+    float distIndexes;
+    float prevHandCamDist;
 
     SpellManager caster;
 
@@ -61,7 +57,7 @@ public class FingerTracker : MonoBehaviour
             indexPresent = true;
             twoFingers = true;
 
-            distIndexes = Vector3.Distance(indexRight.Position, indexLeft.Position);
+            distIndexes = indexRight.Position.x - indexLeft.Position.x;
 
             if (indexRight.Up.y >= fingerUp)
             {
@@ -92,13 +88,12 @@ public class FingerTracker : MonoBehaviour
         float awayVelocity;
         Vector3 cameraPos = Camera.main.transform.position;
 
-        float handCamDist = Vector3.Distance(cameraPos, indexRight.Position);
+        float handCamDist = Mathf.Abs(Vector3.Distance(cameraPos, indexRight.Position));
         awayVelocity = (handCamDist - prevHandCamDist) / Time.deltaTime;
-        prevHandCamDist = Vector3.Distance(cameraPos, indexRight.Position);
+        prevHandCamDist = Mathf.Abs(Vector3.Distance(cameraPos, indexRight.Position));
 
         if (awayVelocity >= minVelocity && awayVelocity <= maxVelocity)
         {
-            Debug.Log("casting");
             caster.CastTestSpell();
         }
     }

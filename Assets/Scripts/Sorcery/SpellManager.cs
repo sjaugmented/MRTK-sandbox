@@ -38,7 +38,7 @@ public class SpellManager : MonoBehaviour
     // used to create rate of fire for spells
     bool ableToCast = true;
 
-    int casterID = 1;
+    public int casterID = 1; //todo remove public
     Vector3 castPosition;
 
     FingerTracker fingerTracker;
