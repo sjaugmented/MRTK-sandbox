@@ -12,15 +12,15 @@ public class FingerTracker : MonoBehaviour
     [Tooltip("Max Velocity at which spells are cast")] 
     [SerializeField] float maxVelocity = 10f;
 
-    [Header("Palm Spellbook")]
+    /*[Header("Palm Spellbook")]
     [Tooltip("If false, turn off Palm Menu solvers")] 
     [SerializeField] bool usePalmMenu = true;
     [Tooltip("Parent object for the palm menu visuals")]
-    [SerializeField] GameObject palmMenuVisuals;
+    [SerializeField] GameObject palmMenuVisuals;*/
 
     // used for index tracking & velocity
     MixedRealityPose indexRight, indexLeft; 
-    float fingerUp = 0.3f;
+    float castFingerUp = 0.3f;
     bool indexPresent = false;
     bool twoFingers = false;
     float distIndexes;
@@ -37,7 +37,9 @@ public class FingerTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (usePalmMenu)
+        ProcessIndexes();
+        
+        /*if (usePalmMenu)
         {
             // only track index if menu is closed
             if (!palmMenuVisuals.activeInHierarchy) ProcessIndexes();
@@ -46,7 +48,7 @@ public class FingerTracker : MonoBehaviour
         else
         {
             ProcessIndexes();
-        }
+        }*/
     }
 
     private void ProcessIndexes()
@@ -59,7 +61,7 @@ public class FingerTracker : MonoBehaviour
 
             distIndexes = indexRight.Position.x - indexLeft.Position.x;
 
-            if (indexRight.Up.y >= fingerUp)
+            if (indexRight.Up.y >= castFingerUp)
             {
                 ProcessIndexVelocity();
             }
@@ -70,7 +72,7 @@ public class FingerTracker : MonoBehaviour
             indexPresent = true;
             twoFingers = false;
 
-            if (indexRight.Up.y >= fingerUp)
+            if (indexRight.Up.y >= castFingerUp)
             {
                 ProcessIndexVelocity();
             }
@@ -94,7 +96,7 @@ public class FingerTracker : MonoBehaviour
 
         if (awayVelocity >= minVelocity && awayVelocity <= maxVelocity)
         {
-            caster.CastTestSpell();
+            caster.CastSpell();
         }
     }
 
@@ -108,7 +110,7 @@ public class FingerTracker : MonoBehaviour
         return distIndexes;
     }
 
-    public bool GetFingerUp()
+    public bool GetCastFingerUp()
     {
         return indexPresent;
     }

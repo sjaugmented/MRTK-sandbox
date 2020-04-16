@@ -30,6 +30,14 @@ public class SpellManager : MonoBehaviour
     [Tooltip("Earth spell prefab to cast")] 
     [SerializeField] GameObject earthSpell;
 
+    [Header("Palm Spellbook")]
+    [Tooltip("If false, turn off Palm Menu solvers")]
+    [SerializeField] bool usePalmMenu = true;
+    [Tooltip("Parent gameObject for the Palm Menu")]
+    [SerializeField] GameObject palmMenuParent;
+    [Tooltip("Parent gamObject for the Palm Menu visuals")]
+    [SerializeField] GameObject palmMenuVisuals;
+
     [Header("Two Finger Spellbook")]
     [Tooltip("Distance between index fingers that activates Spellbook")]
     [SerializeField] float spellbookDistThresh = 0.8f;
@@ -47,10 +55,10 @@ public class SpellManager : MonoBehaviour
     void Start()
     {
         fingerTracker = FindObjectOfType<FingerTracker>();
-        ResetCasters();
+        TurnOffCasters();
     }
 
-    private void ResetCasters()
+    private void TurnOffCasters()
     {
         lightCaster.SetActive(false);
         fireCaster.SetActive(false);
@@ -62,16 +70,38 @@ public class SpellManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fingerTracker.GetFingerUp() == true) ActivateCaster();
-        else ResetCasters();
+        if (usePalmMenu)
+        {
+            palmMenuParent.SetActive(true);
+            if (!palmMenuVisuals.activeInHierarchy)
+            {
+                LookForCastFinger();
+                LookForFingerSpellbook();
+            }
+            else TurnOffCasters();
+        }
+        else
+        {
+            palmMenuParent.SetActive(false);
+            LookForCastFinger();
+            LookForFingerSpellbook();
+        }
+    }
 
+    private void LookForCastFinger()
+    {
+        if (fingerTracker.GetCastFingerUp() == true) ActivateCaster();
+        else TurnOffCasters();
+    }
+
+    private void LookForFingerSpellbook()
+    {
         if (fingerTracker.GetTwoFingers() == true) ProcessFingerSpellbook();
     }
 
-   
     public void ActivateCaster()
     {
-        ResetCasters();
+        TurnOffCasters();
 
         if (casterID == 1)
         {
@@ -134,9 +164,9 @@ public class SpellManager : MonoBehaviour
     }
 
 
-    public void CastTestSpell()
+    public void CastSpell()
     {
-        if (ableToCast)
+        if (ableToCast && !palmMenuVisuals.activeInHierarchy)
         {
             if (casterID == 1)
             {

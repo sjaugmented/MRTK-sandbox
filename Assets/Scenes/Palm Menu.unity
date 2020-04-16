@@ -391,6 +391,12 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &684395744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8943472344320155159, guid: 1f96bc08732324c47a39eec0ced4155d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8943472344267178162}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1003557382
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,8 +472,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minVelocity: 2
   maxVelocity: 10
-  usePalmMenu: 1
-  palmMenuVisuals: {fileID: 1917638244}
 --- !u!4 &1222994576
 Transform:
   m_ObjectHideFlags: 0
@@ -510,8 +514,12 @@ MonoBehaviour:
     type: 3}
   earthSpell: {fileID: 5418862387724200070, guid: 75684dd42016791468ba72dd9b6226b3,
     type: 3}
+  usePalmMenu: 1
+  palmMenuParent: {fileID: 684395744}
+  palmMenuVisuals: {fileID: 1917638244}
   spellbookDistThresh: 0.5
   numOfSpells: 5
+  casterID: 1
 --- !u!1 &1395986365
 GameObject:
   m_ObjectHideFlags: 0
