@@ -10,14 +10,14 @@ public class SphereController : MonoBehaviour
     
     [Header("DMX/OSC")]
     [Tooltip("DMX channels to control")] [SerializeField] int[] DMXchannels;
-    [Tooltip("Brightness value for corresponding channel - !ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0, 255)] [SerializeField] int[] DMXvalues;
+    [Tooltip("Brightness value for corresponding channel - ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0, 255)] [SerializeField] int[] DMXvalues;
 
     [Tooltip("Dim light(s) over time or leave at set values?")] [SerializeField] bool dimOverTime = true;
-    [Tooltip("Percent of dimming per rendered frame")] [Range(0, 100)] [SerializeField] int rateOfDim = 20;
+    [Tooltip("Percent of dimming per second")] [Range(0, 100)] [SerializeField] int rateOfDim = 20;
 
     [SerializeField] string messageOSC;
     [SerializeField] float valueOSC = 1f;
-    [Tooltip("If Dim Over Time is true and you want OSC value to change with DMX. Converts the highest DMX value to an OSC float.")] [SerializeField] bool lockOSCValueToDMX = false;
+    [Tooltip("If Dim Over Time is true and you want OSC value to change with DMX. Converts the highest DMX value to an OSC float.")] [SerializeField] bool dimOSCwithDMX = false;
 
     [Header("Misc Controls")]
     [SerializeField] bool timedBlackout = true;
@@ -49,6 +49,15 @@ public class SphereController : MonoBehaviour
         StartCoroutine("SelfDestruct");
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (dimOverTime)
+        {
+            DimLight();
+        }
+    }
+
     private void SendDMX()
     {
         if (DMXchannels.Length == 0) return;
@@ -67,48 +76,51 @@ public class SphereController : MonoBehaviour
     }
     private void SendOSCMessage(float oscVal)
     {
-        if (!lockOSCValueToDMX)
-        {
-            OscMessage message = new OscMessage();
-            message.address = messageOSC;
-            message.values.Add(valueOSC);
-            osc.Send(message);
-            //Debug.Log("sending OSC: " + message + oscVal); //todo remove
-        }
-        else
-        {
-            OscMessage message = new OscMessage();
-            message.address = messageOSC;
-            message.values.Add(oscVal);
-            osc.Send(message);
-            //Debug.Log("sending OSC: " + message + oscVal); //todo remove
-        }
-
-
+        OscMessage message = new OscMessage();
+        message.address = messageOSC;
+        message.values.Add(oscVal);
+        osc.Send(message);
+        Debug.Log("sending OSC: " + message + oscVal); //todo remove
     }
 
     private void DimLight()
     {
+        var dimPercentage = rateOfDim / 100;
+
         if (DMXchannels.Length == 0) return; 
 
         for (int i = 0; i < DMXchannels.Length; i++)
-        {   
+        {
             if (DMXvalues[i] > 0)
             {
-                DMXvalues[i] -= rateOfDim;
+                DMXvalues[i] -= Mathf.RoundToInt(dimPercentage * Time.deltaTime);
                 if (DMXvalues[i] < 0) DMXvalues[i] = 0;
                 dmx.SetAddress(DMXchannels[i], DMXvalues[i]);
-
-                /*if (lockOSCValueToDMX)
-                {
-                    float maxOSCval = 255;
-                    float oscDmxConvert = DMXvalues[i] / maxOSCval;
-                    SendOSCMessage(oscDmxConvert);
-                }*/
             }
+            else return;
+        }
 
+        /*int sum = 0;
+
+        foreach (int val in DMXvalues)
+        {
+            sum += val;
+        }
+
+        if (dimOSCwithDMX)
+        {
+            if (sum > 0)
+            {
+                
+                SendOSCMessage(valueOSC - dimPercentage * Time.deltaTime);
+            }
+            else
+            {
+                SendOSCMessage(0);
+            }
             
         }
+        else return;*/
     }
 
     IEnumerator TimedLight()
@@ -142,12 +154,5 @@ public class SphereController : MonoBehaviour
         rigidBody.AddForce(transform.forward * force);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (dimOverTime)
-        {
-            DimLight();
-        }
-    }
+    
 }
