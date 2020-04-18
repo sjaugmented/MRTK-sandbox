@@ -10,15 +10,15 @@ public class SpellManager : MonoBehaviour
 
     [Header("Caster and Spell hook-ups")]
     [Tooltip("Visual representation of Light spell")] 
-    [SerializeField] GameObject lightCaster;
+    [SerializeField] MeshRenderer lightCaster;
     [Tooltip("Visual representation of Fire spell")] 
-    [SerializeField] GameObject fireCaster;
+    [SerializeField] MeshRenderer fireCaster;
     [Tooltip("Visual representation of Water spell")] 
-    [SerializeField] GameObject waterCaster;
+    [SerializeField] MeshRenderer waterCaster;
     [Tooltip("Visual representation of Wind spell")] 
-    [SerializeField] GameObject windCaster;
+    [SerializeField] MeshRenderer windCaster;
     [Tooltip("Visual representation of Earth spell")] 
-    [SerializeField] GameObject earthCaster;
+    [SerializeField] MeshRenderer earthCaster;
     [Tooltip("Light spell prefab to cast")] 
     [SerializeField] GameObject lightSpell;
     [Tooltip("Fire spell prefab to cast")] 
@@ -60,11 +60,11 @@ public class SpellManager : MonoBehaviour
 
     private void TurnOffCasters()
     {
-        lightCaster.SetActive(false);
-        fireCaster.SetActive(false);
-        waterCaster.SetActive(false);
-        windCaster.SetActive(false);
-        earthCaster.SetActive(false);
+        lightCaster.enabled = false;
+        fireCaster.enabled = false;
+        waterCaster.enabled = false;
+        windCaster.enabled = false;
+        earthCaster.enabled = false;
     }
 
     // Update is called once per frame
@@ -105,27 +105,27 @@ public class SpellManager : MonoBehaviour
 
         if (casterID == 1)
         {
-            lightCaster.SetActive(true);
+            lightCaster.enabled = true;
             castPosition = lightCaster.transform.position;
         }
         else if (casterID == 2)
         {
-            fireCaster.SetActive(true);
+            fireCaster.enabled = true;
             castPosition = fireCaster.transform.position;
         }
         else if (casterID == 3)
         {
-            waterCaster.SetActive(true);
+            waterCaster.enabled = true;
             castPosition = waterCaster.transform.position;
         }
         else if (casterID == 4)
         {
-            windCaster.SetActive(true);
+            windCaster.enabled = true;
             castPosition = windCaster.transform.position;
         }
         else if (casterID == 5)
         {
-            earthCaster.SetActive(true);
+            earthCaster.enabled = true;
             castPosition = earthCaster.transform.position;
         }
         else return;
