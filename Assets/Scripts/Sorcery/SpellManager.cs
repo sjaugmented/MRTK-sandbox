@@ -9,16 +9,18 @@ public class SpellManager : MonoBehaviour
     [SerializeField] float delayBetweenCasts = 0.2f;
 
     [Header("Caster and Spell hook-ups")]
+    [Tooltip("Position where spells cast from. Typically the Parent Object of the Casters")]
+    [SerializeField] Transform casterParent;
     [Tooltip("Visual representation of Light spell")] 
-    [SerializeField] MeshRenderer lightCaster;
+    [SerializeField] ParticleSystem lightCaster;
     [Tooltip("Visual representation of Fire spell")] 
-    [SerializeField] MeshRenderer fireCaster;
+    [SerializeField] ParticleSystem fireCaster;
     [Tooltip("Visual representation of Water spell")] 
-    [SerializeField] MeshRenderer waterCaster;
+    [SerializeField] ParticleSystem waterCaster;
     [Tooltip("Visual representation of Wind spell")] 
-    [SerializeField] MeshRenderer windCaster;
+    [SerializeField] ParticleSystem windCaster;
     [Tooltip("Visual representation of Earth spell")] 
-    [SerializeField] MeshRenderer earthCaster;
+    [SerializeField] ParticleSystem earthCaster;
     [Tooltip("Light spell prefab to cast")] 
     [SerializeField] GameObject lightSpell;
     [Tooltip("Fire spell prefab to cast")] 
@@ -47,24 +49,32 @@ public class SpellManager : MonoBehaviour
     bool ableToCast = true;
 
     public int casterID = 1; //todo remove public
-    Vector3 castPosition;
 
     FingerTracker fingerTracker;
+
+    ParticleSystem.EmissionModule lightEm, fireEm, waterEm, windEm, earthEm;
 
     // Start is called before the first frame update
     void Start()
     {
         fingerTracker = FindObjectOfType<FingerTracker>();
+
+        lightEm = lightCaster.emission;
+        fireEm = fireCaster.emission;
+        waterEm = waterCaster.emission;
+        windEm = windCaster.emission;
+        earthEm = earthCaster.emission;
+
         TurnOffCasters();
     }
 
     private void TurnOffCasters()
     {
-        lightCaster.enabled = false;
-        fireCaster.enabled = false;
-        waterCaster.enabled = false;
-        windCaster.enabled = false;
-        earthCaster.enabled = false;
+        lightEm.enabled = false;
+        fireEm.enabled = false;
+        waterEm.enabled = false;
+        windEm.enabled = false;
+        earthEm.enabled = false;
     }
 
     // Update is called once per frame
@@ -105,28 +115,23 @@ public class SpellManager : MonoBehaviour
 
         if (casterID == 1)
         {
-            lightCaster.enabled = true;
-            castPosition = lightCaster.transform.position;
+            lightEm.enabled = true;
         }
         else if (casterID == 2)
         {
-            fireCaster.enabled = true;
-            castPosition = fireCaster.transform.position;
+            fireEm.enabled = true;
         }
         else if (casterID == 3)
         {
-            waterCaster.enabled = true;
-            castPosition = waterCaster.transform.position;
+            waterEm.enabled = true;
         }
         else if (casterID == 4)
         {
-            windCaster.enabled = true;
-            castPosition = windCaster.transform.position;
+            windEm.enabled = true;
         }
         else if (casterID == 5)
         {
-            earthCaster.enabled = true;
-            castPosition = earthCaster.transform.position;
+            earthEm.enabled = true;
         }
         else return;
     }
@@ -170,27 +175,27 @@ public class SpellManager : MonoBehaviour
         {
             if (casterID == 1)
             {
-                Instantiate(lightSpell, castPosition, Camera.main.transform.rotation);
+                Instantiate(lightSpell, casterParent.position, Camera.main.transform.rotation);
                 StartCoroutine("CastDelay");
             }
             else if (casterID == 2)
             {
-                Instantiate(fireSpell, castPosition, Camera.main.transform.rotation);
+                Instantiate(fireSpell, casterParent.position, Camera.main.transform.rotation);
                 StartCoroutine("CastDelay");
             }
             else if (casterID == 3)
             {
-                Instantiate(waterSpell, castPosition, Camera.main.transform.rotation);
+                Instantiate(waterSpell, casterParent.position, Camera.main.transform.rotation);
                 StartCoroutine("CastDelay");
             }
             else if (casterID == 4)
             {
-                Instantiate(windSpell, castPosition, Camera.main.transform.rotation);
+                Instantiate(windSpell, casterParent.position, Camera.main.transform.rotation);
                 StartCoroutine("CastDelay");
             }
             else if (casterID == 5)
             {
-                Instantiate(earthSpell, castPosition, Camera.main.transform.rotation);
+                Instantiate(earthSpell, casterParent.position, Camera.main.transform.rotation);
                 StartCoroutine("CastDelay");
             }
             else return;
