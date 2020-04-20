@@ -3,52 +3,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(FingerDimmerScaler))]
 public class FingerDimmer : MonoBehaviour
 {
-    [SerializeField] private HandInteractionPanZoom panInputSource;
-    [SerializeField] GameObject lightObj;
+    [SerializeField] int dmxChannel = 1;
+    [SerializeField] Transform lvlIndicator;
+    [SerializeField] float bufferZone = 0.05f;
+    [SerializeField] GameObject lightObj; // remove after testing
+
+    /*[SerializeField] Transform tip;         //
+    [SerializeField] Transform knuckle;     // todo remove*/
 
     Light workLight;
+    FingerDimmerScaler dimmer;
+    DMXcontroller dmx;
 
-    private void OnEnable()
-    {
-        if (panInputSource == null)
-        {
-            panInputSource = GetComponent<HandInteractionPanZoom>();
-        }
-        if (panInputSource == null)
-        {
-            Debug.LogError("MoveWithPan did not find a HandInteractionPanZoom to listen to, the component will not work", gameObject);
-        }
-        else
-        {
-            panInputSource.PanUpdated.AddListener(OnPanning);
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (panInputSource != null)
-        {
-            panInputSource.PanUpdated.RemoveListener(OnPanning);
-        }
-    }
-
-    public void OnPanning(HandPanEventData eventData)
-    {
-        Vector3 panningPosition = new Vector3(eventData.PanDelta.x, eventData.PanDelta.y * -1, 0.0f);
-        Debug.Log(panningPosition); //todo remove
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
+        dmx = FindObjectOfType<DMXcontroller>();
         workLight = lightObj.GetComponent<Light>();
+        dimmer = GetComponent<FingerDimmerScaler>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        ProcessIndicatorPos();
+    }
+
+    private void ProcessIndicatorPos()
+    {
+        Vector3 fingerTip = dimmer.GetIndexTip();
+        Vector3 fingerKnuckle = dimmer.GetIndexKnuckle();
+        float fingerLength = dimmer.GetFingerLength();
+
+        float distToTip = Vector3.Distance(lvlIndicator.position, fingerTip);
+        float distToKnuckle = Vector3.Distance(lvlIndicator.position, fingerKnuckle);
+
+        if (distToTip <= fingerLength * bufferZone)
+        {
+            workLight.intensity = 25;
+            dmx.SetAddress(dmxChannel, 255);
+        }
+        else if (distToKnuckle <= fingerLength * bufferZone)
+        {
+            workLight.intensity = 0;
+            dmx.SetAddress(dmxChannel, 0);
+        }
+        else
+        {
+            float dimmerFloat = distToKnuckle / fingerLength;
+
+            workLight.intensity = dimmerFloat * 25;
+            dmx.SetAddress(dmxChannel, Mathf.RoundToInt(dimmerFloat * 255));
+        }
     }
 }
