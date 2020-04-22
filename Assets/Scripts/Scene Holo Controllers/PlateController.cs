@@ -45,7 +45,7 @@ public class PlateController : MonoBehaviour
                 StartCoroutine("TimedLight");
             }
 
-            if (other.GetComponent<SphereController>().isBullet == false)
+            if (other.GetComponent<SpellController>().isBullet == false)
             {
                 Destroy(other);
             }
