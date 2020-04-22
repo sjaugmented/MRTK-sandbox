@@ -42,6 +42,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ice spray
       objectReference: {fileID: 0}
+    - target: {fileID: 4770816759576624, guid: cfca30cbddd5d67419e3858cdf131f09, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.38521
+      objectReference: {fileID: 0}
+    - target: {fileID: 4770816759576624, guid: cfca30cbddd5d67419e3858cdf131f09, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.38521
+      objectReference: {fileID: 0}
+    - target: {fileID: 4770816759576624, guid: cfca30cbddd5d67419e3858cdf131f09, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.38521
+      objectReference: {fileID: 0}
     - target: {fileID: 4854650212877272, guid: cfca30cbddd5d67419e3858cdf131f09, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -85,6 +97,18 @@ PrefabInstance:
     - target: {fileID: 4854650212877272, guid: cfca30cbddd5d67419e3858cdf131f09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854650212877272, guid: cfca30cbddd5d67419e3858cdf131f09, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.53586
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854650212877272, guid: cfca30cbddd5d67419e3858cdf131f09, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.53586
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854650212877272, guid: cfca30cbddd5d67419e3858cdf131f09, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.53586
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfca30cbddd5d67419e3858cdf131f09, type: 3}
