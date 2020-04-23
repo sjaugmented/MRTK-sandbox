@@ -37,7 +37,7 @@ public class FingerTracker : MonoBehaviour
     private void ProcessIndexes()
     {
         // if 2 indexes
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out indexRight) && HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out indexLeft))
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexRight) && HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexLeft))
         {
             indexPresent = true;
             twoFingers = true;
@@ -50,7 +50,7 @@ public class FingerTracker : MonoBehaviour
             }
         }
         // if right hand index only
-        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out indexRight))
+        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexRight))
         {
             indexPresent = true;
             twoFingers = false;
