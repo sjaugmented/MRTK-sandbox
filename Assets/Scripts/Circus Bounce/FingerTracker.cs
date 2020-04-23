@@ -13,10 +13,10 @@ public class FingerTracker : MonoBehaviour
     [SerializeField] float maxVelocity = 10f;
 
     // used for index tracking & velocity
-    MixedRealityPose indexRight, indexLeft; 
+    MixedRealityPose firstIndex, secondIndex; 
     float castFingerUp = 0.3f;
-    bool indexPresent = false;
-    bool twoFingers = false;
+    public bool oneFinger = false;
+    public bool twoFingers = false;
     float distIndexes;
     float prevHandCamDist;
 
@@ -36,53 +36,91 @@ public class FingerTracker : MonoBehaviour
 
     private void ProcessIndexes()
     {
-        // if 2 indexes
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexRight) && HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexLeft))
+        // if right index THEN left index
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out firstIndex)) 
         {
-            indexPresent = true;
-            twoFingers = true;
-
-            distIndexes = indexRight.Position.x - indexLeft.Position.x;
-
-            if (indexRight.Up.y >= castFingerUp)
-            {
-                ProcessIndexVelocity();
-            }
-        }
-        // if right hand index only
-        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexRight))
-        {
-            indexPresent = true;
+            oneFinger = true;
             twoFingers = false;
 
-            if (indexRight.Up.y >= castFingerUp)
+            if (firstIndex.Up.y >= castFingerUp)
             {
                 ProcessIndexVelocity();
             }
+
+            if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out secondIndex))
+            {
+                oneFinger = true;
+                twoFingers = true;
+
+                distIndexes = firstIndex.Position.x - secondIndex.Position.x;
+            }
         }
+        // if left index THEN right index
+        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Left, out firstIndex))
+        {
+            oneFinger = true;
+            twoFingers = false;
+
+            if (firstIndex.Up.y >= castFingerUp)
+            {
+                ProcessIndexVelocity();
+            }
+
+            if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out secondIndex))
+            {
+                oneFinger = true;
+                twoFingers = true;
+
+                distIndexes = firstIndex.Position.x - secondIndex.Position.x;
+            }
+        }
+        // if one index only
+        /*else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out firstIndex))
+        {
+            oneFinger = true;
+            twoFingers = false;
+
+            if (firstIndex.Up.y >= castFingerUp)
+            {
+                ProcessIndexVelocity();
+            }
+        }*/
         // if no indexes
         else
         {
-            indexPresent = false;
+            oneFinger = false;
             twoFingers = false;
         }
     }
 
     private void ProcessIndexVelocity()
     {
-        float awayVelocity;
-        Vector3 cameraPos = Camera.main.transform.position;
-
-        float handCamDist = Mathf.Abs(Vector3.Distance(cameraPos, indexRight.Position));
-        awayVelocity = (handCamDist - prevHandCamDist) / Time.deltaTime;
-        prevHandCamDist = Mathf.Abs(Vector3.Distance(cameraPos, indexRight.Position));
-
-        if (awayVelocity >= minVelocity && awayVelocity <= maxVelocity)
+        if (caster.GetCurrForm() == SpellManager.Form.particle || caster.GetCurrForm() == SpellManager.Form.orb)
         {
-            caster.CastSpell();
+            float awayVelocity;
+            Vector3 cameraPos = Camera.main.transform.position;
+
+            float handCamDist = Mathf.Abs(Vector3.Distance(cameraPos, firstIndex.Position));
+            awayVelocity = (handCamDist - prevHandCamDist) / Time.deltaTime;
+            prevHandCamDist = Mathf.Abs(Vector3.Distance(cameraPos, firstIndex.Position));
+
+            if (awayVelocity >= minVelocity && awayVelocity <= maxVelocity)
+            {
+                caster.CastSpell();
+            }
         }
+        else if (caster.GetCurrForm() == SpellManager.Form.stream)
+        {
+            Debug.Log("index rotation: " + firstIndex.Rotation);
+            
+        }
+        else return;
     }
 
+    public bool GetCastFingerUp()
+    {
+        return oneFinger;
+    }
     public bool GetTwoFingers()
     {
         return twoFingers;
@@ -91,10 +129,5 @@ public class FingerTracker : MonoBehaviour
     public float GetDistIndexes()
     {
         return distIndexes;
-    }
-
-    public bool GetCastFingerUp()
-    {
-        return indexPresent;
     }
 }
