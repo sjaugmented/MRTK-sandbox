@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1349129073523999004}
+  - component: {fileID: 4344580185811324803}
   m_Layer: 0
   m_Name: Ice Thrower
   m_TagString: Untagged
@@ -31,6 +32,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4344580185811324803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349129073523999005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6d6c0b9b6987e4a810f774eedc8bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  channelDMX: 0
+  valueDMX: 0
+  messageOSC: /composition/columns/12/connect
+  valueOSC: 1
 --- !u!1001 &1349129075323589709
 PrefabInstance:
   m_ObjectHideFlags: 0

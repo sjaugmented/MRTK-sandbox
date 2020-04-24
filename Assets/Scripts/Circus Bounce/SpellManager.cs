@@ -106,7 +106,7 @@ public class SpellManager : MonoBehaviour
         foreach (Transform child in spellBook.streamSpells[index].transform)
         {
             var childEmission = child.GetComponent<ParticleSystem>().emission;
-            childEmission.enabled = true;
+            childEmission.enabled = true; 
         }
     }
 
@@ -127,7 +127,7 @@ public class SpellManager : MonoBehaviour
 
     private void LookForCastFinger()
     {
-        if (fingerTracker.GetCastFingerUp() == true) ActivateCaster();
+        if (fingerTracker.GetCastFingerUp() == true) DisplayCaster();
         else
         {
             DisableCasters();
@@ -139,179 +139,76 @@ public class SpellManager : MonoBehaviour
     {
         if (fingerTracker.GetTwoFingers() == true)
         {
-            SelectForm();
+            SelectCurrForm();
             DisableStreams();
         }
     }
 
-    public void ActivateCaster()
+    private void ActivateCurrForm(int index)
+    {
+        if (currForm == Form.particle)
+        {
+            spellBook.particleCasters[index].layer = LayerMask.NameToLayer("Default");
+            foreach (Transform child in spellBook.particleCasters[index].transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("Default");
+                foreach (Transform nextChild in child)
+                {
+                    nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
+                }
+            }
+        }
+        else if (currForm == Form.orb)
+        {
+            spellBook.orbCasters[index].layer = LayerMask.NameToLayer("Default");
+            foreach (Transform child in spellBook.orbCasters[index].transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("Default");
+                foreach (Transform nextChild in child)
+                {
+                    nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
+                }
+            }
+        }
+        else if (currForm == Form.stream)
+        {
+            spellBook.streamCasters[index].layer = LayerMask.NameToLayer("Default");
+            foreach (Transform child in spellBook.streamCasters[index].transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("Default");
+                foreach (Transform nextChild in child)
+                {
+                    nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
+                }
+            }
+        }
+        else return;
+    }
+
+    public void DisplayCaster()
     {
         DisableCasters();
 
         if (currEl == Element.light)
         {
-            if (currForm == Form.particle)
-            {
-                spellBook.particleCasters[0].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.particleCasters[0].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else if (currForm == Form.orb)
-            {
-                spellBook.orbCasters[0].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.orbCasters[0].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else if (currForm == Form.stream)
-            {
-                spellBook.streamCasters[0].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.streamCasters[0].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else return;
+            ActivateCurrForm(0);
         }
         else if (currEl == Element.fire)
         {
-            if (currForm == Form.particle)
-            {
-                spellBook.particleCasters[1].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.particleCasters[1].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else if (currForm == Form.orb)
-            {
-                spellBook.orbCasters[1].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.orbCasters[1].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else if (currForm == Form.stream)
-            {
-                spellBook.streamCasters[1].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.streamCasters[1].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else return;
+            ActivateCurrForm(1);
         }
         else if (currEl == Element.water)
         {
-            if (currForm == Form.particle)
-            {
-                spellBook.particleCasters[2].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.particleCasters[2].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else if (currForm == Form.orb)
-            {
-                spellBook.orbCasters[2].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.orbCasters[2].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else if (currForm == Form.stream)
-            {
-                spellBook.streamCasters[2].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.streamCasters[2].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else return;
+            ActivateCurrForm(2);
         }
         else if (currEl == Element.ice)
         {
-            if (currForm == Form.particle)
-            {
-                spellBook.particleCasters[3].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.particleCasters[3].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else if (currForm == Form.orb)
-            {
-                spellBook.orbCasters[3].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.orbCasters[3].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else if (currForm == Form.stream)
-            {
-                spellBook.streamCasters[3].layer = LayerMask.NameToLayer("Default");
-                foreach (Transform child in spellBook.streamCasters[3].transform)
-                {
-                    child.gameObject.layer = LayerMask.NameToLayer("Default");
-                    foreach (Transform nextChild in child)
-                    {
-                        nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
-                    }
-                }
-            }
-            else return;
+            ActivateCurrForm(3);
         }
         else return;
     }
 
-    private void SelectForm()
+    private void SelectCurrForm()
     {
         float slotSize = spellbookDistThresh / numOfForms;
 
@@ -342,75 +239,41 @@ public class SpellManager : MonoBehaviour
         {
             if (currEl == Element.light)
             {
-                if (currForm == Form.particle)
-                {
-                    Instantiate(spellBook.particleSpells[0], castingObj.position, Camera.main.transform.rotation);
-                    StartCoroutine("CastDelay");
-                }
-                else if (currForm == Form.orb)
-                {
-                    Instantiate(spellBook.orbSpells[0], castingObj.position, Camera.main.transform.rotation);
-                    StartCoroutine("CastDelay");
-                }
-                else if (currForm == Form.stream)
-                {
-                    EnableStream(0);
-                }
+                InstantiateForm(0);
             }
             else if (currEl == Element.fire)
             {
-                if (currForm == Form.particle)
-                {
-                    Instantiate(spellBook.particleSpells[1], castingObj.position, Camera.main.transform.rotation);
-                    StartCoroutine("CastDelay");
-                }
-                else if (currForm == Form.orb)
-                {
-                    Instantiate(spellBook.orbSpells[1], castingObj.position, Camera.main.transform.rotation);
-                    StartCoroutine("CastDelay");
-                }
-                else if (currForm == Form.stream)
-                {
-                    EnableStream(1);
-                }
+                InstantiateForm(1);
             }
             else if (currEl == Element.water)
             {
-                if (currForm == Form.particle)
-                {
-                    Instantiate(spellBook.particleSpells[2], castingObj.position, Camera.main.transform.rotation);
-                    StartCoroutine("CastDelay");
-                }
-                else if (currForm == Form.orb)
-                {
-                    Instantiate(spellBook.orbSpells[2], castingObj.position, Camera.main.transform.rotation);
-                    StartCoroutine("CastDelay");
-                }
-                else if (currForm == Form.stream)
-                {
-                    EnableStream(2);
-                }
+                InstantiateForm(2);
+
             }
             else if (currEl == Element.ice)
             {
-                if (currForm == Form.particle)
-                {
-                    Instantiate(spellBook.particleSpells[3], castingObj.position, Camera.main.transform.rotation);
-                    StartCoroutine("CastDelay");
-                }
-                else if (currForm == Form.orb)
-                {
-                    Instantiate(spellBook.orbSpells[3], castingObj.position, Camera.main.transform.rotation);
-                    StartCoroutine("CastDelay");
-                }
-                else if (currForm == Form.stream)
-                {
-                    EnableStream(3);
-                }
+                InstantiateForm(3);
+
             }
             else return;
+        }
+    }
 
-            
+    private void InstantiateForm(int index)
+    {
+        if (currForm == Form.particle)
+        {
+            Instantiate(spellBook.particleSpells[index], castingObj.position, Camera.main.transform.rotation);
+            StartCoroutine("CastDelay");
+        }
+        else if (currForm == Form.orb)
+        {
+            Instantiate(spellBook.orbSpells[index], castingObj.position, Camera.main.transform.rotation);
+            StartCoroutine("CastDelay");
+        }
+        else if (currForm == Form.stream)
+        {
+            EnableStream(index);
         }
     }
 

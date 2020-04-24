@@ -393,7 +393,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8334192196334270164}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9595bd8a6648b72478d69bc5182430eb, type: 3}
   m_Name: 
@@ -413,16 +413,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8334192196334270164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 032d36eb42f0b8d43a313833fed17105, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e60fdbba8b1f69429ed89a3e8bee178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifeSpan: 5
-  force: 5
+  force: 10
   DMXchannels: 
   DMXvalues: 
   dimOverTime: 1
   rateOfDim: 20
-  messageOSC: 
+  messageOSC: /composition/columns/8/connect
   valueOSC: 1
   dimOSCwithDMX: 0
   timedBlackout: 1

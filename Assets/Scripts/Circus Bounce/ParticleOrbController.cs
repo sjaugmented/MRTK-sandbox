@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellController : MonoBehaviour
+public class ParticleOrbController : MonoBehaviour
 {
     [Header("General")]
     [Tooltip("Time before self-destruct")] [SerializeField] float lifeSpan = 5f;

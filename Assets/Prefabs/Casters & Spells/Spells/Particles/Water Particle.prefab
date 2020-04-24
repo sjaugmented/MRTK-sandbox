@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6360468339990746815}
   - component: {fileID: 1903618674103314817}
   m_Layer: 0
-  m_Name: Water Spell
+  m_Name: Water Particle
   m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,16 +121,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5418862387724200070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 032d36eb42f0b8d43a313833fed17105, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e60fdbba8b1f69429ed89a3e8bee178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifeSpan: 5
-  force: 25
-  DMXchannels: 0300000002000000
-  DMXvalues: ff00000080000000
-  dimOverTime: 0
+  force: 50
+  DMXchannels: 
+  DMXvalues: 
+  dimOverTime: 1
   rateOfDim: 20
-  messageOSC: /composition/columns/3/connect
+  messageOSC: /composition/columns/7/connect
   valueOSC: 1
   dimOSCwithDMX: 0
   timedBlackout: 1
