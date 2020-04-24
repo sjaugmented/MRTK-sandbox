@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 [RequireComponent(typeof(FingerTracker))]  
 public class SpellManager : MonoBehaviour
@@ -83,6 +84,32 @@ public class SpellManager : MonoBehaviour
         }
     }
 
+    private void DisableStreams()
+    {
+        foreach (ParticleSystem stream in spellBook.streamSpells)
+        {
+            var emission = stream.emission;
+            emission.enabled = false;
+            foreach (Transform child in stream.transform)
+            {
+                var childEmission = child.GetComponent<ParticleSystem>().emission;
+                childEmission.enabled = false;
+            }
+        }
+    }
+
+    private void EnableStream(int index)
+    {
+        var emission = spellBook.streamSpells[index].emission;
+        emission.enabled = true;
+
+        foreach (Transform child in spellBook.streamSpells[index].transform)
+        {
+            var childEmission = child.GetComponent<ParticleSystem>().emission;
+            childEmission.enabled = true;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -91,18 +118,30 @@ public class SpellManager : MonoBehaviour
             LookForCastFinger();
             LookForFormSelector();
         }
-        else DisableCasters();
+        else
+        {
+            DisableCasters();
+            DisableStreams();
+        }
     }
 
     private void LookForCastFinger()
     {
         if (fingerTracker.GetCastFingerUp() == true) ActivateCaster();
-        else DisableCasters();
+        else
+        {
+            DisableCasters();
+            DisableStreams();
+        }
     }
 
     private void LookForFormSelector()
     {
-        if (fingerTracker.GetTwoFingers() == true) SelectForm();
+        if (fingerTracker.GetTwoFingers() == true)
+        {
+            SelectForm();
+            DisableStreams();
+        }
     }
 
     public void ActivateCaster()
@@ -315,7 +354,7 @@ public class SpellManager : MonoBehaviour
                 }
                 else if (currForm == Form.stream)
                 {
-                    Instantiate(spellBook.streamSpells[0], castingObj.position, castingObj.rotation);
+                    EnableStream(0);
                 }
             }
             else if (currEl == Element.fire)
@@ -332,7 +371,7 @@ public class SpellManager : MonoBehaviour
                 }
                 else if (currForm == Form.stream)
                 {
-                    Instantiate(spellBook.streamSpells[1], castingObj.position, castingObj.rotation);
+                    EnableStream(1);
                 }
             }
             else if (currEl == Element.water)
@@ -349,7 +388,7 @@ public class SpellManager : MonoBehaviour
                 }
                 else if (currForm == Form.stream)
                 {
-                    Instantiate(spellBook.streamSpells[2], castingObj.position, castingObj.rotation);
+                    EnableStream(2);
                 }
             }
             else if (currEl == Element.ice)
@@ -366,7 +405,7 @@ public class SpellManager : MonoBehaviour
                 }
                 else if (currForm == Form.stream)
                 {
-                    Instantiate(spellBook.streamSpells[3], castingObj.position, castingObj.rotation);
+                    EnableStream(3);
                 }
             }
             else return;

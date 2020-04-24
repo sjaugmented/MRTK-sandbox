@@ -111,8 +111,7 @@ public class FingerTracker : MonoBehaviour
         }
         else if (caster.GetCurrForm() == SpellManager.Form.stream)
         {
-            Debug.Log("index rotation: " + firstIndex.Rotation);
-            
+            caster.CastSpell();
         }
         else return;
     }

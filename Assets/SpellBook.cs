@@ -9,7 +9,7 @@ public class SpellBook : MonoBehaviour
     public List<GameObject> streamCasters;
     public List<GameObject> particleSpells;
     public List<GameObject> orbSpells;
-    public List<GameObject> streamSpells;
+    public List<ParticleSystem> streamSpells;
     
 
 
