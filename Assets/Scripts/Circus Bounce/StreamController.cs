@@ -22,7 +22,7 @@ public class StreamController : MonoBehaviour
     void Update()
     {
         dmx.SetAddress(channelDMX, valueDMX);
-
+        SendOSCMessage();
     }
 
     private void SendOSCMessage()
