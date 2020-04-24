@@ -48,6 +48,7 @@ MonoBehaviour:
   valueDMX: 0
   messageOSC: /composition/columns/6/connect
   valueOSC: 1
+  parentStream: {fileID: 3877004442783153193}
 --- !u!1001 &3966699034944201371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120,6 +121,12 @@ PrefabInstance:
 --- !u!4 &3971345701714227511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4932540599669676, guid: c661bc24b30bf71459dc3d016ed262b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3966699034944201371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3877004442783153193 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198555576274820786, guid: c661bc24b30bf71459dc3d016ed262b1,
     type: 3}
   m_PrefabInstance: {fileID: 3966699034944201371}
   m_PrefabAsset: {fileID: 0}
