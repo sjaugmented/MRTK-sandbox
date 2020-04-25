@@ -37,7 +37,7 @@ public class StreamController : MonoBehaviour
     {
         OscMessage message = new OscMessage();
         message.address = messageOSC;
-        message.values.Add(valueDMX);
+        message.values.Add(valueOSC);
         osc.Send(message);
         Debug.Log("sending OSC: " + message + valueOSC); //todo remove
 
