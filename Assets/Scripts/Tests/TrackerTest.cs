@@ -7,6 +7,11 @@ using UnityEngine;
 public class TrackerTest : MonoBehaviour
 {
     MixedRealityPose indexTip1, indexTip2, palm1, palm2;
+
+    [SerializeField] bool logIndex = false;
+    [SerializeField] bool logPalm = false;
+
+    [SerializeField] GameObject testObject;
     
     // Start is called before the first frame update
     void Start()
@@ -19,12 +24,27 @@ public class TrackerTest : MonoBehaviour
     {
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexTip1))
         {
-            Debug.Log(indexTip1.Forward.z);
+            if (logIndex)
+            {
+                Debug.Log("indextip.forward: " + indexTip1.Forward);
+                Debug.Log("indextip.up: " + indexTip1.Up);
+            }
         }
 
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Any, out palm1))
         {
-            Debug.Log(palm1);
+            if (logPalm)
+            {
+                Debug.Log("palm.forward: " + palm1.Forward);
+                Debug.Log("palm.up: " + palm1.Up);
+
+            }
+
+            /*if (palm1.Up.y < 0)
+            {
+                testObject.SetActive(true);
+            }
+            else testObject.SetActive(false);*/
         }
     }
 }

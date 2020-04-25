@@ -14,7 +14,8 @@ public class FingerTracker : MonoBehaviour
 
     // used for index tracking & velocity
     MixedRealityPose firstIndex, secondIndex; 
-    float castFingerUp = 0.3f;
+    float castFingerUpThresh = 0.3f;
+    bool castFingerOut = false;
     bool oneFinger = false;
     bool twoFingers = false;
     float distIndexes;
@@ -42,7 +43,7 @@ public class FingerTracker : MonoBehaviour
             oneFinger = true;
             twoFingers = false;
 
-            if (firstIndex.Up.y >= castFingerUp)
+            if (firstIndex.Up.y >= castFingerUpThresh)
             {
                 ProcessIndexVelocity();
             }
@@ -61,7 +62,7 @@ public class FingerTracker : MonoBehaviour
             oneFinger = true;
             twoFingers = false;
 
-            if (firstIndex.Up.y >= castFingerUp)
+            if (firstIndex.Up.y >= castFingerUpThresh)
             {
                 ProcessIndexVelocity();
             }
@@ -100,7 +101,11 @@ public class FingerTracker : MonoBehaviour
         }
         else if (caster.GetCurrForm() == SpellManager.Form.stream)
         {
-            caster.CastSpell();
+            if (firstIndex.Forward.z >= 0.7f)
+            {
+                caster.CastSpell();
+            }
+            else caster.DisableStreams();
         }
         else return;
     }

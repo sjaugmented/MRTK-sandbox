@@ -84,7 +84,7 @@ public class SpellManager : MonoBehaviour
         }
     }
 
-    private void DisableStreams()
+    public void DisableStreams()
     {
         foreach (ParticleSystem stream in spellBook.streamSpells)
         {
