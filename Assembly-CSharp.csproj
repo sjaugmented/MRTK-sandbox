@@ -56,8 +56,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ArtNet\Engine.cs" />
-     <Compile Include="Assets\ElementSpells.cs" />
-     <Compile Include="Assets\Elementals.cs" />
      <Compile Include="Assets\Hovl Studio\Elemental VFX\Demo scene\CameraHolder.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\EyeTrackingTutorialDemo.cs" />
      <Compile Include="Assets\MRTK.Tutorials.GettingStarted\Scripts\HandInteractionTouch.cs" />
@@ -120,13 +118,11 @@
      <Compile Include="Assets\Scripts\Light Wand\FingerDimmer.cs" />
      <Compile Include="Assets\Scripts\Light Wand\FingerDimmerScaler.cs" />
      <Compile Include="Assets\Scripts\Light Wand\SizePositionTester.cs" />
-     <Compile Include="Assets\Scripts\PlaygroundToggle.cs" />
      <Compile Include="Assets\Scripts\Scene Holo Controllers\LightMinMaxToggle.cs" />
      <Compile Include="Assets\Scripts\Scene Holo Controllers\LightSliderTest.cs" />
      <Compile Include="Assets\Scripts\Scene Holo Controllers\PlateController.cs" />
      <Compile Include="Assets\Scripts\Scene Holo Controllers\Ship.cs" />
-     <Compile Include="Assets\Scripts\Tests\HandTrackerTest.cs" />
-     <Compile Include="Assets\Scripts\Tests\PalmMenuTest.cs" />
+     <Compile Include="Assets\Scripts\Tests\TrackerTest.cs" />
      <None Include="Assets\Hovl Studio\Elemental VFX\Shaders\Bog.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

@@ -500,8 +500,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minVelocity: 2
   maxVelocity: 10
-  oneFinger: 0
-  twoFingers: 0
 --- !u!4 &1097242589
 Transform:
   m_ObjectHideFlags: 0
