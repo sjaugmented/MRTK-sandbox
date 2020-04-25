@@ -15,8 +15,8 @@ public class FingerTracker : MonoBehaviour
     // used for index tracking & velocity
     MixedRealityPose firstIndex, secondIndex; 
     float castFingerUp = 0.3f;
-    public bool oneFinger = false;
-    public bool twoFingers = false;
+    bool oneFinger = false;
+    bool twoFingers = false;
     float distIndexes;
     float prevHandCamDist;
 
@@ -52,7 +52,7 @@ public class FingerTracker : MonoBehaviour
                 oneFinger = true;
                 twoFingers = true;
 
-                distIndexes = firstIndex.Position.x - secondIndex.Position.x;
+                distIndexes = Mathf.Abs(firstIndex.Position.x - secondIndex.Position.x);
             }
         }
         // if left index THEN right index
@@ -71,20 +71,9 @@ public class FingerTracker : MonoBehaviour
                 oneFinger = true;
                 twoFingers = true;
 
-                distIndexes = firstIndex.Position.x - secondIndex.Position.x;
+                distIndexes = Mathf.Abs(firstIndex.Position.x - secondIndex.Position.x);
             }
         }
-        // if one index only
-        /*else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out firstIndex))
-        {
-            oneFinger = true;
-            twoFingers = false;
-
-            if (firstIndex.Up.y >= castFingerUp)
-            {
-                ProcessIndexVelocity();
-            }
-        }*/
         // if no indexes
         else
         {
@@ -120,6 +109,7 @@ public class FingerTracker : MonoBehaviour
     {
         return oneFinger;
     }
+
     public bool GetTwoFingers()
     {
         return twoFingers;
