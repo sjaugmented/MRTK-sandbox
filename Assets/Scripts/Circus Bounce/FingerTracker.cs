@@ -11,6 +11,8 @@ public class FingerTracker : MonoBehaviour
     [SerializeField] float minVelocity = 2f;
     [Tooltip("Max Velocity at which spells are cast")] 
     [SerializeField] float maxVelocity = 10f;
+    [Tooltip("")]
+    [SerializeField] float fingerForwardThreshold = 0.7f;
 
     // used for index tracking & velocity
     MixedRealityPose firstIndex, secondIndex; 
@@ -96,12 +98,17 @@ public class FingerTracker : MonoBehaviour
 
             if (awayVelocity >= minVelocity && awayVelocity <= maxVelocity)
             {
-                caster.CastSpell();
+                if (firstIndex.Forward.z >= fingerForwardThreshold)
+                {
+                    caster.CastSpell();
+                }
+                else return;
             }
+            else return;
         }
         else if (caster.GetCurrForm() == SpellManager.Form.stream)
         {
-            if (firstIndex.Forward.z >= 0.7f)
+            if (firstIndex.Forward.z >= fingerForwardThreshold)
             {
                 caster.CastSpell();
             }
