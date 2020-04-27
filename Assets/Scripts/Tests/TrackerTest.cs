@@ -14,9 +14,9 @@ public class TrackerTest : MonoBehaviour
     [SerializeField] bool logIndex = false;
     [SerializeField] bool logPalm = false;
 
-    [SerializeField] GameObject sphere;
-    [SerializeField] GameObject cube;
-    [SerializeField] GameObject cylinder;
+    [SerializeField] GameObject particles;
+    [SerializeField] GameObject orbs;
+    [SerializeField] GameObject streams;
 
     float palmDist;
     
@@ -53,7 +53,6 @@ public class TrackerTest : MonoBehaviour
             if (palm1.Right.x <= palmInThresh && palm1.Right.x >= 0 && palm2.Right.x <= palmInThresh && palm2.Right.x >= 0)
             {
                 palmDist = Mathf.Abs(Vector3.Distance(palm1.Position, palm2.Position));
-                Debug.Log("palmDist: " + palmDist);//todo remove
                 ActivatePalmForms();
             }
             else
@@ -72,30 +71,30 @@ public class TrackerTest : MonoBehaviour
         {
             if (palmDist > 0 && palmDist <= palmSelectorSize - slotSize * 2)
             {
-                sphere.SetActive(true);
-                cube.SetActive(false);
-                cylinder.SetActive(false);
+                particles.SetActive(true);
+                orbs.SetActive(false);
+                streams.SetActive(false);
 
-                sphere.transform.position = GetShapePos();
-                sphere.transform.localScale = new Vector3(palmDist / 3, palmDist / 3, palmDist / 3);
+                particles.transform.position = GetShapePos();
+                particles.transform.localScale = new Vector3(palmDist, palmDist, palmDist);
             }
             else if (palmDist > palmSelectorSize - slotSize * 2 && palmDist <= palmSelectorSize - slotSize)
             {
-                sphere.SetActive(false);
-                cube.SetActive(true);
-                cylinder.SetActive(false);
+                particles.SetActive(false);
+                orbs.SetActive(true);
+                streams.SetActive(false);
 
-                cube.transform.position = GetShapePos();
-                cube.transform.localScale = new Vector3(palmDist / 3, palmDist / 3, palmDist / 3);
+                orbs.transform.position = GetShapePos();
+                orbs.transform.localScale = new Vector3(palmDist, palmDist, palmDist);
             }
             else
             {
-                sphere.SetActive(false);
-                cube.SetActive(false);
-                cylinder.SetActive(true);
+                particles.SetActive(false);
+                orbs.SetActive(false);
+                streams.SetActive(true);
 
-                cylinder.transform.position = GetShapePos();
-                cylinder.transform.localScale = new Vector3(palmDist / 3, palmDist / 3, palmDist / 3);
+                streams.transform.position = GetShapePos();
+                streams.transform.localScale = new Vector3(palmDist, palmDist, palmDist);
             }
         }
         else
@@ -116,8 +115,8 @@ public class TrackerTest : MonoBehaviour
 
     private void DisableShapes()
     {
-        sphere.SetActive(false);
-        cube.SetActive(false);
-        cylinder.SetActive(false);
+        particles.SetActive(false);
+        orbs.SetActive(false);
+        streams.SetActive(false);
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8972492002615308246}
   m_Layer: 0
-  m_Name: Water Thrower
+  m_Name: Water Thrower 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160062318177420, guid: c4d00a92f1282404f86a0dca1e817f21, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4160062318177420, guid: c4d00a92f1282404f86a0dca1e817f21, type: 3}
       propertyPath: m_LocalPosition.y
@@ -60,7 +60,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160062318177420, guid: c4d00a92f1282404f86a0dca1e817f21, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4160062318177420, guid: c4d00a92f1282404f86a0dca1e817f21, type: 3}
       propertyPath: m_LocalRotation.z
@@ -68,7 +68,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160062318177420, guid: c4d00a92f1282404f86a0dca1e817f21, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4160062318177420, guid: c4d00a92f1282404f86a0dca1e817f21, type: 3}
       propertyPath: m_RootOrder
@@ -80,7 +80,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160062318177420, guid: c4d00a92f1282404f86a0dca1e817f21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 4160062318177420, guid: c4d00a92f1282404f86a0dca1e817f21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -124,6 +124,16 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198358629486489210, guid: c4d00a92f1282404f86a0dca1e817f21,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198358629486489210, guid: c4d00a92f1282404f86a0dca1e817f21,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4d00a92f1282404f86a0dca1e817f21, type: 3}

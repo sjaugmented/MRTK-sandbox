@@ -20,7 +20,7 @@ public class SpellManager : MonoBehaviour
 
     [Header("Two Finger Spellbook")]
     [Tooltip("Distance between index fingers that activates Spellbook")]
-    [SerializeField] float spellbookDistThresh = 0.3f;
+    [SerializeField] float formMenuThresh = 0.3f;
     [SerializeField] int numOfForms = 3;
 
     // used to create rate of fire for spells
@@ -30,9 +30,22 @@ public class SpellManager : MonoBehaviour
     public enum Form { particle, orb, stream };
     public Element currEl = Element.light;
     public Form currForm = Form.particle;
+    int elementID = 0;
+    int formID = 0;
+
+    bool formSelector = false;
 
     FingerTracker fingerTracker;
     SpellBook spellBook;
+
+    private void ConvertElementToID() // allows for quick selection in inspector for testing various elements and forms
+    {
+        if (currEl == Element.light) elementID = 0;
+        if (currEl == Element.fire) elementID = 1;
+        if (currEl == Element.water) elementID = 2;
+        if (currEl == Element.ice) elementID = 3;
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +54,8 @@ public class SpellManager : MonoBehaviour
         spellBook = GetComponent<SpellBook>();
 
         DisableCasters();
+        DisableAllDummies();
+        DisableStreams();
     }
 
     private void DisableCasters()
@@ -84,6 +99,37 @@ public class SpellManager : MonoBehaviour
         }
     }
 
+    private void DisableAllDummies()
+    {
+        DisableParticleDummies();
+        DisableOrbDummies();
+        DisableStreamDummies();
+    }
+
+    private void DisableParticleDummies()
+    {
+        foreach (GameObject dummy in spellBook.particleDummies)
+        {
+            dummy.SetActive(false);
+        }
+    }
+
+    private void DisableOrbDummies()
+    {
+        foreach (GameObject dummy in spellBook.orbDummies)
+        {
+            dummy.SetActive(false);
+        }
+    }
+
+    private void DisableStreamDummies()
+    {
+        foreach (GameObject dummy in spellBook.streamDummies)
+        {
+            dummy.SetActive(false);
+        }
+    }
+
     public void DisableStreams()
     {
         foreach (ParticleSystem stream in spellBook.streamSpells)
@@ -98,12 +144,12 @@ public class SpellManager : MonoBehaviour
         }
     }
 
-    private void EnableStream(int index)
+    private void EnableStream()
     {
-        var emission = spellBook.streamSpells[index].emission;
+        var emission = spellBook.streamSpells[elementID].emission;
         emission.enabled = true;
 
-        foreach (Transform child in spellBook.streamSpells[index].transform)
+        foreach (Transform child in spellBook.streamSpells[elementID].transform)
         {
             var childEmission = child.GetComponent<ParticleSystem>().emission;
             childEmission.enabled = true; 
@@ -113,43 +159,116 @@ public class SpellManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ConvertElementToID();
+
         if (!palmMenuVisuals.activeInHierarchy)
         {
-            LookForCastFinger();
             LookForFormSelector();
+            if (!formSelector) LookForCastFinger();
         }
         else
         {
             DisableCasters();
-            DisableStreams();
-        }
-    }
-
-    private void LookForCastFinger()
-    {
-        if (fingerTracker.GetCastFingerUp() == true) DisplayCaster();
-        else
-        {
-            DisableCasters();
+            DisableAllDummies();
             DisableStreams();
         }
     }
 
     private void LookForFormSelector()
     {
-        if (fingerTracker.GetTwoFingers() == true)
+        if (fingerTracker.GetPalmsIn() == true)
         {
+            formSelector = true;
+            DisableCasters();
+            DisableStreams();
             SelectCurrForm();
+        }
+        else formSelector = false;
+    }
+
+    private void LookForCastFinger()
+    {
+        DisableAllDummies();
+        if (fingerTracker.GetCastFingerUp() == true)
+        {
+            DisplayCaster();
+        }
+        else
+        {
+            DisableCasters();
             DisableStreams();
         }
     }
-
-    private void ActivateCurrForm(int index)
+    private void SelectCurrForm()
     {
+        float slotSize = formMenuThresh / numOfForms;
+
+        float palmDist = fingerTracker.GetPalmDist();
+        Vector3 palm1Pos = fingerTracker.GetPalm1Pos();
+        Vector3 palm2Pos = fingerTracker.GetPalm2Pos();
+
+        var midpoint = Vector3.Lerp(palm1Pos, palm2Pos, 0.5f);
+
+        if (palmDist > 0 && palmDist <= formMenuThresh)
+        {
+            if (palmDist > 0 && palmDist <= formMenuThresh - slotSize * 2)
+            {
+                currForm = Form.particle;
+                DisableOrbDummies();
+                DisableStreamDummies();
+
+                for (int i = 0; i < spellBook.particleDummies.Count; i++)
+                {
+                    if (i == elementID) spellBook.particleDummies[i].SetActive(true);
+                    else spellBook.particleDummies[i].SetActive(false);
+                }
+
+                spellBook.particleDummies[elementID].transform.position = midpoint;
+                spellBook.particleDummies[elementID].transform.localScale = new Vector3(palmDist, palmDist, palmDist);
+
+            }
+            else if (palmDist > formMenuThresh - slotSize * 2 && palmDist <= formMenuThresh - slotSize)
+            {
+                currForm = Form.orb;
+                DisableParticleDummies();
+                DisableStreamDummies();
+
+                for (int i = 0; i < spellBook.orbDummies.Count; i++)
+                {
+                    if (i == elementID) spellBook.orbDummies[i].SetActive(true);
+                    else spellBook.orbDummies[i].SetActive(false);
+                }
+
+                spellBook.orbDummies[elementID].transform.position = midpoint;
+                spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist, palmDist, palmDist);
+            }
+            else
+            {
+                currForm = Form.stream;
+                DisableParticleDummies();
+                DisableOrbDummies();
+
+                for (int i = 0; i < spellBook.streamDummies.Count; i++)
+                {
+                    if (i == elementID) spellBook.streamDummies[i].SetActive(true);
+                    else spellBook.streamDummies[i].SetActive(false);
+                }
+
+                spellBook.streamDummies[elementID].transform.position = midpoint;
+                spellBook.streamDummies[elementID].transform.localScale = new Vector3(palmDist, palmDist, palmDist);
+            }
+        }
+        else DisableAllDummies();
+    }
+
+    public void DisplayCaster()
+    {
+        DisableCasters();
+
         if (currForm == Form.particle)
         {
-            spellBook.particleCasters[index].layer = LayerMask.NameToLayer("Default");
-            foreach (Transform child in spellBook.particleCasters[index].transform)
+            spellBook.particleCasters[elementID].layer = LayerMask.NameToLayer("Default");
+            foreach (Transform child in spellBook.particleCasters[elementID].transform)
             {
                 child.gameObject.layer = LayerMask.NameToLayer("Default");
                 foreach (Transform nextChild in child)
@@ -160,8 +279,8 @@ public class SpellManager : MonoBehaviour
         }
         else if (currForm == Form.orb)
         {
-            spellBook.orbCasters[index].layer = LayerMask.NameToLayer("Default");
-            foreach (Transform child in spellBook.orbCasters[index].transform)
+            spellBook.orbCasters[elementID].layer = LayerMask.NameToLayer("Default");
+            foreach (Transform child in spellBook.orbCasters[elementID].transform)
             {
                 child.gameObject.layer = LayerMask.NameToLayer("Default");
                 foreach (Transform nextChild in child)
@@ -172,61 +291,14 @@ public class SpellManager : MonoBehaviour
         }
         else if (currForm == Form.stream)
         {
-            spellBook.streamCasters[index].layer = LayerMask.NameToLayer("Default");
-            foreach (Transform child in spellBook.streamCasters[index].transform)
+            spellBook.streamCasters[elementID].layer = LayerMask.NameToLayer("Default");
+            foreach (Transform child in spellBook.streamCasters[elementID].transform)
             {
                 child.gameObject.layer = LayerMask.NameToLayer("Default");
                 foreach (Transform nextChild in child)
                 {
                     nextChild.gameObject.layer = LayerMask.NameToLayer("Default");
                 }
-            }
-        }
-        else return;
-    }
-
-    public void DisplayCaster()
-    {
-        DisableCasters();
-
-        if (currEl == Element.light)
-        {
-            ActivateCurrForm(0);
-        }
-        else if (currEl == Element.fire)
-        {
-            ActivateCurrForm(1);
-        }
-        else if (currEl == Element.water)
-        {
-            ActivateCurrForm(2);
-        }
-        else if (currEl == Element.ice)
-        {
-            ActivateCurrForm(3);
-        }
-        else return;
-    }
-
-    private void SelectCurrForm()
-    {
-        float slotSize = spellbookDistThresh / numOfForms;
-
-        float fingerDist = fingerTracker.GetDistIndexes();
-
-        if (fingerDist > 0 && fingerDist <= spellbookDistThresh)
-        {
-            if (fingerDist > 0 && fingerDist <= spellbookDistThresh - slotSize * 2)
-            {
-                currForm = Form.particle;
-            }
-            else if (fingerDist > spellbookDistThresh - slotSize * 2 && fingerDist <= spellbookDistThresh - slotSize)
-            {
-                currForm = Form.orb;
-            }
-            else
-            {
-                currForm = Form.stream;
             }
         }
         else return;
@@ -237,43 +309,26 @@ public class SpellManager : MonoBehaviour
     {
         if (ableToCast && !palmMenuVisuals.activeInHierarchy)
         {
-            if (currEl == Element.light)
-            {
-                InstantiateForm(0);
-            }
-            else if (currEl == Element.fire)
-            {
-                InstantiateForm(1);
-            }
-            else if (currEl == Element.water)
-            {
-                InstantiateForm(2);
-
-            }
-            else if (currEl == Element.ice)
-            {
-                InstantiateForm(3);
-
-            }
-            else return;
+            InstantiateForm();
         }
+        else return;
     }
 
-    private void InstantiateForm(int index)
+    private void InstantiateForm()
     {
         if (currForm == Form.particle)
         {
-            Instantiate(spellBook.particleSpells[index], castingObj.position, Camera.main.transform.rotation);
+            Instantiate(spellBook.particleSpells[elementID], castingObj.position, Camera.main.transform.rotation);
             StartCoroutine("CastDelay");
         }
         else if (currForm == Form.orb)
         {
-            Instantiate(spellBook.orbSpells[index], castingObj.position, Camera.main.transform.rotation);
+            Instantiate(spellBook.orbSpells[elementID], castingObj.position, Camera.main.transform.rotation);
             StartCoroutine("CastDelay");
         }
         else if (currForm == Form.stream)
         {
-            EnableStream(index);
+            EnableStream();
         }
     }
 
@@ -304,7 +359,7 @@ public class SpellManager : MonoBehaviour
         currEl = Element.ice;
     }
 
-    public Form GetCurrForm()
+    public Form GetCurrForm() //used by FingerTracker to know when and how to cast particles/orbs vs streams
     {
         return currForm;
     }

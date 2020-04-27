@@ -10,7 +10,10 @@ public class SpellBook : MonoBehaviour
     public List<GameObject> particleSpells;
     public List<GameObject> orbSpells;
     public List<ParticleSystem> streamSpells;
-    
+    public List<GameObject> particleDummies;
+    public List<GameObject> orbDummies;
+    public List<GameObject> streamDummies;
+
 
 
 
