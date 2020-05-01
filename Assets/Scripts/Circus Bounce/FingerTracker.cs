@@ -15,6 +15,8 @@ public class FingerTracker : MonoBehaviour
     [SerializeField] float fingerForwardThreshold = 0.7f;
     [Tooltip("How far in the palms have to face to trigger Selector menu")]
     [SerializeField] float palmInThresh = 0.3f;
+    [SerializeField] float palmOutThresh = 0.5f;
+    [SerializeField] float palmOutThresh2 = -0.5f;
 
 
     // used for index tracking & velocity
@@ -37,14 +39,13 @@ public class FingerTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("palm1.up: " + palm1.Up);
+        Debug.Log("palm2.up: " + palm2.Up);
         ProcessHands();
     }
 
     private void ProcessHands()
     {
-        Debug.Log("palm1.right.x: " + palm1.Right.x);
-        Debug.Log("palm2.right.x: " + palm2.Right.x);
-
         // look for palms in
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out palm1) && HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out palm2))
         {
