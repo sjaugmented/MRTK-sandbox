@@ -543,10 +543,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBetweenCasts: 0.2
   castingObj: {fileID: 379569410223444776}
+  usePalmMenu: 0
   palmMenuParent: {fileID: 4277123180207977557}
   palmMenuVisuals: {fileID: 4277123180207977558}
   formMenuThresh: 0.5
   numOfForms: 3
+  lightMessageOSC: light message here
+  lightValueOSC: 1
+  fireMessageOSC: fire message here
+  fireValueOSC: 1
+  iceMessageOSC: ice message here
+  iceValueOSC: 1
   currEl: 0
   currForm: 0
 --- !u!114 &1097242588
@@ -565,8 +572,12 @@ MonoBehaviour:
   maxVelocity: 10
   fingerForwardThreshold: 0.7
   palmInThresh: 0.4
+  palmOutThresh: 0.5
+  palmOutThresh2: -0.5
+  fingerCasting: 0
   oneFinger: 0
   palmsIn: 0
+  palmsOut: 0
 --- !u!4 &1097242589
 Transform:
   m_ObjectHideFlags: 0
@@ -825,6 +836,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Particle Casters
       objectReference: {fileID: 0}
+    - target: {fileID: 7814349934404986879, guid: addebf473a8e74748bb4b8b118050fbc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: addebf473a8e74748bb4b8b118050fbc, type: 3}
 --- !u!1 &379569410223444772 stripped
@@ -868,6 +884,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stream Spells
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156121, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
         type: 3}
@@ -993,6 +1014,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stream Casters
       objectReference: {fileID: 0}
+    - target: {fileID: 5039109495822560897, guid: 908f5ab9b97b54c43931d9881bea3d05,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 908f5ab9b97b54c43931d9881bea3d05, type: 3}
 --- !u!1 &2570211990408823698 stripped
@@ -1083,6 +1109,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 8943472344320155159, guid: 1f96bc08732324c47a39eec0ced4155d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8943472344320155163, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1163,6 +1194,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Orb Casters
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244617834711844956, guid: a9f39f60e3409674bbd882969fd914b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3244617834711844957, guid: a9f39f60e3409674bbd882969fd914b1,
         type: 3}
@@ -1256,6 +1292,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dummies
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276679439982973182, guid: ed32711d52c7f8247b3dfe90b06a099c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8276679439982973183, guid: ed32711d52c7f8247b3dfe90b06a099c,
         type: 3}

@@ -17,16 +17,18 @@ public class FingerTracker : MonoBehaviour
     [SerializeField] float palmInThresh = 0.3f;
     [SerializeField] float palmOutThresh = 0.5f;
     [SerializeField] float palmOutThresh2 = -0.5f;
-
+    [SerializeField] bool fingerCasting = true;
 
     // used for index tracking & velocity
-    MixedRealityPose indexTip, palm1, palm2;
+    MixedRealityPose indexTip, rightPalm, leftPalm;
     float castFingerUpThresh = 0.3f;
     bool castFingerOut = false;
     public bool oneFinger = false;
     public bool palmsIn = false;
+    public bool palmsOut = false;
     float palmDist;
     float prevHandCamDist;
+
 
     SpellManager caster;
 
@@ -39,36 +41,93 @@ public class FingerTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("palm1.up: " + palm1.Up);
-        Debug.Log("palm2.up: " + palm2.Up);
         ProcessHands();
     }
 
     private void ProcessHands()
     {
-        // look for palms in
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out palm1) && HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out palm2))
+        // right then left
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out rightPalm))
         {
-            oneFinger = false;
-
-            if (palm1.Right.x <= palmInThresh && palm2.Right.x <= palmInThresh)
+            // look for two palms
+            if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out leftPalm))
             {
-                palmsIn = true;
-                palmDist = Mathf.Abs(Vector3.Distance(palm1.Position, palm2.Position));
+                oneFinger = false;
+                // look for palmsIn for form selector
+                if (rightPalm.Right.x <= palmInThresh && leftPalm.Right.x <= palmInThresh)
+                {
+                    palmsIn = true;
+                    palmsOut = false;
+                    palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
+                }
+                // look for palmsOut for casting
+                else if (rightPalm.Up.y <= palmOutThresh && rightPalm.Up.x <= palmOutThresh && leftPalm.Up.y <= palmOutThresh && leftPalm.Up.x >= palmOutThresh2)
+                {
+                    palmsIn = false;
+                    palmsOut = true;
+                    Debug.Log("palm casting"); //todo remove
+                }
+                else
+                {
+                    palmsIn = false;
+                    palmsOut = false;
+                }
             }
-            else
+            else if (fingerCasting)
             {
-                palmsIn = false;
+                // look for single index tip
+                if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexTip))
+                {
+                    oneFinger = true;
+
+                    if (indexTip.Up.y >= castFingerUpThresh)
+                    {
+                        ProcessIndexVelocity();
+                    }
+                }
+                else oneFinger = false;
             }
         }
-        // look for casting finger
-        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexTip))
+        // left then right
+        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out leftPalm))
         {
-            oneFinger = true;
-
-            if (indexTip.Up.y >= castFingerUpThresh)
+            // look for two palms
+            if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out rightPalm))
             {
-                ProcessIndexVelocity();
+                oneFinger = false;
+                // look for palmsIn for form selector
+                if (rightPalm.Right.x <= palmInThresh && leftPalm.Right.x <= palmInThresh)
+                {
+                    palmsIn = true;
+                    palmsOut = false;
+                    palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
+                }
+                // look for palmsOut for casting
+                else if (rightPalm.Up.y <= palmOutThresh && rightPalm.Up.x <= palmOutThresh && leftPalm.Up.y <= palmOutThresh && leftPalm.Up.x >= palmOutThresh2)
+                {
+                    palmsIn = false;
+                    palmsOut = true;
+                    Debug.Log("palm casting"); //todo remove
+                }
+                else
+                {
+                    palmsIn = false;
+                    palmsOut = false;
+                }
+            }
+            else if (fingerCasting)
+            {
+                // look for single index tip
+                if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexTip))
+                {
+                    oneFinger = true;
+
+                    if (indexTip.Up.y >= castFingerUpThresh)
+                    {
+                        ProcessIndexVelocity();
+                    }
+                }
+                else oneFinger = false;
             }
         }
         // if no hands
@@ -116,6 +175,11 @@ public class FingerTracker : MonoBehaviour
         return oneFinger;
     }
 
+    public bool GetPalmsOut()
+    {
+        return palmsOut;
+    }
+
     public bool GetPalmsIn()
     {
         return palmsIn;
@@ -128,11 +192,11 @@ public class FingerTracker : MonoBehaviour
 
     public Vector3 GetPalm1Pos()
     {
-        return palm1.Position;
+        return rightPalm.Position;
     }
 
     public Vector3 GetPalm2Pos()
     {
-        return palm2.Position;
+        return leftPalm.Position;
     }
 }

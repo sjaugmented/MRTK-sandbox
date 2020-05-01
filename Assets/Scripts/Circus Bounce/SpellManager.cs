@@ -13,6 +13,7 @@ public class SpellManager : MonoBehaviour
     [SerializeField] SortingLayer inactiveLayer;
 
     [Header("Palm Spellbook")]
+    [SerializeField] bool usePalmMenu = true;
     [Tooltip("Parent gameObject for the Palm Menu")]
     [SerializeField] GameObject palmMenuParent;
     [Tooltip("Parent gamObject for the Palm Menu visuals")]
@@ -22,6 +23,14 @@ public class SpellManager : MonoBehaviour
     [Tooltip("Distance between index fingers that activates Spellbook")]
     [SerializeField] float formMenuThresh = 0.3f;
     [SerializeField] int numOfForms = 3;
+
+    [Header("OSC controller")]
+    [SerializeField] string lightMessageOSC = "light message here";
+    [SerializeField] float lightValueOSC = 1;
+    [SerializeField] string fireMessageOSC = "fire message here";
+    [SerializeField] float fireValueOSC = 1;
+    [SerializeField] string iceMessageOSC = "ice message here";
+    [SerializeField] float iceValueOSC = 1;
 
     // used to create rate of fire for spells
     bool ableToCast = true;
@@ -37,6 +46,7 @@ public class SpellManager : MonoBehaviour
 
     FingerTracker fingerTracker;
     SpellBook spellBook;
+    OSC osc;
 
     private void ConvertElementToID() // allows for quick selection in inspector for testing various elements and forms
     {
@@ -52,6 +62,7 @@ public class SpellManager : MonoBehaviour
     {
         fingerTracker = FindObjectOfType<FingerTracker>();
         spellBook = GetComponent<SpellBook>();
+        osc = FindObjectOfType<OSC>();
 
         DisableCasters();
         DisableAllDummies();
@@ -161,17 +172,141 @@ public class SpellManager : MonoBehaviour
     {
         ConvertElementToID();
 
-        if (!palmMenuVisuals.activeInHierarchy)
+        if (usePalmMenu)
         {
-            LookForFormSelector();
-            if (!formSelector) LookForCastFinger();
+            if (!palmMenuVisuals.activeInHierarchy)
+            {
+                LookForFormSelector();
+                if (!formSelector) LookForCastFinger();
+            }
+            else
+            {
+                DisableCasters();
+                DisableAllDummies();
+                DisableStreams();
+            }
         }
         else
         {
-            DisableCasters();
-            DisableAllDummies();
-            DisableStreams();
+            CalcPalmPositions();
+
+            bool palmsIn = fingerTracker.GetPalmsIn();
+            bool palmsOut = fingerTracker.GetPalmsOut();
+
+            if (palmsIn) OrbSelector();
+            else DisableAllDummies();
+
+            if (palmsOut) CastOrb();
+            
         }
+        
+    }
+
+    Vector3 midpoint;
+    Vector3 palm1Pos;
+    Vector3 palm2Pos;
+    float palmDist;
+
+    private void CalcPalmPositions()
+    {
+        palmDist = fingerTracker.GetPalmDist();
+        palm1Pos = fingerTracker.GetPalm1Pos();
+        palm2Pos = fingerTracker.GetPalm2Pos();
+
+        midpoint = Vector3.Lerp(palm1Pos, palm2Pos, 0.5f);
+    }
+
+    private void OrbSelector()
+    {
+        currForm = Form.orb;
+
+        float slotSize = formMenuThresh / numOfForms;
+
+        
+
+        if (palmDist > 0 && palmDist <= formMenuThresh)
+        {
+            if (palmDist > 0 && palmDist <= formMenuThresh - slotSize * 2)
+            {
+                DisableParticleDummies();
+                DisableStreamDummies();
+                elementID = 0;
+
+                for (int i = 0; i < spellBook.orbDummies.Count; i++)
+                {
+                    if (i == elementID) spellBook.orbDummies[i].SetActive(true);
+                    else spellBook.orbDummies[i].SetActive(false);
+                }
+
+                spellBook.orbDummies[elementID].transform.position = midpoint;
+                spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist, palmDist, palmDist);
+
+                OscMessage message = new OscMessage();
+                message.address = lightMessageOSC;
+                message.values.Add(lightValueOSC);
+                osc.Send(message);
+                Debug.Log("sending OSC: " + lightMessageOSC + lightValueOSC); //todo remove
+
+
+            }
+            else if (palmDist > formMenuThresh - slotSize * 2 && palmDist <= formMenuThresh - slotSize)
+            {
+                DisableParticleDummies();
+                DisableStreamDummies();
+                elementID = 1;
+
+                for (int i = 0; i < spellBook.orbDummies.Count; i++)
+                {
+                    if (i == elementID) spellBook.orbDummies[i].SetActive(true);
+                    else spellBook.orbDummies[i].SetActive(false);
+                }
+
+                spellBook.orbDummies[elementID].transform.position = midpoint;
+                spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist, palmDist, palmDist);
+
+                OscMessage message = new OscMessage();
+                message.address = fireMessageOSC;
+                message.values.Add(fireValueOSC);
+                osc.Send(message);
+                Debug.Log("sending OSC: " + fireMessageOSC + fireValueOSC); //todo remove
+
+            }
+            else
+            {
+                DisableParticleDummies();
+                DisableStreamDummies();
+                elementID = 3;
+
+                for (int i = 0; i < spellBook.orbDummies.Count; i++)
+                {
+                    if (i == elementID) spellBook.orbDummies[i].SetActive(true);
+                    else spellBook.orbDummies[i].SetActive(false);
+                }
+
+                spellBook.orbDummies[elementID].transform.position = midpoint;
+                spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist, palmDist, palmDist);
+
+                OscMessage message = new OscMessage();
+                message.address = iceMessageOSC;
+                message.values.Add(iceValueOSC);
+                osc.Send(message);
+                Debug.Log("sending OSC: " + iceMessageOSC + iceValueOSC); //todo remove
+
+            }
+        }
+        else DisableAllDummies();
+    }
+
+    private void CastOrb()
+    {
+        if (ableToCast)
+        {
+            Debug.Log("casting " + currEl + " orb"); //todo remove
+            Instantiate(spellBook.orbSpells[elementID], midpoint, Camera.main.transform.rotation);
+            StartCoroutine("CastDelay");
+        }
+        
+
     }
 
     private void LookForFormSelector()
