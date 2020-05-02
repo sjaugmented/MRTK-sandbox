@@ -734,6 +734,7 @@ MonoBehaviour:
   palmMenuVisuals: {fileID: 4277123180207977558}
   formMenuThresh: 0.5
   numOfForms: 3
+  scaleMultiplier: 3
   lightMessageOSC: light message here
   lightValueOSC: 1
   fireMessageOSC: fire message here

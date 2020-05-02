@@ -9,8 +9,6 @@ public class SpellManager : MonoBehaviour
 {
     [SerializeField] float delayBetweenCasts = 0.2f;
     [SerializeField] Transform castingObj;
-    [SerializeField] SortingLayer activeLayer;
-    [SerializeField] SortingLayer inactiveLayer;
 
     [Header("Palm Spellbook")]
     [SerializeField] bool usePalmMenu = true;
@@ -23,6 +21,7 @@ public class SpellManager : MonoBehaviour
     [Tooltip("Distance between index fingers that activates Spellbook")]
     [SerializeField] float formMenuThresh = 0.3f;
     [SerializeField] int numOfForms = 3;
+    [SerializeField] float scaleMultiplier = 1f;
 
     [Header("OSC controller")]
     [SerializeField] string lightMessageOSC = "light message here";
@@ -240,7 +239,7 @@ public class SpellManager : MonoBehaviour
                 }
 
                 spellBook.orbDummies[elementID].transform.position = midpoint;
-                spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist, palmDist, palmDist);
+                spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist * scaleMultiplier, palmDist * scaleMultiplier, palmDist * scaleMultiplier);
 
                 OscMessage message = new OscMessage();
                 message.address = lightMessageOSC;
@@ -263,7 +262,7 @@ public class SpellManager : MonoBehaviour
                 }
 
                 spellBook.orbDummies[elementID].transform.position = midpoint;
-                spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist, palmDist, palmDist);
+                spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist * scaleMultiplier, palmDist * scaleMultiplier, palmDist * scaleMultiplier);
 
                 OscMessage message = new OscMessage();
                 message.address = fireMessageOSC;
@@ -285,7 +284,7 @@ public class SpellManager : MonoBehaviour
                 }
 
                 spellBook.orbDummies[elementID].transform.position = midpoint;
-                spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist, palmDist, palmDist);
+                spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist * scaleMultiplier, palmDist * scaleMultiplier, palmDist * scaleMultiplier);
 
                 OscMessage message = new OscMessage();
                 message.address = iceMessageOSC;
