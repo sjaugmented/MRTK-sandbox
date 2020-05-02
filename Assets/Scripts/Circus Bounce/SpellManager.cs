@@ -195,9 +195,10 @@ public class SpellManager : MonoBehaviour
 
             if (palmsIn) OrbSelector();
             else DisableAllDummies();
-
+            
             if (palmsOut) CastOrb();
             
+            else if (!palmsIn && !palmsOut) LookForCastFinger();
         }
         
     }
@@ -230,7 +231,7 @@ public class SpellManager : MonoBehaviour
             {
                 DisableParticleDummies();
                 DisableStreamDummies();
-                elementID = 0;
+                currEl = Element.light;
 
                 for (int i = 0; i < spellBook.orbDummies.Count; i++)
                 {
@@ -253,7 +254,7 @@ public class SpellManager : MonoBehaviour
             {
                 DisableParticleDummies();
                 DisableStreamDummies();
-                elementID = 1;
+                currEl = Element.fire;
 
                 for (int i = 0; i < spellBook.orbDummies.Count; i++)
                 {
@@ -275,7 +276,7 @@ public class SpellManager : MonoBehaviour
             {
                 DisableParticleDummies();
                 DisableStreamDummies();
-                elementID = 3;
+                currEl = Element.ice;
 
                 for (int i = 0; i < spellBook.orbDummies.Count; i++)
                 {
