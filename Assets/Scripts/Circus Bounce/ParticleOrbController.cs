@@ -5,19 +5,25 @@ using UnityEngine;
 public class ParticleOrbController : MonoBehaviour
 {
     [Header("General")]
-    [Tooltip("Time before self-destruct")] [SerializeField] float lifeSpan = 5f;
+    [Tooltip("Time before self-destruct")] 
+    [SerializeField] float lifeSpan = 5f;
     [SerializeField] float force = 50;
     
     [Header("DMX/OSC")]
-    [Tooltip("DMX channels to control")] [SerializeField] int[] DMXchannels;
-    [Tooltip("Brightness value for corresponding channel - ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0, 255)] [SerializeField] int[] DMXvalues;
+    [Tooltip("DMX channels to control")] 
+    [SerializeField] int[] DMXchannels;
+    [Tooltip("Brightness value for corresponding channel - ORDER MUST MATCH DMX CHANNEL ORDER!")] [Range(0, 255)] 
+    [SerializeField] int[] DMXvalues;
 
-    [Tooltip("Dim light(s) over time or leave at set values?")] [SerializeField] bool dimOverTime = true;
-    [Tooltip("Percent of dimming per second")] [Range(0, 100)] [SerializeField] int rateOfDim = 20;
+    [Tooltip("Dim light(s) over time or leave at set values?")] 
+    [SerializeField] bool dimOverTime = true;
+    [Tooltip("Percent of dimming per second")] [Range(0, 100)] 
+    [SerializeField] int rateOfDim = 20;
 
     [SerializeField] string messageOSC;
     [SerializeField] float valueOSC = 1f;
-    [Tooltip("If Dim Over Time is true and you want OSC value to change with DMX. Converts the highest DMX value to an OSC float.")] [SerializeField] bool dimOSCwithDMX = false;
+    [Tooltip("If Dim Over Time is true and you want OSC value to change with DMX. Converts the highest DMX value to an OSC float.")] 
+    [SerializeField] bool dimOSCwithDMX = false;
 
     [Header("Misc Controls")]
     [SerializeField] bool timedBlackout = true;
