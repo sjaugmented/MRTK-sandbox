@@ -15,7 +15,7 @@ public class OrbManager : MonoBehaviour
     [SerializeField] string conjureMessageOSC = "conjure message here";
     
     float conjureValueOSC = 0;
-    float spellScale;
+    public float spellScale = 1;
 
     // used to create rate of fire for spells
     bool ableToCast = true;
@@ -122,6 +122,7 @@ public class OrbManager : MonoBehaviour
 
             spellBook.orbDummies[elementID].transform.position = midpoint;
             spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist * scaleMultiplier, palmDist * scaleMultiplier, palmDist * scaleMultiplier);
+            
             spellScale = palmDist * scaleMultiplier;
         }
         else DisableOrbDummies();
@@ -131,9 +132,10 @@ public class OrbManager : MonoBehaviour
     {
         if (ableToCast)
         {
-            GameObject spell = Instantiate(spellBook.orbSpells[elementID], midpoint, Camera.main.transform.rotation);
+            GameObject spell = Instantiate(spellBook.orbSpells[elementID], midpoint, Camera.main.transform.rotation) as GameObject;
             spell.transform.localScale = new Vector3(spellScale, spellScale, spellScale);
             StartCoroutine("CastDelay");
+            
         }
     }
 
