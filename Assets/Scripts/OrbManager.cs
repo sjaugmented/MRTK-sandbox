@@ -6,8 +6,11 @@ public class OrbManager : MonoBehaviour
 {
     [SerializeField] float delayBetweenCasts = 0.2f;
 
-    [Header("Two Finger Spellbook")]
-    [Tooltip("Distance between index fingers that activates Spellbook")]
+    [Tooltip("Parent object of the palm menu visuals")]
+    [SerializeField] GameObject palmMenuVisuals;
+
+    [Header("Palm Conjure")]
+    [Tooltip("Max distance between palms for conjuring")]
     [SerializeField] float formMenuThresh = 0.3f;
     [SerializeField] float scaleMultiplier = 1f;
 
@@ -23,7 +26,7 @@ public class OrbManager : MonoBehaviour
     public enum Element { light, fire, water, ice };
     public enum Form { particle, orb, stream };
     public Element currEl = Element.light;
-    public Form currForm = Form.orb;
+    //public Form currForm = Form.orb; // in case we reintroduce different forms - ie, particles, streams
     int elementID = 0;
 
     bool conjuring = false;
@@ -62,27 +65,30 @@ public class OrbManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CalcPalmPositions();
-        conjureValueOSC = palmDist / formMenuThresh;
-
-        bool palmsIn = fingerTracker.GetPalmsIn();
-        bool palmsOut = fingerTracker.GetPalmsOut();
-
-        if (palmsIn)
+        if (!palmMenuVisuals.activeInHierarchy)
         {
-            conjuring = true;
-            OrbSelector();
-        }
-        else
-        {
-            conjuring = false;
-            DisableOrbDummies();
-        }
+            CalcPalmPositions();
+            conjureValueOSC = palmDist / formMenuThresh;
 
-        if (palmsOut) CastOrb();
+            bool palmsIn = fingerTracker.GetPalmsIn();
+            bool palmsOut = fingerTracker.GetPalmsOut();
 
-        if (conjuring) SendOSCMessage(conjureMessageOSC, conjureValueOSC);
-        else return;
+            if (palmsIn)
+            {
+                conjuring = true;
+                OrbSelector();
+            }
+            else
+            {
+                conjuring = false;
+                DisableOrbDummies();
+            }
+
+            if (palmsOut) CastOrb();
+
+            if (conjuring) SendOSCMessage(conjureMessageOSC, conjureValueOSC);
+            else return;
+        }        
     }
 
     private void SendOSCMessage(string address, float value)
@@ -110,7 +116,7 @@ public class OrbManager : MonoBehaviour
 
     private void OrbSelector()
     {
-        currForm = Form.orb;
+        //currForm = Form.orb;
 
         if (palmDist > 0 && palmDist <= formMenuThresh)
         {
@@ -144,5 +150,20 @@ public class OrbManager : MonoBehaviour
         ableToCast = false;
         yield return new WaitForSeconds(delayBetweenCasts);
         ableToCast = true;
+    }
+
+    public void SetLight()
+    {
+        currEl = Element.light;
+    }
+
+    public void SetFire()
+    {
+        currEl = Element.fire;
+    }
+
+    public void SetIce()
+    {
+        currEl = Element.ice;
     }
 }

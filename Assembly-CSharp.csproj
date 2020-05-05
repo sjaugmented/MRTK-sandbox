@@ -76,8 +76,6 @@
      <Compile Include="Assets\MixedRealityToolkit.Examples\Demos\HandTracking\Script\SystemKeyboardExample.cs" />
      <Compile Include="Assets\MixedRealityToolkit.Examples\Demos\HandTracking\Script\TetheredPlacement.cs" />
      <Compile Include="Assets\MixedRealityToolkit.Examples\Demos\HandTracking\Script\ToggleBoundingBox.cs" />
-     <Compile Include="Assets\OrbFingerTracker.cs" />
-     <Compile Include="Assets\OrbManager.cs" />
      <Compile Include="Assets\Potions\LiquidSimulation\Scripts\BottleSmash.cs" />
      <Compile Include="Assets\Potions\LiquidSimulation\Scripts\ColorUnification\ColorBase.cs" />
      <Compile Include="Assets\Potions\LiquidSimulation\Scripts\ColorUnification\LiquidColor.cs" />
@@ -120,6 +118,8 @@
      <Compile Include="Assets\Scripts\Light Wand\FingerDimmer.cs" />
      <Compile Include="Assets\Scripts\Light Wand\FingerDimmerScaler.cs" />
      <Compile Include="Assets\Scripts\Light Wand\SizePositionTester.cs" />
+     <Compile Include="Assets\Scripts\OrbFingerTracker.cs" />
+     <Compile Include="Assets\Scripts\OrbManager.cs" />
      <Compile Include="Assets\Scripts\Scene Holo Controllers\LightMinMaxToggle.cs" />
      <Compile Include="Assets\Scripts\Scene Holo Controllers\LightSliderTest.cs" />
      <Compile Include="Assets\Scripts\Scene Holo Controllers\PlateController.cs" />

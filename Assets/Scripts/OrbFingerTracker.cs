@@ -65,6 +65,8 @@ public class OrbFingerTracker : MonoBehaviour
                 {
                     palmsIn = false;
                     palmsOut = true;
+                    palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
+
                 }
                 else
                 {
@@ -106,6 +108,7 @@ public class OrbFingerTracker : MonoBehaviour
                 {
                     palmsIn = false;
                     palmsOut = true;
+                    palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
                 }
                 else
                 {
