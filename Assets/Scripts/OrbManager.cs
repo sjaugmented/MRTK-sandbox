@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class OrbManager : MonoBehaviour
 
     [Tooltip("Parent object of the palm menu visuals")]
     [SerializeField] GameObject palmMenuVisuals;
+    [SerializeField] List<OctaRotater> elementOctas;
 
     [Header("Palm Conjure")]
     [Tooltip("Max distance between palms for conjuring")]
@@ -15,23 +17,30 @@ public class OrbManager : MonoBehaviour
     [SerializeField] float scaleMultiplier = 1f;
 
     [Header("OSC controller")]
-    [SerializeField] string conjureMessageOSC = "conjure message here";
+    public List<String> conjureOSCMessages;
     
     float conjureValueOSC = 0;
+
+    [Header("Misc")]
     public float spellScale = 1;
-
-    // used to create rate of fire for spells
-    bool ableToCast = true;
-
     public enum Element { light, fire, water, ice };
     public enum Form { particle, orb, stream };
     public Element currEl = Element.light;
-    //public Form currForm = Form.orb; // in case we reintroduce different forms - ie, particles, streams
+    public Form currForm = Form.orb; // in case we reintroduce different forms - ie, particles, streams
     int elementID = 0;
 
     bool conjuring = false;
 
-    OrbFingerTracker fingerTracker;
+    // coordinates for conjuring
+    Vector3 midpoint;
+    Vector3 palm1Pos;
+    Vector3 palm2Pos;
+    float palmDist;
+
+    // used to create rate of fire for spells
+    bool ableToCast = true;
+
+    OrbFingerTracker handTracking;
     SpellBook spellBook;
     OSC osc;
 
@@ -43,11 +52,20 @@ public class OrbManager : MonoBehaviour
         if (currEl == Element.ice) elementID = 3;
     }
 
+    private void ConfigOctas()
+    {
+        for(int i = 0; i < elementOctas.Count; i++)
+        {
+            if (i == elementID) elementOctas[i].isSelected = true;
+            else elementOctas[i].isSelected = false;
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        fingerTracker = FindObjectOfType<OrbFingerTracker>();
+        handTracking = FindObjectOfType<OrbFingerTracker>();
         spellBook = GetComponent<SpellBook>();
         osc = FindObjectOfType<OSC>();
 
@@ -65,30 +83,61 @@ public class OrbManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ConvertElementToID();
+        //ConfigOctas();
+        
         if (!palmMenuVisuals.activeInHierarchy)
         {
+            bool twoPalms = handTracking.GetTwoPalms();
+            bool palmsIn = handTracking.GetPalmsIn();
+            bool palmsOut = handTracking.GetPalmsOut();
+
             CalcPalmPositions();
-            conjureValueOSC = palmDist / formMenuThresh;
 
-            bool palmsIn = fingerTracker.GetPalmsIn();
-            bool palmsOut = fingerTracker.GetPalmsOut();
-
-            if (palmsIn)
+            if (twoPalms)
             {
-                conjuring = true;
-                OrbSelector();
+                if (palmsIn)
+                {
+                    //conjuring = true;
+                    OrbSelector();
+
+                    conjureValueOSC = palmDist / formMenuThresh;
+
+                    if (conjureValueOSC < 0) conjureValueOSC = 0;
+                    if (conjureValueOSC > 1) conjureValueOSC = 1;
+                    SendOSCMessage(conjureOSCMessages[elementID], conjureValueOSC);
+
+                }
+                else
+                {
+                    //conjuring = false;
+                    DisableOrbDummies();
+                }
+
+                if (palmsOut) CastOrb();
+
+                /*conjureValueOSC = palmDist / formMenuThresh;
+                if (conjuring)
+                {
+                    if (conjureValueOSC >= 0 && conjureValueOSC <= 1)
+                    {
+                        SendOSCMessage(conjureOSCMessages[elementID], conjureValueOSC);
+                    }
+                }
+                else return;*/
             }
             else
             {
-                conjuring = false;
+                //conjuring = false;
                 DisableOrbDummies();
             }
+        } 
+        else
+        {
+            DisableOrbDummies();
+            //conjuring = false;
 
-            if (palmsOut) CastOrb();
-
-            if (conjuring) SendOSCMessage(conjureMessageOSC, conjureValueOSC);
-            else return;
-        }        
+        }
     }
 
     private void SendOSCMessage(string address, float value)
@@ -100,38 +149,38 @@ public class OrbManager : MonoBehaviour
         //Debug.Log("Sending OSC: " + address + " " + value); // todo remove
     }
 
-    Vector3 midpoint;
-    Vector3 palm1Pos;
-    Vector3 palm2Pos;
-    float palmDist;
-
     private void CalcPalmPositions()
     {
-        palmDist = fingerTracker.GetPalmDist();
-        palm1Pos = fingerTracker.GetPalm1Pos();
-        palm2Pos = fingerTracker.GetPalm2Pos();
+        palmDist = handTracking.GetPalmDist();
+        palm1Pos = handTracking.GetPalm1Pos();
+        palm2Pos = handTracking.GetPalm2Pos();
 
         midpoint = Vector3.Lerp(palm1Pos, palm2Pos, 0.5f);
+
+        if (palmDist < formMenuThresh) spellScale = palmDist * scaleMultiplier;
+        if (palmDist >= formMenuThresh) spellScale = formMenuThresh * scaleMultiplier;
     }
 
     private void OrbSelector()
     {
-        //currForm = Form.orb;
+        currForm = Form.orb;
 
-        if (palmDist > 0 && palmDist <= formMenuThresh)
+        for (int i = 0; i < spellBook.orbDummies.Count; i++)
         {
-            for (int i = 0; i < spellBook.orbDummies.Count; i++)
-            {
-                if (i == elementID) spellBook.orbDummies[i].SetActive(true);
-                else spellBook.orbDummies[i].SetActive(false);
-            }
-
-            spellBook.orbDummies[elementID].transform.position = midpoint;
-            spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist * scaleMultiplier, palmDist * scaleMultiplier, palmDist * scaleMultiplier);
-            
-            spellScale = palmDist * scaleMultiplier;
+            if (i == elementID) spellBook.orbDummies[i].SetActive(true);
+            else spellBook.orbDummies[i].SetActive(false);
         }
-        else DisableOrbDummies();
+
+        spellBook.orbDummies[elementID].transform.position = midpoint;
+
+        if (palmDist < formMenuThresh)
+        {
+            spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist * scaleMultiplier, palmDist * scaleMultiplier, palmDist * scaleMultiplier);
+        }
+        else if (palmDist >= formMenuThresh)
+        {
+            spellBook.orbDummies[elementID].transform.localScale = new Vector3(formMenuThresh * scaleMultiplier, formMenuThresh * scaleMultiplier, formMenuThresh * scaleMultiplier);
+        }
     }
 
     private void CastOrb()
@@ -160,6 +209,11 @@ public class OrbManager : MonoBehaviour
     public void SetFire()
     {
         currEl = Element.fire;
+    }
+
+    public void SetWater()
+    {
+        currEl = Element.water;
     }
 
     public void SetIce()

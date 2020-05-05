@@ -70,12 +70,11 @@ MonoBehaviour:
     deviceManagerProfile: {fileID: 11400000, guid: d24b9651c02dc654fa00c65c6937c96e,
       type: 2}
   - componentType:
-      reference: Microsoft.MixedReality.Toolkit.WindowsMixedReality.Input.WindowsMixedRealityEyeGazeDataProvider,
-        Microsoft.MixedReality.Toolkit.Providers.WindowsMixedReality
+      reference: 
     componentName: Windows Mixed Reality Eye Gaze Provider
     priority: 0
     runtimePlatform: 8
-    deviceManagerProfile: {fileID: 11400000, guid: 2d87dd11b18f700449c9dab320d19b99,
+    deviceManagerProfile: {fileID: 11400000, guid: eccf4056ef671e64ea8c339cd39e0635,
       type: 2}
   - componentType:
       reference: Microsoft.MixedReality.Toolkit.Input.InputRecordingService, Microsoft.MixedReality.Toolkit.Services.InputAnimation

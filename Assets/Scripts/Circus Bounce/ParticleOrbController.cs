@@ -20,6 +20,9 @@ public class ParticleOrbController : MonoBehaviour
     [Tooltip("Percent of dimming per second")] [Range(0, 100)] 
     [SerializeField] int rateOfDim = 20;
 
+    [Tooltip("OSC message to receive - triggers destruction/explosion of spell orb/particle")]
+    [SerializeField] string OSCtoReceive = "message to receive here";
+    [Tooltip("OSC message to send, either on cast or collision")]
     [SerializeField] string messageOSC;
     [SerializeField] float valueOSC = 1f;
     [Tooltip("If Dim Over Time is true and you want OSC value to change with DMX. Converts the highest DMX value to an OSC float.")] 
@@ -46,6 +49,8 @@ public class ParticleOrbController : MonoBehaviour
         
         SendDMX();
         SendOSCMessage(valueOSC); //todo refactor for lockOSCvalueToDMX
+
+        osc.SetAddressHandler(OSCtoReceive, OnReceiveOSC);
 
         if (timedBlackout)
         {
@@ -87,6 +92,12 @@ public class ParticleOrbController : MonoBehaviour
         message.values.Add(oscVal);
         osc.Send(message);
         Debug.Log("sending OSC: " + message + oscVal); //todo remove
+    }
+
+    void OnReceiveOSC(OscMessage message)
+    {
+        // todo - play particle explosion
+        Destroy(gameObject);
     }
 
     private void DimLight()
@@ -146,6 +157,8 @@ public class ParticleOrbController : MonoBehaviour
         yield return new WaitForSeconds(lifeSpan);
         Destroy(gameObject);
     }
+
+    
 
     private void OnCollisionEnter(Collision other)
     {

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8334192194983241492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.022400552, y: 0.022400552, z: 0.022400552}
+  m_LocalScale: {x: 0.1808173, y: 0.1808173, z: 0.1808173}
   m_Children: []
   m_Father: {fileID: 8334192196334270171}
   m_RootOrder: 1
@@ -139,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 8334192195912255962}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.021280525, y: 0.021280525, z: 0.021280525}
+  m_LocalScale: {x: 0.16525605, y: 0.16525605, z: 0.16525605}
   m_Children: []
   m_Father: {fileID: 8334192196334270171}
   m_RootOrder: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mats: []
-  level: 0.34
+  level: 0.541
   minMaxBounds: {x: 0, y: 0}
   mf: {fileID: 0}
   mr: {fileID: 0}
@@ -245,7 +245,7 @@ MonoBehaviour:
   transformedPoint: {x: 0, y: 0, z: 0}
   prevTransformedPoint: {x: 0, y: 0, z: 0}
   calculateTextureProjection: 1
-  TextureSize: 1
+  TextureSize: 0.01
   TextureSizeScalar: 1
   texCurveSize:
     serializedVersion: 2
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8334192196334270164}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaf538c07796e5745a75c30bc3ec6117, type: 3}
   m_Name: 

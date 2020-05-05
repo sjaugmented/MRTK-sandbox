@@ -26,6 +26,7 @@ public class OrbFingerTracker : MonoBehaviour
     //public bool oneFinger = false;
     public bool palmsIn = false;
     public bool palmsOut = false;
+    public bool twoPalms = false;
     float palmDist;
     float prevHandCamDist;
 
@@ -46,75 +47,30 @@ public class OrbFingerTracker : MonoBehaviour
 
     private void ProcessHands()
     {
-        // right then left
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out rightPalm))
+        // look for two palms
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out rightPalm) && HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out leftPalm))
         {
-            // look for two palms
-            if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out leftPalm))
+            twoPalms = true;
+            //oneFinger = false;
+            // look for palmsIn for form selector
+            if (rightPalm.Right.x <= palmInThresh && leftPalm.Right.x <= palmInThresh)
             {
-                //oneFinger = false;
-                // look for palmsIn for form selector
-                if (rightPalm.Right.x <= palmInThresh && leftPalm.Right.x <= palmInThresh)
-                {
-                    palmsIn = true;
-                    palmsOut = false;
-                    palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
-                }
-                // look for palmsOut for casting
-                else if (rightPalm.Up.y <= palmOutThresh && rightPalm.Up.x <= palmOutThresh && leftPalm.Up.y <= palmOutThresh && leftPalm.Up.x >= palmOutThresh2)
-                {
-                    palmsIn = false;
-                    palmsOut = true;
-                    palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
-
-                }
-                else
-                {
-                    palmsIn = false;
-                    palmsOut = false;
-                }
+                palmsIn = true;
+                palmsOut = false;
+                palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
             }
-            /*else if (fingerCasting)
+            // look for palmsOut for casting
+            else if (rightPalm.Up.y <= palmOutThresh && rightPalm.Up.x <= palmOutThresh && leftPalm.Up.y <= palmOutThresh && leftPalm.Up.x >= palmOutThresh2)
             {
-                // look for single index tip
-                if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexTip))
-                {
-                    oneFinger = true;
+                palmsIn = false;
+                palmsOut = true;
+                palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
 
-                    if (indexTip.Up.y >= castFingerUpThresh)
-                    {
-                        ProcessIndexVelocity();
-                    }
-                }
-                else oneFinger = false;
-            }*/
-        }
-        // left then right
-        else if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out leftPalm))
-        {
-            // look for two palms
-            if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out rightPalm))
+            }
+            else
             {
-                //oneFinger = false;
-                // look for palmsIn for form selector
-                if (rightPalm.Right.x <= palmInThresh && leftPalm.Right.x <= palmInThresh)
-                {
-                    palmsIn = true;
-                    palmsOut = false;
-                    palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
-                }
-                // look for palmsOut for casting
-                else if (rightPalm.Up.y <= palmOutThresh && rightPalm.Up.x <= palmOutThresh && leftPalm.Up.y <= palmOutThresh && leftPalm.Up.x >= palmOutThresh2)
-                {
-                    palmsIn = false;
-                    palmsOut = true;
-                    palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
-                }
-                else
-                {
-                    palmsIn = false;
-                    palmsOut = false;
-                }
+                palmsIn = false;
+                palmsOut = false;
             }
             /*else if (fingerCasting)
             {
@@ -135,7 +91,9 @@ public class OrbFingerTracker : MonoBehaviour
         else
         {
             //oneFinger = false;
+            twoPalms = false;
             palmsIn = false;
+            palmsOut = false;
         }
     }
 
@@ -199,5 +157,10 @@ public class OrbFingerTracker : MonoBehaviour
     public float GetPalmDist()
     {
         return palmDist;
+    }
+
+    public bool GetTwoPalms()
+    {
+        return twoPalms;
     }
 }
