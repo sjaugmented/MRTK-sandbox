@@ -591,9 +591,7 @@ MonoBehaviour:
   minVelocity: 2
   maxVelocity: 10
   fingerForwardThreshold: 0.7
-  palmInThresh: 0.3
-  palmOutThresh: 0.5
-  palmOutThresh2: -0.5
+  angleMargin: 40
   palmsIn: 0
   palmsOut: 0
   twoPalms: 0
@@ -635,7 +633,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117319102}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 167fcd770dece2d49ba556438f94e08c, type: 3}
   m_Name: 
@@ -644,7 +642,7 @@ MonoBehaviour:
   palmRight: 0
   palmForward: 0
   palmPosition: 0
-  palmRotation: 1
+  palmRotation: 0
 --- !u!4 &1117319104
 Transform:
   m_ObjectHideFlags: 0
@@ -664,6 +662,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4258854785433967990, guid: ed32711d52c7f8247b3dfe90b06a099c,
     type: 3}
   m_PrefabInstance: {fileID: 8276679439036883316}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1152973831 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 194260139491665344, guid: 1f96bc08732324c47a39eec0ced4155d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561904523}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1278724072 stripped
 MonoBehaviour:
@@ -787,7 +791,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnTouchStarted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1561904525}
+      objectReference: {fileID: 1948419536}
     - target: {fileID: 408058194039999169, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
       propertyPath: OnTouchStarted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -857,7 +861,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnTouchStarted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1561904526}
+      objectReference: {fileID: 1152973831}
     - target: {fileID: 7270638822298618669, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
       propertyPath: OnTouchStarted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -887,6 +891,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Palm Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943472344320155159, guid: 1f96bc08732324c47a39eec0ced4155d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8943472344320155163, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
@@ -948,18 +957,6 @@ PrefabInstance:
 --- !u!1 &1561904524 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8943472342896449238, guid: 1f96bc08732324c47a39eec0ced4155d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1561904523}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &1561904525 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1626498849122604309, guid: 1f96bc08732324c47a39eec0ced4155d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1561904523}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &1561904526 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 194260139491665344, guid: 1f96bc08732324c47a39eec0ced4155d,
     type: 3}
   m_PrefabInstance: {fileID: 1561904523}
   m_PrefabAsset: {fileID: 0}
@@ -1036,6 +1033,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1978320802997782298, guid: ed32711d52c7f8247b3dfe90b06a099c,
     type: 3}
   m_PrefabInstance: {fileID: 8276679439036883316}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1948419536 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1626498849122604309, guid: 1f96bc08732324c47a39eec0ced4155d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561904523}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2117764238 stripped
 GameObject:

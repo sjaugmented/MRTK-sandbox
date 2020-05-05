@@ -13,10 +13,8 @@ public class OrbFingerTracker : MonoBehaviour
     [SerializeField] float maxVelocity = 10f;
     [Tooltip("How far forward the finger must point before casting can happen")]
     [SerializeField] float fingerForwardThreshold = 0.7f;
-    [Tooltip("How far in the palms have to face to trigger Selector menu")]
-    [SerializeField] float palmInThresh = 0.3f;
-    [SerializeField] float palmOutThresh = 0.5f;
-    [SerializeField] float palmOutThresh2 = -0.5f;
+    [Tooltip("Margin between hero angles of 0 and 180")]
+    [SerializeField] float angleMargin = 20f;
     //[SerializeField] bool fingerCasting = true;
 
     // used for index tracking & velocity
@@ -51,16 +49,21 @@ public class OrbFingerTracker : MonoBehaviour
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out rightPalm) && HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out leftPalm))
         {
             twoPalms = true;
+
+            // get angle of palms.Up
+            var palmAngle = Vector3.Angle(rightPalm.Up, leftPalm.Up);
+            
             //oneFinger = false;
+
             // look for palmsIn for form selector
-            if (rightPalm.Right.x <= palmInThresh && leftPalm.Right.x <= palmInThresh)
+            if (palmAngle >= 180 - angleMargin)
             {
                 palmsIn = true;
                 palmsOut = false;
                 palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
             }
             // look for palmsOut for casting
-            else if (rightPalm.Up.y <= palmOutThresh && rightPalm.Up.x <= palmOutThresh && leftPalm.Up.y <= palmOutThresh && leftPalm.Up.x >= palmOutThresh2)
+            else if (palmAngle <= angleMargin)
             {
                 palmsIn = false;
                 palmsOut = true;

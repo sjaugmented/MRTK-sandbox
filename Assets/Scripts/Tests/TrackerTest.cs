@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrackerTest : MonoBehaviour, IMixedRealityHand
+public class TrackerTest : MonoBehaviour
 {
     [SerializeField] bool palmUp = false;
     [SerializeField] bool palmRight = false;
@@ -15,39 +15,12 @@ public class TrackerTest : MonoBehaviour, IMixedRealityHand
 
     MixedRealityPose indexTip1, indexTip2, palm1, palm2;
 
-    public bool Enabled { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-    public TrackingState TrackingState => throw new System.NotImplementedException();
-
-    public Handedness ControllerHandedness => throw new System.NotImplementedException();
-
-    public IMixedRealityInputSource InputSource => throw new System.NotImplementedException();
-
-    public IMixedRealityControllerVisualizer Visualizer => throw new System.NotImplementedException();
-
-    public bool IsPositionAvailable => throw new System.NotImplementedException();
-
-    public bool IsPositionApproximate => throw new System.NotImplementedException();
-
-    public bool IsRotationAvailable => throw new System.NotImplementedException();
-
-    public MixedRealityInteractionMapping[] Interactions => throw new System.NotImplementedException();
-
-    public Vector3 AngularVelocity => throw new System.NotImplementedException();
-
-    public Vector3 Velocity => throw new System.NotImplementedException();
-
-    public bool IsInPointingPose => throw new System.NotImplementedException();
-
-    public bool TryGetJoint(TrackedHandJoint joint, out MixedRealityPose pose)
-    {
-        throw new System.NotImplementedException();
-    }
-
     void Update()
     {
-         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Any, out palm1))
+         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out palm1) && HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out palm2))
         {
+            Debug.Log(Vector3.Angle(palm1.Up, palm2.Up));
+
             if (palmUp) Debug.Log("palm1.Up: " + palm1.Up);
             if (palmRight) Debug.Log("palm1.Right: " + palm1.Right);
             if (palmForward) Debug.Log("palm1.Forward: " + palm1.Forward);
