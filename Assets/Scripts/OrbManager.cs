@@ -84,7 +84,7 @@ public class OrbManager : MonoBehaviour
     void Update()
     {
         ConvertElementToID();
-        //ConfigOctas();
+        ConfigOctas();
         
         if (!palmMenuVisuals.activeInHierarchy)
         {
