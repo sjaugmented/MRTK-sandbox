@@ -17,9 +17,9 @@ public class TrackerTest : MonoBehaviour
 
     void Update()
     {
-         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out palm1) && HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out palm2))
+         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out palm1) /*&& HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out palm2)*/)
         {
-            Debug.Log(Vector3.Angle(palm1.Up, palm2.Up));
+            Debug.Log(Vector3.Angle(palm1.Up, Camera.main.transform.forward));
 
             if (palmUp) Debug.Log("palm1.Up: " + palm1.Up);
             if (palmRight) Debug.Log("palm1.Right: " + palm1.Right);

@@ -591,7 +591,7 @@ MonoBehaviour:
   minVelocity: 2
   maxVelocity: 10
   fingerForwardThreshold: 0.7
-  angleMargin: 40
+  angleMargin: 60
   palmsIn: 0
   palmsOut: 0
   twoPalms: 0
