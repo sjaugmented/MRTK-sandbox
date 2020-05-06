@@ -244,7 +244,6 @@ public class OrbManager : MonoBehaviour
             if (fromOrbScaler) spellOrb.transform.localScale = new Vector3(spellScale, spellScale, spellScale);
             else spellOrb.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             StartCoroutine("CastDelay");
-            
         }
     }
 
