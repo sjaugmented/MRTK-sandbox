@@ -22,8 +22,9 @@ public class OrbFingerTracker : MonoBehaviour
     float castFingerUpThresh = 0.3f;
     bool castFingerOut = false;
     //public bool oneFinger = false;
+    public bool touchDown = false;
+    public bool palmsForward = false;
     public bool palmsIn = false;
-    public bool palmsOut = false;
     public bool twoPalms = false;
     float palmDist;
     float prevHandCamDist;
@@ -45,59 +46,73 @@ public class OrbFingerTracker : MonoBehaviour
 
     private void ProcessHands()
     {
+        Transform cam = Camera.main.transform;
+        
         // look for two palms
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out rightPalm) && HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out leftPalm))
         {
             twoPalms = true;
+            palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
 
-            // get angle of palms.Up
-            var palmAngle = Vector3.Angle(rightPalm.Up, leftPalm.Up);
-            
-            //oneFinger = false;
+            // get angle of palms to cam.Forward
+            float rtPalmUpAng = Vector3.Angle(rightPalm.Up, cam.forward);
+            float ltPalmUpAng = Vector3.Angle(leftPalm.Up, cam.forward);
+            float rtPalmForAng = Vector3.Angle(rightPalm.Forward, cam.forward);
+            float ltPalmForAng = Vector3.Angle(leftPalm.Forward, cam.forward);
 
-            // look for palmsIn for form selector
-            if (palmAngle >= 180 - angleMargin)
+            // look for touchDown pose
+            if (IsWithinRange(rtPalmUpAng, 90) && IsWithinRange(ltPalmUpAng, 90) && IsWithinRange(rtPalmForAng, 90) && IsWithinRange(ltPalmForAng, 90))
             {
+                touchDown = true;
+                palmsIn = false;
+                palmsForward = false;
+            }
+
+            // look for palmsIn pose
+            if (IsWithinRange(rtPalmUpAng, 90) && IsWithinRange(ltPalmUpAng, 90) && IsWithinRange(rtPalmForAng, 0) && IsWithinRange(ltPalmForAng, 0))
+            {
+                touchDown = false;
                 palmsIn = true;
-                palmsOut = false;
-                palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
+                palmsForward = false;
             }
-            // look for palmsOut for casting
-            else if (palmAngle <= angleMargin)
-            {
-                palmsIn = false;
-                palmsOut = true;
-                palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
 
-            }
-            else
+            // look for palmsOut pose
+            if (IsWithinRange(rtPalmUpAng, 180) && IsWithinRange(ltPalmUpAng, 180) && IsWithinRange(rtPalmForAng, 90) && IsWithinRange(ltPalmForAng, 90))
             {
+                touchDown = false;
                 palmsIn = false;
-                palmsOut = false;
+                palmsForward = true;
             }
-            /*else if (fingerCasting)
-            {
-                // look for single index tip
-                if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Any, out indexTip))
-                {
-                    oneFinger = true;
-
-                    if (indexTip.Up.y >= castFingerUpThresh)
-                    {
-                        ProcessIndexVelocity();
-                    }
-                }
-                else oneFinger = false;
-            }*/
         }
         // if no hands
         else
         {
-            //oneFinger = false;
             twoPalms = false;
+            touchDown = false;
             palmsIn = false;
-            palmsOut = false;
+            palmsForward = false;
         }
+    }
+
+    private bool IsWithinRange(float testVal, float target)
+    {
+        bool withinRange = false;
+
+        if (target == 0)
+        {
+            if (testVal <= target + angleMargin) withinRange = true;
+        }
+        else if (target == 180)
+        {
+            if (testVal >= 180 - angleMargin) withinRange = true;
+        }
+        else if (target > 0 && target < 180)
+        {
+            if (testVal >= target - angleMargin && testVal <= target + angleMargin) withinRange = true;
+        }
+        else withinRange = false;
+
+        return withinRange;
     }
 
     /* private void ProcessIndexVelocity()
@@ -147,9 +162,14 @@ public class OrbFingerTracker : MonoBehaviour
         return leftPalm.Position;
     }
 
-    public bool GetPalmsOut()
+    public bool GetPalmsForward()
     {
-        return palmsOut;
+        return palmsForward;
+    }
+
+    public bool GetTouchdown()
+    {
+        return touchDown;
     }
 
     public bool GetPalmsIn()

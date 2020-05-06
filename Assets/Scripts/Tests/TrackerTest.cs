@@ -10,22 +10,30 @@ public class TrackerTest : MonoBehaviour
     [SerializeField] bool palmUp = false;
     [SerializeField] bool palmRight = false;
     [SerializeField] bool palmForward = false;
-    [SerializeField] bool palmPosition = false;
-    [SerializeField] bool palmRotation = false;
 
     MixedRealityPose indexTip1, indexTip2, palm1, palm2;
 
     void Update()
     {
-         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out palm1) /*&& HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out palm2)*/)
+         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out palm1) && HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out palm2))
         {
-            Debug.Log(Vector3.Angle(palm1.Up, Camera.main.transform.forward));
+            if (palmUp)
+            {
+                Debug.Log("leftUp/CamFor: " + Vector3.Angle(palm1.Up, Camera.main.transform.forward));
+                Debug.Log("rightUp/CamFor: " + Vector3.Angle(palm2.Up, Camera.main.transform.forward));
+            }
 
-            if (palmUp) Debug.Log("palm1.Up: " + palm1.Up);
-            if (palmRight) Debug.Log("palm1.Right: " + palm1.Right);
-            if (palmForward) Debug.Log("palm1.Forward: " + palm1.Forward);
-            if (palmPosition) Debug.Log("palm.Position: " + palm1.Position);
-            if (palmRotation) Debug.Log("palm.Rotation: " + palm1.Rotation);
+            if (palmRight)
+            {
+                Debug.Log("leftRight/CamFor: " + Vector3.Angle(palm1.Right, Camera.main.transform.forward));
+                Debug.Log("rightRight/CamFor: " + Vector3.Angle(palm2.Right, Camera.main.transform.forward));
+            }
+
+            if (palmForward)
+            {
+                Debug.Log("leftFor/CamFor: " + Vector3.Angle(palm1.Forward, Camera.main.transform.forward));
+                Debug.Log("rightFor/CamFor: " + Vector3.Angle(palm2.Forward, Camera.main.transform.forward));
+            }
         }
     }
 }

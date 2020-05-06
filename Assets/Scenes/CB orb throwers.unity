@@ -567,7 +567,7 @@ MonoBehaviour:
   - {fileID: 424153183}
   - {fileID: 336205230}
   formMenuThresh: 0.5
-  scaleMultiplier: 3
+  scaleMultiplier: 1
   conjureOSCMessages:
   - light conjure message here
   - fire conjure message here
@@ -592,8 +592,9 @@ MonoBehaviour:
   maxVelocity: 10
   fingerForwardThreshold: 0.7
   angleMargin: 60
+  touchDown: 0
+  palmsForward: 0
   palmsIn: 0
-  palmsOut: 0
   twoPalms: 0
 --- !u!4 &1097242589
 Transform:
@@ -625,7 +626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1117319103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,11 +639,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167fcd770dece2d49ba556438f94e08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palmUp: 0
+  palmUp: 1
   palmRight: 0
   palmForward: 0
-  palmPosition: 0
-  palmRotation: 0
 --- !u!4 &1117319104
 Transform:
   m_ObjectHideFlags: 0
@@ -895,7 +894,7 @@ PrefabInstance:
     - target: {fileID: 8943472344320155159, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8943472344320155163, guid: 1f96bc08732324c47a39eec0ced4155d,
         type: 3}
