@@ -59,6 +59,8 @@ public class OrbFingerTracker : MonoBehaviour
             float ltPalmUpAng = Vector3.Angle(leftPalm.Up, cam.forward);
             float rtPalmForAng = Vector3.Angle(rightPalm.Forward, cam.forward);
             float ltPalmForAng = Vector3.Angle(leftPalm.Forward, cam.forward);
+            float rtPalmRtAng = Vector3.Angle(leftPalm.Right, cam.forward);
+            float ltPalmRtAng = Vector3.Angle(leftPalm.Right, cam.forward);
 
             // look for touchDown pose
             if (IsWithinRange(rtPalmUpAng, 90) && IsWithinRange(ltPalmUpAng, 90) && IsWithinRange(rtPalmForAng, 90) && IsWithinRange(ltPalmForAng, 90))
@@ -69,7 +71,7 @@ public class OrbFingerTracker : MonoBehaviour
             }
 
             // look for palmsIn pose
-            if (IsWithinRange(rtPalmUpAng, 90) && IsWithinRange(ltPalmUpAng, 90) && IsWithinRange(rtPalmForAng, 0) && IsWithinRange(ltPalmForAng, 0))
+            if (IsWithinRange(rtPalmUpAng, 90) && IsWithinRange(ltPalmUpAng, 90) && IsWithinRange(rtPalmForAng, 0) && IsWithinRange(ltPalmForAng, 0) && IsWithinRange(rtPalmRtAng, 90) && IsWithinRange(ltPalmRtAng, 90))
             {
                 touchDown = false;
                 palmsIn = true;
@@ -77,7 +79,7 @@ public class OrbFingerTracker : MonoBehaviour
             }
 
             // look for palmsOut pose
-            if (IsWithinRange(rtPalmUpAng, 180) && IsWithinRange(ltPalmUpAng, 180) && IsWithinRange(rtPalmForAng, 90) && IsWithinRange(ltPalmForAng, 90))
+            if (IsWithinRange(rtPalmUpAng, 180) && IsWithinRange(ltPalmUpAng, 180) && IsWithinRange(rtPalmForAng, 90) && IsWithinRange(ltPalmForAng, 90) && IsWithinRange(rtPalmRtAng, 90) && IsWithinRange(ltPalmRtAng, 90))
             {
                 touchDown = false;
                 palmsIn = false;

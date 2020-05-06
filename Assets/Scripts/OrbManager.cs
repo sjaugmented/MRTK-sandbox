@@ -85,56 +85,44 @@ public class OrbManager : MonoBehaviour
     {
         ConvertElementToID();
         //ConfigOctas();
-        
-        if (!palmMenuVisuals.activeInHierarchy)
+
+        bool twoPalms = handTracking.GetTwoPalms();
+        bool touchDown = handTracking.GetTouchdown();
+        bool palmsForward = handTracking.GetPalmsForward();
+        bool palmsIn = handTracking.GetPalmsIn();
+
+        CalcPalmPositions();
+
+        if (twoPalms)
         {
-            bool twoPalms = handTracking.GetTwoPalms();
-            bool touchDown = handTracking.GetTouchdown();
-            bool palmsFor = handTracking.GetPalmsForward();
-            bool palmsIn = handTracking.GetPalmsIn();
-
-            CalcPalmPositions();
-
-            if (twoPalms)
+            if (touchDown)
             {
-                if (touchDown && !palmsIn)
-                {
-                    OrbScaler();
+                OrbScaler();
 
-                    conjureValueOSC = palmDist / formMenuThresh;
+                conjureValueOSC = palmDist / formMenuThresh;
 
-                    if (conjureValueOSC < 0) conjureValueOSC = 0;
-                    if (conjureValueOSC > 1) conjureValueOSC = 1;
-                    SendOSCMessage(conjureOSCMessages[elementID], conjureValueOSC);
+                if (conjureValueOSC < 0) conjureValueOSC = 0;
+                if (conjureValueOSC > 1) conjureValueOSC = 1;
+                SendOSCMessage(conjureOSCMessages[elementID], conjureValueOSC);
 
-                }
-                else if (touchDown && palmsIn)
-                {
-                    DisableOrbDummies();
-                    ElementSelector();
-                }
-                else
-                {
-                    DisableOrbDummies();
-                    ElementSelector();
-                }
-
-                if (palmsFor)
-                {
-                    palmsIn = false;
-                    touchDown = false;
-                    CastOrb();
-                }
+            }
+            else if (palmsIn)
+            {
+                ElementSelector();
+            }
+            else if (palmsForward)
+            {
+                DisableOrbDummies();
+                CastOrb();
             }
             else
             {
                 DisableOrbDummies();
             }
-        } 
+        }
         else
         {
             DisableOrbDummies();
-
         }
     }
 
@@ -203,7 +191,7 @@ public class OrbManager : MonoBehaviour
         }
 
         spellBook.orbDummies[elementID].transform.position = midpoint;
-        spellBook.orbDummies[elementID].transform.localScale = new Vector3(1, 1, 1);
+        spellBook.orbDummies[elementID].transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 
     }
 
@@ -236,7 +224,7 @@ public class OrbManager : MonoBehaviour
         {
             GameObject spell = Instantiate(spellBook.orbSpells[elementID], midpoint, Camera.main.transform.rotation) as GameObject;
             if (fromOrbScaler) spell.transform.localScale = new Vector3(spellScale, spellScale, spellScale);
-            else spell.transform.localScale = new Vector3(1, 1, 1);
+            else spell.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             StartCoroutine("CastDelay");
             
         }

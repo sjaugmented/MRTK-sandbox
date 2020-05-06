@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39057d75621749f4fa7d2e3ec0c8d169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBetweenCasts: 1
+  delayBetweenCasts: 0.1
   palmMenuVisuals: {fileID: 1561904524}
   elementOctas:
   - {fileID: 1278724072}
@@ -591,7 +591,7 @@ MonoBehaviour:
   minVelocity: 2
   maxVelocity: 10
   fingerForwardThreshold: 0.7
-  angleMargin: 60
+  angleMargin: 50
   touchDown: 0
   palmsForward: 0
   palmsIn: 0
