@@ -121,6 +121,99 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &118053656
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2560701942994156121, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_Name
+      value: Stream Spells
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2560701942994156122, guid: 1e56b870054828946b4e0d6585c98508,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e56b870054828946b4e0d6585c98508, type: 3}
+--- !u!198 &118053657 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3742656688249628542, guid: 1e56b870054828946b4e0d6585c98508,
+    type: 3}
+  m_PrefabInstance: {fileID: 118053656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &118053658 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5139163290290197210, guid: 1e56b870054828946b4e0d6585c98508,
+    type: 3}
+  m_PrefabInstance: {fileID: 118053656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &118053659 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1604568059573005406, guid: 1e56b870054828946b4e0d6585c98508,
+    type: 3}
+  m_PrefabInstance: {fileID: 118053656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &118053660 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3915736646862563292, guid: 1e56b870054828946b4e0d6585c98508,
+    type: 3}
+  m_PrefabInstance: {fileID: 118053656}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &156347409 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 104800760311921583, guid: ed32711d52c7f8247b3dfe90b06a099c,
@@ -528,10 +621,10 @@ MonoBehaviour:
   - {fileID: 8334192196334270164, guid: acec9738279753f45818c78e3062e57c, type: 3}
   - {fileID: 6351764222798468372, guid: 0f4a458ac24806243a94c34c81949088, type: 3}
   streamSpells:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 118053660}
+  - {fileID: 118053659}
+  - {fileID: 118053658}
+  - {fileID: 118053657}
   particleDummies:
   - {fileID: 721050745}
   - {fileID: 1862768195}
@@ -639,9 +732,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167fcd770dece2d49ba556438f94e08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palmUp: 1
+  palmUp: 0
   palmRight: 0
   palmForward: 0
+  palmToPalm: 0
 --- !u!4 &1117319104
 Transform:
   m_ObjectHideFlags: 0

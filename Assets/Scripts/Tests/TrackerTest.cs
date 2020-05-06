@@ -10,6 +10,7 @@ public class TrackerTest : MonoBehaviour
     [SerializeField] bool palmUp = false;
     [SerializeField] bool palmRight = false;
     [SerializeField] bool palmForward = false;
+    [SerializeField] bool palmToPalm = false;
 
     MixedRealityPose indexTip1, indexTip2, palm1, palm2;
 
@@ -33,6 +34,11 @@ public class TrackerTest : MonoBehaviour
             {
                 Debug.Log("leftFor/CamFor: " + Vector3.Angle(palm1.Forward, Camera.main.transform.forward));
                 Debug.Log("rightFor/CamFor: " + Vector3.Angle(palm2.Forward, Camera.main.transform.forward));
+            }
+
+            if (palmToPalm)
+            {
+                Debug.Log("palm to palm angle: " + Vector3.Angle(palm1.Up, palm2.Up));
             }
         }
     }

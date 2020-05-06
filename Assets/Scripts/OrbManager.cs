@@ -30,10 +30,13 @@ public class OrbManager : MonoBehaviour
     int elementID = 0;
 
     // coordinates for conjuring
-    Vector3 midpoint;
+    Vector3 midpointPalms;
+    Vector3 midpointRockOn;
     Vector3 palm1Pos;
     Vector3 palm2Pos;
     float palmDist;
+    Vector3 rtIndexPos;
+    Vector3 rtPinkyPos;
 
     // used to create rate of fire for spells
     bool ableToCast = true;
@@ -70,6 +73,7 @@ public class OrbManager : MonoBehaviour
         osc = FindObjectOfType<OSC>();
 
         DisableOrbDummies();
+        DisableStreams();
     }
 
     private void DisableOrbDummies()
@@ -90,8 +94,10 @@ public class OrbManager : MonoBehaviour
         bool touchDown = handTracking.GetTouchdown();
         bool palmsForward = handTracking.GetPalmsForward();
         bool palmsIn = handTracking.GetPalmsIn();
+        bool rockOn = handTracking.GetRockOn();
+        bool fingerGun = handTracking.GetFingerGun();
 
-        CalcPalmPositions();
+        CalcHandPositions();
 
         if (twoPalms)
         {
@@ -112,8 +118,19 @@ public class OrbManager : MonoBehaviour
             }
             else if (palmsForward)
             {
-                DisableOrbDummies();
                 CastOrb();
+            }
+            else if (rockOn)
+            {
+                EnableStream();
+            }
+            else if (!rockOn)
+            {
+                DisableStreams();
+            }
+            else if (fingerGun)
+            {
+                CastParticle();
             }
             else
             {
@@ -135,13 +152,16 @@ public class OrbManager : MonoBehaviour
         //Debug.Log("Sending OSC: " + address + " " + value); // todo remove
     }
 
-    private void CalcPalmPositions()
+    private void CalcHandPositions()
     {
         palmDist = handTracking.GetPalmDist();
         palm1Pos = handTracking.GetPalm1Pos();
         palm2Pos = handTracking.GetPalm2Pos();
+        rtIndexPos = handTracking.GetRtIndexPos();
+        rtPinkyPos = handTracking.GetRtPinkyPos();
 
-        midpoint = Vector3.Lerp(palm1Pos, palm2Pos, 0.5f);
+        midpointPalms = Vector3.Lerp(palm1Pos, palm2Pos, 0.5f);
+        midpointRockOn = Vector3.Lerp(rtIndexPos, rtPinkyPos, 0.5f);
 
         if (palmDist < formMenuThresh) spellScale = palmDist * scaleMultiplier;
         if (palmDist >= formMenuThresh) spellScale = formMenuThresh * scaleMultiplier;
@@ -150,7 +170,6 @@ public class OrbManager : MonoBehaviour
     private void ElementSelector()
     {
         fromOrbScaler = false;
-        currForm = Form.orb;
         float elSlotSize = formMenuThresh / spellBook.orbDummies.Count;
 
         if (palmDist > 0 && palmDist <= formMenuThresh - elSlotSize * 3)
@@ -190,7 +209,7 @@ public class OrbManager : MonoBehaviour
             }
         }
 
-        spellBook.orbDummies[elementID].transform.position = midpoint;
+        spellBook.orbDummies[elementID].transform.position = midpointPalms;
         spellBook.orbDummies[elementID].transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 
     }
@@ -198,7 +217,6 @@ public class OrbManager : MonoBehaviour
     private void OrbScaler()
     {
         fromOrbScaler = true;
-        currForm = Form.orb;
 
         for (int i = 0; i < spellBook.orbDummies.Count; i++)
         {
@@ -206,7 +224,7 @@ public class OrbManager : MonoBehaviour
             else spellBook.orbDummies[i].SetActive(false);
         }
 
-        spellBook.orbDummies[elementID].transform.position = midpoint;
+        spellBook.orbDummies[elementID].transform.position = midpointPalms;
 
         if (palmDist < formMenuThresh)
         {
@@ -222,11 +240,69 @@ public class OrbManager : MonoBehaviour
     {
         if (ableToCast)
         {
-            GameObject spell = Instantiate(spellBook.orbSpells[elementID], midpoint, Camera.main.transform.rotation) as GameObject;
-            if (fromOrbScaler) spell.transform.localScale = new Vector3(spellScale, spellScale, spellScale);
-            else spell.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            GameObject spellOrb = Instantiate(spellBook.orbSpells[elementID], midpointPalms, Camera.main.transform.rotation) as GameObject;
+            if (fromOrbScaler) spellOrb.transform.localScale = new Vector3(spellScale, spellScale, spellScale);
+            else spellOrb.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             StartCoroutine("CastDelay");
             
+        }
+    }
+
+    public void DisableStreams()
+    {
+        foreach (ParticleSystem stream in spellBook.streamSpells)
+        {
+            var emission = stream.emission;
+            emission.enabled = false;
+            foreach (Transform child in stream.transform)
+            {
+                var childEmission = child.GetComponent<ParticleSystem>().emission;
+                childEmission.enabled = false;
+            }
+        }
+    }
+
+    private void EnableStream()
+    {
+        for(int i = 0; i < spellBook.streamSpells.Count; i++)
+        {
+            if (i == elementID)
+            {
+                var emission = spellBook.streamSpells[i].emission;
+                emission.enabled = true;
+                Transform streamParent = spellBook.streamSpells[elementID].transform.parent;
+                streamParent.position = midpointRockOn;
+
+                foreach (Transform child in spellBook.streamSpells[elementID].transform)
+                {
+                    var childEmission = child.GetComponent<ParticleSystem>().emission;
+                    childEmission.enabled = true;
+                }
+            }
+            else
+            {
+                var emission = spellBook.streamSpells[i].emission;
+                emission.enabled = false;
+                Transform streamParent = spellBook.streamSpells[i].transform.parent;
+                streamParent.position = midpointRockOn;
+
+                foreach (Transform child in spellBook.streamSpells[i].transform)
+                {
+                    var childEmission = child.GetComponent<ParticleSystem>().emission;
+                    childEmission.enabled = false;
+                }
+            }
+        }
+        
+        
+    }
+
+    private void CastParticle()
+    {
+        if (ableToCast)
+        {
+            GameObject spellParticle = Instantiate(spellBook.particleSpells[elementID], rtIndexPos, Camera.main.transform.rotation);
+            StartCoroutine("CastDelay");
         }
     }
 
