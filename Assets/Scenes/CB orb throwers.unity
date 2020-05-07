@@ -652,7 +652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39057d75621749f4fa7d2e3ec0c8d169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBetweenCasts: 0.1
+  delayBetweenOrbs: 1
+  delayBetweenParticles: 0.1
   palmMenuVisuals: {fileID: 1561904524}
   elementOctas:
   - {fileID: 1278724072}
@@ -721,7 +722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1117319103
 MonoBehaviour:
   m_ObjectHideFlags: 0

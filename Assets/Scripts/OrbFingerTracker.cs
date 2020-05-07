@@ -109,7 +109,7 @@ public class OrbFingerTracker : MonoBehaviour
             }
         }
         // look for fingers
-        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out rtIndexTip) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Right, out rtMiddleTip) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Right, out rtPinkyTip) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Right, out rtThumbTip))
+        if (HandJointUtils.TryGetJointPose(TrackedHandJoint.IndexTip, Handedness.Right, out rtIndexTip) && HandJointUtils.TryGetJointPose(TrackedHandJoint.MiddleTip, Handedness.Right, out rtMiddleTip) && HandJointUtils.TryGetJointPose(TrackedHandJoint.PinkyTip, Handedness.Right, out rtPinkyTip) && HandJointUtils.TryGetJointPose(TrackedHandJoint.ThumbTip, Handedness.Right, out rtThumbTip))
         {
             // get finger angles
             float rtIndForPalmFor = Vector3.Angle(rtIndexTip.Forward, rightPalm.Forward);
@@ -117,6 +117,7 @@ public class OrbFingerTracker : MonoBehaviour
             float rtMidForPalmFor = Vector3.Angle(rtMiddleTip.Forward, rightPalm.Forward);
             float rtPinkForPalmFor = Vector3.Angle(rtPinkyTip.Forward, rightPalm.Forward);
             float rtThumbForCamFor = Vector3.Angle(rtThumbTip.Forward, cam.forward);
+            float rtThumbForPalmFor = Vector3.Angle(rtThumbTip.Forward, rightPalm.Forward);
 
             // look for rockOn
             if (IsWithinRange(rtIndForPalmFor, 0) && IsWithinRange(rtPinkForPalmFor, 0) && !IsWithinRange(rtMidForPalmFor, 0))
@@ -125,7 +126,7 @@ public class OrbFingerTracker : MonoBehaviour
                 fingerGun = false;
             }
             // look for fingerGun
-            else if (IsWithinRange(rtIndForCamFor, 0) && IsWithinRange(rtThumbForCamFor, 90) && IsWithinRange(rtMidForPalmFor, 180) && IsWithinRange(rtPinkForPalmFor, 180))
+            else if (IsWithinRange(rtIndForCamFor, 0) && IsWithinRange(rtIndForPalmFor, 0) && IsWithinRange(rtThumbForPalmFor, 60) && IsWithinRange(rtMidForPalmFor, 180) && IsWithinRange(rtPinkForPalmFor, 180))
             {
                 rockOn = false;
                 fingerGun = true;
@@ -258,5 +259,10 @@ public class OrbFingerTracker : MonoBehaviour
     public bool GetFingerGun()
     {
         return fingerGun;
+    }
+
+    public Quaternion GetRtPalmRot()
+    {
+        return rightPalm.Rotation;
     }
 }

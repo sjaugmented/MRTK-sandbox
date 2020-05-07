@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class OrbManager : MonoBehaviour
 {
-    [SerializeField] float delayBetweenCasts = 0.2f;
+    [SerializeField] float delayBetweenOrbs = 0.2f;
+    [SerializeField] float delayBetweenParticles = 0.2f;
 
     [Tooltip("Parent object of the palm menu visuals")]
     [SerializeField] GameObject palmMenuVisuals;
@@ -244,7 +245,7 @@ public class OrbManager : MonoBehaviour
             GameObject spellOrb = Instantiate(spellBook.orbSpells[elementID], midpointPalms, Camera.main.transform.rotation) as GameObject;
             if (fromOrbScaler) spellOrb.transform.localScale = new Vector3(spellScale, spellScale, spellScale);
             else spellOrb.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            StartCoroutine("CastDelay");
+            StartCoroutine("CastDelay", delayBetweenOrbs);
         }
     }
 
@@ -299,17 +300,19 @@ public class OrbManager : MonoBehaviour
 
     private void CastParticle()
     {
+        Quaternion rtPalmRot = handTracking.GetRtPalmRot();
+        
         if (ableToCast)
         {
-            GameObject spellParticle = Instantiate(spellBook.particleSpells[elementID], rtIndexPos, Camera.main.transform.rotation);
-            StartCoroutine("CastDelay");
+            GameObject spellParticle = Instantiate(spellBook.particleSpells[elementID], rtIndexPos, rtPalmRot);
+            StartCoroutine("CastDelay", delayBetweenParticles);
         }
     }
 
-    IEnumerator CastDelay()
+    IEnumerator CastDelay(float delay)
     {
         ableToCast = false;
-        yield return new WaitForSeconds(delayBetweenCasts);
+        yield return new WaitForSeconds(delay);
         ableToCast = true;
     }
 
