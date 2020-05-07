@@ -169,9 +169,6 @@ public class OrbManager : MonoBehaviour
 
         midpointPalms = Vector3.Lerp(palm1Pos, palm2Pos, 0.5f);
         midpointIndexPinky = Vector3.Lerp(rtIndexPos, rtPinkyPos, 0.5f);
-
-        if (palmDist < maxPalmDistance) spellScale = palmDist * scaleMultiplier;
-        if (palmDist >= maxPalmDistance) spellScale = maxPalmDistance * scaleMultiplier;
     }
 
     private void ElementSelector()
@@ -254,7 +251,7 @@ public class OrbManager : MonoBehaviour
             LiquidVolumeAnimator liquidController = spellBook.masterOrbElements[elementID].GetComponentInChildren<LiquidVolumeAnimator>();
             liquidController.level = elementScale;
         }
-        else spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(elementScale * scaleMultiplier, elementScale * scaleMultiplier, elementScale * scaleMultiplier);
+        else spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(elementScale, elementScale, elementScale);
     }
 
     private void CastOrb()
@@ -268,6 +265,16 @@ public class OrbManager : MonoBehaviour
                 {
                     var liquidController = spellOrb.GetComponentInChildren<LiquidVolumeAnimator>();
                     liquidController.level = elementScale;
+                }
+                else
+                {
+                    foreach(Transform child in spellOrb.transform)
+                    {
+                        if (child.CompareTag("Spell"))
+                        {
+                            child.localScale = new Vector3(elementScale, elementScale, elementScale);
+                        }
+                    }
                 }
             }
             
