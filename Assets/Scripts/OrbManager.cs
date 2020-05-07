@@ -259,6 +259,7 @@ public class OrbManager : MonoBehaviour
         if (ableToCast)
         {
             GameObject spellOrb = Instantiate(spellBook.orbSpells[elementID], midpointPalms, Camera.main.transform.rotation) as GameObject;
+            spellOrb.transform.localScale = new Vector3(0.05784709f, 0.05784709f, 0.05784709f);
             if (fromOrbScaler)
             {
                 ElementParent elParent = spellOrb.GetComponentInChildren<ElementParent>();
@@ -280,9 +281,6 @@ public class OrbManager : MonoBehaviour
                 }
             }
             
-            
-            if (fromOrbScaler) spellOrb.transform.localScale = new Vector3(spellScale, spellScale, spellScale);
-            else spellOrb.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             StartCoroutine("CastDelay", delayBetweenOrbs);
         }
     }
