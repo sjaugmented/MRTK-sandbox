@@ -219,8 +219,8 @@ public class OrbManager : MonoBehaviour
             }
         }
 
-        // keep orb element scaled at 1 for best visibility
-        spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(1, 1, 1);
+        // keep orb element scaled at 0.5 for best visibility
+        spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 
     }
 
@@ -261,14 +261,16 @@ public class OrbManager : MonoBehaviour
             GameObject spellOrb = Instantiate(spellBook.orbSpells[elementID], midpointPalms, Camera.main.transform.rotation) as GameObject;
             if (fromOrbScaler)
             {
+                ElementParent elParent = spellOrb.GetComponentInChildren<ElementParent>();
+
                 if (currEl == Element.water)
                 {
-                    var liquidController = spellOrb.GetComponentInChildren<LiquidVolumeAnimator>();
+                    var liquidController = elParent.GetComponentInChildren<LiquidVolumeAnimator>();
                     liquidController.level = elementScale;
                 }
                 else
-                {
-                    foreach(Transform child in spellOrb.transform)
+                {   
+                    foreach(Transform child in elParent.transform)
                     {
                         if (child.CompareTag("Spell"))
                         {
