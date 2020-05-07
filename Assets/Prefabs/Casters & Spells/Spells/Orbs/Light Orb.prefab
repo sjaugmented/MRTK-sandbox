@@ -4806,6 +4806,7 @@ MonoBehaviour:
   DMXvalues: 
   dimOverTime: 1
   rateOfDim: 20
+  OSCtoReceive: message to receive here
   messageOSC: /composition/columns/2/connect
   valueOSC: 1
   dimOSCwithDMX: 0
@@ -4946,6 +4947,10 @@ PrefabInstance:
     - target: {fileID: 1937547116981538, guid: f9c96d1d737efe945bca96afd20fe658, type: 3}
       propertyPath: m_Name
       value: Snow star
+      objectReference: {fileID: 0}
+    - target: {fileID: 1937547116981538, guid: f9c96d1d737efe945bca96afd20fe658, type: 3}
+      propertyPath: m_TagString
+      value: Spell
       objectReference: {fileID: 0}
     - target: {fileID: 4821230566465052, guid: f9c96d1d737efe945bca96afd20fe658, type: 3}
       propertyPath: m_LocalPosition.x

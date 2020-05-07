@@ -41,6 +41,8 @@ public class OrbManager : MonoBehaviour
     Vector3 rtIndexPos;
     Vector3 rtPinkyPos;
 
+    float elementScale;
+
     // used to create rate of fire for spells
     bool ableToCast = true;
     bool fromElSelector = false;
@@ -241,28 +243,18 @@ public class OrbManager : MonoBehaviour
         }
 
         // determine scale
-        float elementScale = palmDist / maxPalmDistance;
+        
 
         // apply scale based to orb element
-        if (palmDist < maxPalmDistance)
-        {
-            if (currEl == Element.water)
-            {
-                LiquidVolumeAnimator liquidController = spellBook.masterOrbElements[elementID].GetComponentInChildren<LiquidVolumeAnimator>();
-                liquidController.level = elementScale;
-            }
-            else spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(elementScale * scaleMultiplier, elementScale * scaleMultiplier, elementScale * scaleMultiplier);
+        if (palmDist < maxPalmDistance) elementScale = palmDist / maxPalmDistance;
+        else if (palmDist >= maxPalmDistance) elementScale = 1;
 
-        }
-        else if (palmDist >= maxPalmDistance)
+        if (currEl == Element.water)
         {
-            if (currEl == Element.water)
-            {
-                float waterLevel = spellBook.masterOrbElements[elementID].GetComponentInChildren<LiquidVolumeAnimator>().level;
-                waterLevel = 1;
-            }
-            else spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(1 * scaleMultiplier, 1 * scaleMultiplier, 1 * scaleMultiplier);
+            LiquidVolumeAnimator liquidController = spellBook.masterOrbElements[elementID].GetComponentInChildren<LiquidVolumeAnimator>();
+            liquidController.level = elementScale;
         }
+        else spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(elementScale * scaleMultiplier, elementScale * scaleMultiplier, elementScale * scaleMultiplier);
     }
 
     private void CastOrb()
@@ -270,6 +262,16 @@ public class OrbManager : MonoBehaviour
         if (ableToCast)
         {
             GameObject spellOrb = Instantiate(spellBook.orbSpells[elementID], midpointPalms, Camera.main.transform.rotation) as GameObject;
+            if (fromOrbScaler)
+            {
+                if (currEl == Element.water)
+                {
+                    var liquidController = spellOrb.GetComponentInChildren<LiquidVolumeAnimator>();
+                    liquidController.level = elementScale;
+                }
+            }
+            
+            
             if (fromOrbScaler) spellOrb.transform.localScale = new Vector3(spellScale, spellScale, spellScale);
             else spellOrb.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             StartCoroutine("CastDelay", delayBetweenOrbs);
