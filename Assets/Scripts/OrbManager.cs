@@ -1,18 +1,24 @@
-﻿using System;
+﻿using Microsoft.MixedReality.Toolkit.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class OrbManager : MonoBehaviour
 {
-    [SerializeField] float delayBetweenOrbs = 0.2f;
-    [SerializeField] float delayBetweenParticles = 0.2f;
-    
     [SerializeField] GameObject masterOrb;
 
+    [Header("Rates of Fire")]
+    [SerializeField] [Range(1, 20)] float orbsPerSecond = 1f;
+    [SerializeField] [Range(1, 20)] float particlesPerSecond = 20f;
+
+    [Header("Palm Menus")]
     [Tooltip("Parent object of the palm menu visuals")]
     [SerializeField] GameObject palmMenuVisuals;
-    [SerializeField] List<OctaRotater> elementOctas;
+    [Tooltip("Rate of fire GameObject sliders in hierarchy")]
+    [SerializeField] PinchSlider orbROFSlider;
+    [Tooltip("Rate of fire GameObject sliders in hierarchy")]
+    [SerializeField] PinchSlider particleROFSlider;
 
     [Header("Palm Conjure")]
     [Tooltip("Max distance between palms for conjuring")]
@@ -24,8 +30,6 @@ public class OrbManager : MonoBehaviour
     
     float conjureValueOSC = 0;
 
-    [Header("Misc")]
-    public float spellScale = 1;
     public enum Element { light, fire, water, ice };
     public enum Form { particle, orb, stream };
     public Element currEl = Element.light;
@@ -60,16 +64,6 @@ public class OrbManager : MonoBehaviour
         if (currEl == Element.ice) elementID = 3;
     }
 
-    private void ConfigOctas()
-    {
-        for(int i = 0; i < elementOctas.Count; i++)
-        {
-            if (i == elementID) elementOctas[i].isSelected = true;
-            else elementOctas[i].isSelected = false;
-        }
-    }
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -81,20 +75,10 @@ public class OrbManager : MonoBehaviour
         DisableStreams();
     }
 
-
-    /*private void DisableOrbDummies()
-    {
-        foreach (GameObject dummy in spellBook.orbDummies)
-        {
-            dummy.SetActive(false);
-        }
-    }*/
-
     // Update is called once per frame
     void Update()
     {
         ConvertElementToID();
-        //ConfigOctas();
 
         bool twoPalms = handTracking.GetTwoPalms();
         bool touchDown = handTracking.GetTouchdown();
@@ -105,48 +89,51 @@ public class OrbManager : MonoBehaviour
 
         CalcHandPositions();
 
-        if (twoPalms)
+        if (!palmMenuVisuals.activeInHierarchy)
         {
-            if (palmsForward)
+            if (twoPalms)
             {
-                CastOrb();
-                masterOrb.SetActive(false);
-            }
-            else if (palmsIn)
-            {
-                ElementSelector();
-            }
-            else if (touchDown)
-            {
-                ElementScaler();
+                if (palmsForward)
+                {
+                    CastOrb();
+                    masterOrb.SetActive(false);
+                }
+                else if (palmsIn)
+                {
+                    ElementSelector();
+                }
+                else if (touchDown)
+                {
+                    ElementScaler();
 
-                conjureValueOSC = palmDist / maxPalmDistance;
+                    conjureValueOSC = palmDist / maxPalmDistance;
 
-                if (conjureValueOSC < 0) conjureValueOSC = 0;
-                if (conjureValueOSC > 1) conjureValueOSC = 1;
-                SendOSCMessage(conjureOSCMessages[elementID], conjureValueOSC);
+                    if (conjureValueOSC < 0) conjureValueOSC = 0;
+                    if (conjureValueOSC > 1) conjureValueOSC = 1;
+                    SendOSCMessage(conjureOSCMessages[elementID], conjureValueOSC);
 
-            }
-            else masterOrb.SetActive(false);
+                }
+                else masterOrb.SetActive(false);
 
-            if (fingerGun)
-            {
-                CastParticle();
-                DisableStreams();
-            }
-            else if (rockOn)
-            {
-                EnableStream();
+                if (fingerGun)
+                {
+                    CastParticle();
+                    DisableStreams();
+                }
+                else if (rockOn)
+                {
+                    EnableStream();
+                }
+                else
+                {
+                    DisableStreams();
+                }
             }
             else
             {
+                masterOrb.SetActive(false);
                 DisableStreams();
             }
-        }
-        else
-        {
-            masterOrb.SetActive(false);
-            DisableStreams();
         }
     }
 
@@ -281,7 +268,18 @@ public class OrbManager : MonoBehaviour
                 }
             }
             
-            StartCoroutine("CastDelay", delayBetweenOrbs);
+            StartCoroutine("CastDelay", orbsPerSecond);
+        }
+    }
+
+    private void CastParticle()
+    {
+        Quaternion rtPalmRot = handTracking.GetRtPalmRot();
+
+        if (ableToCast)
+        {
+            GameObject spellParticle = Instantiate(spellBook.particleSpells[elementID], rtIndexPos, rtPalmRot);
+            StartCoroutine("CastDelay", particlesPerSecond);
         }
     }
 
@@ -334,21 +332,11 @@ public class OrbManager : MonoBehaviour
         
     }
 
-    private void CastParticle()
-    {
-        Quaternion rtPalmRot = handTracking.GetRtPalmRot();
-        
-        if (ableToCast)
-        {
-            GameObject spellParticle = Instantiate(spellBook.particleSpells[elementID], rtIndexPos, rtPalmRot);
-            StartCoroutine("CastDelay", delayBetweenParticles);
-        }
-    }
 
     IEnumerator CastDelay(float delay)
     {
         ableToCast = false;
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(1 / delay);
         ableToCast = true;
     }
 
@@ -370,5 +358,21 @@ public class OrbManager : MonoBehaviour
     public void SetIce()
     {
         currEl = Element.ice;
+    }
+
+    public void SetOrbRateOfFire()
+    {
+        var sliderVal = orbROFSlider.SliderValue;
+        // rate of fire cannot go below 1
+        if (sliderVal < 0.05f) sliderVal = 0.05f;
+        orbsPerSecond = sliderVal * 20;
+    }
+
+    public void SetParticleRateOfFire()
+    {
+        var sliderVal = particleROFSlider.SliderValue;
+        // rate of fire cannot go below 1
+        if (sliderVal < 0.05f) sliderVal = 0.05f;
+        particlesPerSecond = sliderVal * 20;
     }
 }

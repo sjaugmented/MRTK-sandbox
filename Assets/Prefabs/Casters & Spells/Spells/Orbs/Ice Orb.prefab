@@ -9717,7 +9717,7 @@ GameObject:
   - component: {fileID: 9153813722968106895}
   m_Layer: 0
   m_Name: Snow star
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
