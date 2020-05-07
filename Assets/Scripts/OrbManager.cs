@@ -7,6 +7,8 @@ public class OrbManager : MonoBehaviour
 {
     [SerializeField] float delayBetweenOrbs = 0.2f;
     [SerializeField] float delayBetweenParticles = 0.2f;
+    
+    [SerializeField] GameObject masterOrb;
 
     [Tooltip("Parent object of the palm menu visuals")]
     [SerializeField] GameObject palmMenuVisuals;
@@ -14,7 +16,7 @@ public class OrbManager : MonoBehaviour
 
     [Header("Palm Conjure")]
     [Tooltip("Max distance between palms for conjuring")]
-    [SerializeField] float formMenuThresh = 0.3f;
+    [SerializeField] float maxPalmDistance = 0.3f;
     [SerializeField] float scaleMultiplier = 1f;
 
     [Header("OSC controller")]
@@ -73,9 +75,10 @@ public class OrbManager : MonoBehaviour
         spellBook = GetComponent<SpellBook>();
         osc = FindObjectOfType<OSC>();
 
-        DisableOrbDummies();
+        masterOrb.SetActive(false);
         DisableStreams();
     }
+
 
     private void DisableOrbDummies()
     {
@@ -115,7 +118,7 @@ public class OrbManager : MonoBehaviour
             {
                 OrbScaler();
 
-                conjureValueOSC = palmDist / formMenuThresh;
+                conjureValueOSC = palmDist / maxPalmDistance;
 
                 if (conjureValueOSC < 0) conjureValueOSC = 0;
                 if (conjureValueOSC > 1) conjureValueOSC = 1;
@@ -165,16 +168,16 @@ public class OrbManager : MonoBehaviour
         midpointPalms = Vector3.Lerp(palm1Pos, palm2Pos, 0.5f);
         midpointRockOn = Vector3.Lerp(rtIndexPos, rtPinkyPos, 0.5f);
 
-        if (palmDist < formMenuThresh) spellScale = palmDist * scaleMultiplier;
-        if (palmDist >= formMenuThresh) spellScale = formMenuThresh * scaleMultiplier;
+        if (palmDist < maxPalmDistance) spellScale = palmDist * scaleMultiplier;
+        if (palmDist >= maxPalmDistance) spellScale = maxPalmDistance * scaleMultiplier;
     }
 
     private void ElementSelector()
     {
         fromOrbScaler = false;
-        float elSlotSize = formMenuThresh / spellBook.orbDummies.Count;
+        float elSlotSize = maxPalmDistance / spellBook.orbDummies.Count;
 
-        if (palmDist > 0 && palmDist <= formMenuThresh - elSlotSize * 3)
+        if (palmDist > 0 && palmDist <= maxPalmDistance - elSlotSize * 3)
         {
             currEl = Element.light;
             for (int i = 0; i < spellBook.orbDummies.Count; i++)
@@ -183,7 +186,7 @@ public class OrbManager : MonoBehaviour
                 else spellBook.orbDummies[i].SetActive(false);
             }
         }
-        else if (palmDist > formMenuThresh - elSlotSize * 3 && palmDist <= formMenuThresh - elSlotSize * 2)
+        else if (palmDist > maxPalmDistance - elSlotSize * 3 && palmDist <= maxPalmDistance - elSlotSize * 2)
         {
             currEl = Element.fire;
             for (int i = 0; i < spellBook.orbDummies.Count; i++)
@@ -192,7 +195,7 @@ public class OrbManager : MonoBehaviour
                 else spellBook.orbDummies[i].SetActive(false);
             }
         }
-        else if (palmDist > formMenuThresh - elSlotSize * 2 && palmDist <= formMenuThresh - elSlotSize)
+        else if (palmDist > maxPalmDistance - elSlotSize * 2 && palmDist <= maxPalmDistance - elSlotSize)
         {
             currEl = Element.water;
             for (int i = 0; i < spellBook.orbDummies.Count; i++)
@@ -201,7 +204,7 @@ public class OrbManager : MonoBehaviour
                 else spellBook.orbDummies[i].SetActive(false);
             }
         }
-        else if (palmDist > formMenuThresh - elSlotSize && palmDist <= formMenuThresh)
+        else if (palmDist > maxPalmDistance - elSlotSize && palmDist <= maxPalmDistance)
         {
             currEl = Element.ice;
             for (int i = 0; i < spellBook.orbDummies.Count; i++)
@@ -228,13 +231,13 @@ public class OrbManager : MonoBehaviour
 
         spellBook.orbDummies[elementID].transform.position = midpointPalms;
 
-        if (palmDist < formMenuThresh)
+        if (palmDist < maxPalmDistance)
         {
             spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist * scaleMultiplier, palmDist * scaleMultiplier, palmDist * scaleMultiplier);
         }
-        else if (palmDist >= formMenuThresh)
+        else if (palmDist >= maxPalmDistance)
         {
-            spellBook.orbDummies[elementID].transform.localScale = new Vector3(formMenuThresh * scaleMultiplier, formMenuThresh * scaleMultiplier, formMenuThresh * scaleMultiplier);
+            spellBook.orbDummies[elementID].transform.localScale = new Vector3(maxPalmDistance * scaleMultiplier, maxPalmDistance * scaleMultiplier, maxPalmDistance * scaleMultiplier);
         }
     }
 

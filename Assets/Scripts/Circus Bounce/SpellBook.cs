@@ -13,6 +13,7 @@ public class SpellBook : MonoBehaviour
     public List<GameObject> particleDummies;
     public List<GameObject> orbDummies;
     public List<GameObject> streamDummies;
+    public List<GameObject> masterOrbElements;
 
 
 
