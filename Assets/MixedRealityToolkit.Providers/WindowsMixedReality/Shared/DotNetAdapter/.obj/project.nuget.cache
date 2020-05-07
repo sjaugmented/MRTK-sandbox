@@ -1,11 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "wn6LSEyY1yz+zBbQtp07uu03gnMk6kSdqLKfJwaQjmqQ0jBG9TNFfBl31ewW/y/1gXT1e1XXfPAYYVA9mhBo+w==",
+  "dgSpecHash": "9ggJnwfq5Qr/u/BRLyVPQlsT/ZgjQ3gazPGw6x7RsOhyjiDEYs01zrc4RYxWNJVsU1ngpyjfkTaNcMHsjrej7g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Seth\\Documents\\MRTK\\MRTK tutorials\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Seth\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Seth\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Seth\\.nuget\\packages\\microsoft.windows.mixedreality.dotnetwinrt\\0.5.1045\\microsoft.windows.mixedreality.dotnetwinrt.0.5.1045.nupkg.sha512",
-    "C:\\Users\\Seth\\.nuget\\packages\\system.drawing.primitives\\4.3.0\\system.drawing.primitives.4.3.0.nupkg.sha512"
+    "C:\\Users\\Seth\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Seth\\.nuget\\packages\\system.drawing.primitives\\4.3.0\\system.drawing.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\Seth\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\Seth\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

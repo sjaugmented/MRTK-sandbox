@@ -101,7 +101,16 @@ public class OrbManager : MonoBehaviour
 
         if (twoPalms)
         {
-            if (touchDown)
+            if (palmsForward)
+            {
+                CastOrb();
+                DisableOrbDummies();
+            }
+            else if (palmsIn)
+            {
+                ElementSelector();
+            }
+            else if (touchDown)
             {
                 OrbScaler();
 
@@ -112,34 +121,26 @@ public class OrbManager : MonoBehaviour
                 SendOSCMessage(conjureOSCMessages[elementID], conjureValueOSC);
 
             }
-            else if (palmsIn)
+            else DisableOrbDummies();
+
+            if (fingerGun)
             {
-                ElementSelector();
-            }
-            else if (palmsForward)
-            {
-                CastOrb();
+                CastParticle();
+                DisableStreams();
             }
             else if (rockOn)
             {
                 EnableStream();
             }
-            else if (!rockOn)
-            {
-                DisableStreams();
-            }
-            else if (fingerGun)
-            {
-                CastParticle();
-            }
             else
             {
-                DisableOrbDummies();
+                DisableStreams();
             }
         }
         else
         {
             DisableOrbDummies();
+            DisableStreams();
         }
     }
 
