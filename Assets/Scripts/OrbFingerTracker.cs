@@ -54,7 +54,7 @@ public class OrbFingerTracker : MonoBehaviour
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Right, out rightPalm) && HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, Handedness.Left, out leftPalm))
         {
             twoPalms = true;
-            palmDist = Mathf.Abs(Vector3.Distance(rightPalm.Position, leftPalm.Position));
+            palmDist = Vector3.Distance(rightPalm.Position, leftPalm.Position);
 
             // get reference angles
             // palm to palm
