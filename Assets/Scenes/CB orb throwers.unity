@@ -515,7 +515,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431665070}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8821811f704fa594182c00cc2811db0f, type: 3}
   m_Name: 
@@ -1092,7 +1092,7 @@ MonoBehaviour:
   - {fileID: 1755469644}
   - {fileID: 424153183}
   - {fileID: 336205230}
-  maxPalmDistance: 0.3
+  maxPalmDistance: 0.5
   scaleMultiplier: 1
   conjureOSCMessages:
   - light conjure message here
@@ -1154,7 +1154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1117319103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5979,8 +5979,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268968389}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.18081999, y: 0.18081999, z: 0.18081999}
+  m_LocalPosition: {x: 0.0000821054, y: -0.057943236, z: 0.52005684}
+  m_LocalScale: {x: 0.05784709, y: 0.05784709, z: 0.05784709}
   m_Children:
   - {fileID: 1469484791}
   - {fileID: 1855595861}

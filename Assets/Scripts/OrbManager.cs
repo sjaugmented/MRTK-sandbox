@@ -34,7 +34,7 @@ public class OrbManager : MonoBehaviour
 
     // coordinates for conjuring
     Vector3 midpointPalms;
-    Vector3 midpointRockOn;
+    Vector3 midpointIndexPinky;
     Vector3 palm1Pos;
     Vector3 palm2Pos;
     float palmDist;
@@ -80,13 +80,13 @@ public class OrbManager : MonoBehaviour
     }
 
 
-    private void DisableOrbDummies()
+    /*private void DisableOrbDummies()
     {
         foreach (GameObject dummy in spellBook.orbDummies)
         {
             dummy.SetActive(false);
         }
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -108,7 +108,7 @@ public class OrbManager : MonoBehaviour
             if (palmsForward)
             {
                 CastOrb();
-                DisableOrbDummies();
+                masterOrb.SetActive(false);
             }
             else if (palmsIn)
             {
@@ -116,7 +116,7 @@ public class OrbManager : MonoBehaviour
             }
             else if (touchDown)
             {
-                OrbScaler();
+                ElementScaler();
 
                 conjureValueOSC = palmDist / maxPalmDistance;
 
@@ -125,7 +125,7 @@ public class OrbManager : MonoBehaviour
                 SendOSCMessage(conjureOSCMessages[elementID], conjureValueOSC);
 
             }
-            else DisableOrbDummies();
+            else masterOrb.SetActive(false);
 
             if (fingerGun)
             {
@@ -143,7 +143,7 @@ public class OrbManager : MonoBehaviour
         }
         else
         {
-            DisableOrbDummies();
+            masterOrb.SetActive(false);
             DisableStreams();
         }
     }
@@ -166,7 +166,7 @@ public class OrbManager : MonoBehaviour
         rtPinkyPos = handTracking.GetRtPinkyPos();
 
         midpointPalms = Vector3.Lerp(palm1Pos, palm2Pos, 0.5f);
-        midpointRockOn = Vector3.Lerp(rtIndexPos, rtPinkyPos, 0.5f);
+        midpointIndexPinky = Vector3.Lerp(rtIndexPos, rtPinkyPos, 0.5f);
 
         if (palmDist < maxPalmDistance) spellScale = palmDist * scaleMultiplier;
         if (palmDist >= maxPalmDistance) spellScale = maxPalmDistance * scaleMultiplier;
@@ -175,69 +175,93 @@ public class OrbManager : MonoBehaviour
     private void ElementSelector()
     {
         fromOrbScaler = false;
-        float elSlotSize = maxPalmDistance / spellBook.orbDummies.Count;
 
+        float elSlotSize = maxPalmDistance / spellBook.masterOrbElements.Count;
+
+        // activate master orb and position between palms
+        masterOrb.SetActive(true);
+        masterOrb.transform.position = midpointPalms;
+
+        // select element based on distance between palms
         if (palmDist > 0 && palmDist <= maxPalmDistance - elSlotSize * 3)
         {
             currEl = Element.light;
-            for (int i = 0; i < spellBook.orbDummies.Count; i++)
+            for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
             {
-                if (i == elementID) spellBook.orbDummies[i].SetActive(true);
-                else spellBook.orbDummies[i].SetActive(false);
+                if (i == elementID) spellBook.masterOrbElements[i].SetActive(true);
+                else spellBook.masterOrbElements[i].SetActive(false);
             }
         }
         else if (palmDist > maxPalmDistance - elSlotSize * 3 && palmDist <= maxPalmDistance - elSlotSize * 2)
         {
             currEl = Element.fire;
-            for (int i = 0; i < spellBook.orbDummies.Count; i++)
+            for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
             {
-                if (i == elementID) spellBook.orbDummies[i].SetActive(true);
-                else spellBook.orbDummies[i].SetActive(false);
+                if (i == elementID) spellBook.masterOrbElements[i].SetActive(true);
+                else spellBook.masterOrbElements[i].SetActive(false);
             }
         }
         else if (palmDist > maxPalmDistance - elSlotSize * 2 && palmDist <= maxPalmDistance - elSlotSize)
         {
             currEl = Element.water;
-            for (int i = 0; i < spellBook.orbDummies.Count; i++)
+            for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
             {
-                if (i == elementID) spellBook.orbDummies[i].SetActive(true);
-                else spellBook.orbDummies[i].SetActive(false);
+                if (i == elementID) spellBook.masterOrbElements[i].SetActive(true);
+                else spellBook.masterOrbElements[i].SetActive(false);
             }
         }
         else if (palmDist > maxPalmDistance - elSlotSize && palmDist <= maxPalmDistance)
         {
             currEl = Element.ice;
-            for (int i = 0; i < spellBook.orbDummies.Count; i++)
+            for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
             {
-                if (i == elementID) spellBook.orbDummies[i].SetActive(true);
-                else spellBook.orbDummies[i].SetActive(false);
+                if (i == elementID) spellBook.masterOrbElements[i].SetActive(true);
+                else spellBook.masterOrbElements[i].SetActive(false);
             }
         }
 
-        spellBook.orbDummies[elementID].transform.position = midpointPalms;
-        spellBook.orbDummies[elementID].transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        // keep orb element scaled at 1 for best visibility
+        spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(1, 1, 1);
 
     }
 
-    private void OrbScaler()
+    private void ElementScaler()
     {
         fromOrbScaler = true;
 
-        for (int i = 0; i < spellBook.orbDummies.Count; i++)
+        // activate master orb and position between palms
+        masterOrb.SetActive(true);
+        masterOrb.transform.position = midpointPalms;
+
+        // activate correct orb element
+        for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
         {
-            if (i == elementID) spellBook.orbDummies[i].SetActive(true);
-            else spellBook.orbDummies[i].SetActive(false);
+            if (i == elementID) spellBook.masterOrbElements[i].SetActive(true);
+            else spellBook.masterOrbElements[i].SetActive(false);
         }
 
-        spellBook.orbDummies[elementID].transform.position = midpointPalms;
+        // determine scale
+        float elementScale = palmDist / maxPalmDistance;
 
+        // apply scale based to orb element
         if (palmDist < maxPalmDistance)
         {
-            spellBook.orbDummies[elementID].transform.localScale = new Vector3(palmDist * scaleMultiplier, palmDist * scaleMultiplier, palmDist * scaleMultiplier);
+            if (currEl == Element.water)
+            {
+                LiquidVolumeAnimator liquidController = spellBook.masterOrbElements[elementID].GetComponentInChildren<LiquidVolumeAnimator>();
+                liquidController.level = elementScale;
+            }
+            else spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(elementScale * scaleMultiplier, elementScale * scaleMultiplier, elementScale * scaleMultiplier);
+
         }
         else if (palmDist >= maxPalmDistance)
         {
-            spellBook.orbDummies[elementID].transform.localScale = new Vector3(maxPalmDistance * scaleMultiplier, maxPalmDistance * scaleMultiplier, maxPalmDistance * scaleMultiplier);
+            if (currEl == Element.water)
+            {
+                float waterLevel = spellBook.masterOrbElements[elementID].GetComponentInChildren<LiquidVolumeAnimator>().level;
+                waterLevel = 1;
+            }
+            else spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(1 * scaleMultiplier, 1 * scaleMultiplier, 1 * scaleMultiplier);
         }
     }
 
@@ -275,7 +299,7 @@ public class OrbManager : MonoBehaviour
                 var emission = spellBook.streamSpells[i].emission;
                 emission.enabled = true;
                 Transform streamParent = spellBook.streamSpells[elementID].transform.parent;
-                streamParent.position = midpointRockOn;
+                streamParent.position = midpointIndexPinky;
 
                 foreach (Transform child in spellBook.streamSpells[elementID].transform)
                 {
@@ -288,7 +312,7 @@ public class OrbManager : MonoBehaviour
                 var emission = spellBook.streamSpells[i].emission;
                 emission.enabled = false;
                 Transform streamParent = spellBook.streamSpells[i].transform.parent;
-                streamParent.position = midpointRockOn;
+                streamParent.position = midpointIndexPinky;
 
                 foreach (Transform child in spellBook.streamSpells[i].transform)
                 {
