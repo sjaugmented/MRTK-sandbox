@@ -26,7 +26,7 @@ public class OrbManager : MonoBehaviour
     [SerializeField] float scaleMultiplier = 1f;
 
     [Header("OSC controller")]
-    public List<String> conjureOSCMessages;
+    public List<String> conjureOSCMessages;    
     
     float conjureValueOSC = 0;
 
@@ -55,6 +55,8 @@ public class OrbManager : MonoBehaviour
     OrbFingerTracker handTracking;
     SpellBook spellBook;
     OSC osc;
+    SoundManager sound;
+    AudioSource audio;
 
     private void ConvertElementToID() // allows for quick selection in inspector for testing various elements and forms
     {
@@ -70,6 +72,8 @@ public class OrbManager : MonoBehaviour
         handTracking = FindObjectOfType<OrbFingerTracker>();
         spellBook = GetComponent<SpellBook>();
         osc = FindObjectOfType<OSC>();
+        sound = FindObjectOfType<SoundManager>();
+        audio = FindObjectOfType<SoundManager>().GetComponent<AudioSource>();
 
         masterOrb.SetActive(false);
         DisableStreams();
@@ -96,15 +100,18 @@ public class OrbManager : MonoBehaviour
                 if (palmsForward)
                 {
                     CastOrb();
+                    sound.orbAmbienceFX.Pause();
                     masterOrb.SetActive(false);
                 }
                 else if (palmsIn)
                 {
                     ElementSelector();
+                    if (!sound.orbAmbienceFX.isPlaying) sound.orbAmbienceFX.Play();
                 }
                 else if (touchDown)
                 {
                     ElementScaler();
+                    if (!sound.orbAmbienceFX.isPlaying) sound.orbAmbienceFX.Play();
 
                     conjureValueOSC = palmDist / maxPalmDistance;
 
@@ -132,6 +139,7 @@ public class OrbManager : MonoBehaviour
             else
             {
                 masterOrb.SetActive(false);
+                sound.orbAmbienceFX.Pause();
                 DisableStreams();
             }
         }
@@ -172,33 +180,50 @@ public class OrbManager : MonoBehaviour
         if (palmDist > 0 && palmDist <= maxPalmDistance - elSlotSize * 3)
         {
             currEl = Element.light;
+            // activate corresponding element
             for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
             {
                 if (i == elementID) spellBook.masterOrbElements[i].SetActive(true);
                 else spellBook.masterOrbElements[i].SetActive(false);
+            }
+
+            // play soundfx as you leave the zone
+            if (palmDist == maxPalmDistance - (elSlotSize * 3))
+            {
+                audio.PlayOneShot(sound.elementSwitchFX);
+                Debug.Log("switch!");
             }
         }
         else if (palmDist > maxPalmDistance - elSlotSize * 3 && palmDist <= maxPalmDistance - elSlotSize * 2)
         {
             currEl = Element.fire;
+            // activate corresponding element
             for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
             {
                 if (i == elementID) spellBook.masterOrbElements[i].SetActive(true);
                 else spellBook.masterOrbElements[i].SetActive(false);
             }
+
+            // play soundfx as you leave the zone
+            if (palmDist == maxPalmDistance - elSlotSize * 2) audio.PlayOneShot(sound.elementSwitchFX);
         }
         else if (palmDist > maxPalmDistance - elSlotSize * 2 && palmDist <= maxPalmDistance - elSlotSize)
         {
             currEl = Element.water;
+            // activate corresponding element
             for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
             {
                 if (i == elementID) spellBook.masterOrbElements[i].SetActive(true);
                 else spellBook.masterOrbElements[i].SetActive(false);
             }
+
+            // play soundfx as you leave the zone
+            if (palmDist == maxPalmDistance - elSlotSize) audio.PlayOneShot(sound.elementSwitchFX);
         }
         else if (palmDist > maxPalmDistance - elSlotSize && palmDist <= maxPalmDistance)
         {
             currEl = Element.ice;
+            // activate corresponding element
             for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
             {
                 if (i == elementID) spellBook.masterOrbElements[i].SetActive(true);
@@ -227,12 +252,10 @@ public class OrbManager : MonoBehaviour
         }
 
         // determine scale
-        
+        if (palmDist < maxPalmDistance) elementScale = 1 - palmDist / maxPalmDistance;
+        else if (palmDist >= maxPalmDistance) elementScale = 0;
 
-        // apply scale based to orb element
-        if (palmDist < maxPalmDistance) elementScale = palmDist / maxPalmDistance;
-        else if (palmDist >= maxPalmDistance) elementScale = 1;
-
+        // apply scale based on orb element
         if (currEl == Element.water)
         {
             LiquidVolumeAnimator liquidController = spellBook.masterOrbElements[elementID].GetComponentInChildren<LiquidVolumeAnimator>();
@@ -295,6 +318,9 @@ public class OrbManager : MonoBehaviour
                 childEmission.enabled = false;
             }
         }
+
+        sound.fireStreamFX.Pause();
+        sound.waterIceStreamFX.Pause();
     }
 
     private void EnableStream()
@@ -328,8 +354,18 @@ public class OrbManager : MonoBehaviour
                 }
             }
         }
-        
-        
+
+
+        if (currEl == Element.fire)
+        {
+            sound.fireStreamFX.Play();
+            sound.waterIceStreamFX.Pause();
+        }
+        else
+        {
+            sound.waterIceStreamFX.Play();
+            sound.fireStreamFX.Pause();
+        }
     }
 
 
