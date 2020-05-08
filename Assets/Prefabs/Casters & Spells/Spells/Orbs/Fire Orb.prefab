@@ -5049,7 +5049,7 @@ MonoBehaviour:
   DMXvalues: 
   dimOverTime: 1
   rateOfDim: 20
-  OSCtoReceive: message to receive here
+  OSCtoReceive: /fireInterrupt
   messageOSC: /composition/columns/5/connect
   valueOSC: 1
   dimOSCwithDMX: 0

@@ -174,7 +174,7 @@ MonoBehaviour:
   DMXvalues: 
   dimOverTime: 1
   rateOfDim: 20
-  OSCtoReceive: message to receive here
+  OSCtoReceive: /iceInterrupt
   messageOSC: /composition/columns/11/connect
   valueOSC: 1
   dimOSCwithDMX: 0

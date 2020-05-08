@@ -366,7 +366,7 @@ MonoBehaviour:
   DMXvalues: 
   dimOverTime: 1
   rateOfDim: 20
-  OSCtoReceive: message to receive here
+  OSCtoReceive: /waterInterrupt
   messageOSC: /composition/columns/8/connect
   valueOSC: 1
   dimOSCwithDMX: 0

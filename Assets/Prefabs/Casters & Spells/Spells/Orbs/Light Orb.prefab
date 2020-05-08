@@ -130,7 +130,7 @@ MonoBehaviour:
   DMXvalues: 
   dimOverTime: 1
   rateOfDim: 20
-  OSCtoReceive: message to receive here
+  OSCtoReceive: /lightInterrupt
   messageOSC: /composition/columns/2/connect
   valueOSC: 1
   dimOSCwithDMX: 0
