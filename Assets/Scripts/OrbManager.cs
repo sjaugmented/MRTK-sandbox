@@ -462,6 +462,7 @@ public class OrbManager : MonoBehaviour
     {
         float sliderVal = maxPalmDistSlider.SliderValue;
         maxPalmDistance = sliderVal * 0.6f;
+        if (maxPalmDistance < 0.2f) maxPalmDistance = 0.2f;
         maxPalmDistText.text = maxPalmDistance.ToString();
     }
 }
