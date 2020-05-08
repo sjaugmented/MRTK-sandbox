@@ -120,7 +120,11 @@ public class OrbManager : MonoBehaviour
                     SendOSCMessage(conjureOSCMessages[elementID], conjureValueOSC);
 
                 }
-                else masterOrb.SetActive(false);
+                else
+                {
+                    masterOrb.SetActive(false);
+                    sound.orbAmbienceFX.Pause();
+                }
 
                 if (fingerGun)
                 {
