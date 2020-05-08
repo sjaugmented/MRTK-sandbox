@@ -3644,5 +3644,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Master Orb
       objectReference: {fileID: 0}
+    - target: {fileID: 9064369555553278808, guid: 1d51ecb2f44a95d438ccb81bdc6211e0,
+        type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9154017839215103022, guid: 1d51ecb2f44a95d438ccb81bdc6211e0,
+        type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9154269194990692390, guid: 1d51ecb2f44a95d438ccb81bdc6211e0,
+        type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9154644088447230632, guid: 1d51ecb2f44a95d438ccb81bdc6211e0,
+        type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d51ecb2f44a95d438ccb81bdc6211e0, type: 3}
