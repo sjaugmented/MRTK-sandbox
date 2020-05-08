@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class OrbManager : MonoBehaviour
@@ -14,15 +15,23 @@ public class OrbManager : MonoBehaviour
 
     [Header("Palm Menus")]
     [Tooltip("Parent object of the palm menu visuals")]
-    [SerializeField] GameObject palmMenuVisuals;
+    [SerializeField] GameObject palmMenuVisuals1;
+    [SerializeField] GameObject palmMenuVisuals2;
     [Tooltip("Rate of fire GameObject sliders in hierarchy")]
     [SerializeField] PinchSlider orbROFSlider;
+    [SerializeField] TextMeshPro orbROFText;
     [Tooltip("Rate of fire GameObject sliders in hierarchy")]
     [SerializeField] PinchSlider particleROFSlider;
+    [SerializeField] TextMeshPro particleROFText;
+    [SerializeField] PinchSlider palmOffsetSlider;
+    [SerializeField] TextMeshPro palmOffsetText;
+    [SerializeField] PinchSlider maxPalmDistSlider;
+    [SerializeField] TextMeshPro maxPalmDistText;
 
     [Header("Palm Conjure")]
     [Tooltip("Max distance between palms for conjuring")]
-    [SerializeField] float maxPalmDistance = 0.3f;
+    [SerializeField] [Range( 0.2f, 0.6f)] float maxPalmDistance = 0.3f;
+    [SerializeField] [Range(0f, 0.2f)] float palmDistOffset = 0.05f;
     [SerializeField] float scaleMultiplier = 1f;
 
     [Header("OSC controller")]
@@ -93,7 +102,7 @@ public class OrbManager : MonoBehaviour
 
         CalcHandPositions();
 
-        if (!palmMenuVisuals.activeInHierarchy)
+        if (!palmMenuVisuals1.activeInHierarchy && !palmMenuVisuals2.activeInHierarchy)
         {
             if (twoPalms)
             {
@@ -105,11 +114,15 @@ public class OrbManager : MonoBehaviour
                 }
                 else if (palmsIn)
                 {
+                    masterOrb.SetActive(true);
+                    masterOrb.transform.position = midpointPalms;
                     ElementSelector();
                     if (!sound.orbAmbienceFX.isPlaying) sound.orbAmbienceFX.Play();
                 }
                 else if (touchDown)
                 {
+                    masterOrb.SetActive(true);
+                    masterOrb.transform.position = midpointPalms;
                     ElementScaler();
                     if (!sound.orbAmbienceFX.isPlaying) sound.orbAmbienceFX.Play();
 
@@ -147,6 +160,12 @@ public class OrbManager : MonoBehaviour
                 DisableStreams();
             }
         }
+        else
+        {
+            masterOrb.SetActive(false);
+            sound.orbAmbienceFX.Pause();
+            DisableStreams();
+        }
     }
 
     private void SendOSCMessage(string address, float value)
@@ -174,14 +193,23 @@ public class OrbManager : MonoBehaviour
     {
         fromOrbScaler = false;
 
-        float elSlotSize = maxPalmDistance / spellBook.masterOrbElements.Count;
+        float elSlotSize = (maxPalmDistance - palmDistOffset) / spellBook.masterOrbElements.Count;
 
         // activate master orb and position between palms
-        masterOrb.SetActive(true);
-        masterOrb.transform.position = midpointPalms;
+        
 
         // select element based on distance between palms
-        if (palmDist > 0 && palmDist <= maxPalmDistance - elSlotSize * 3)
+        if (palmDist > 0 && palmDist <= palmDistOffset)
+        {
+            currEl = Element.light;
+            // activate corresponding element
+            for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
+            {
+                if (i == elementID) spellBook.masterOrbElements[i].SetActive(true);
+                else spellBook.masterOrbElements[i].SetActive(false);
+            }
+        }
+        else if(palmDist > palmDistOffset && palmDist <= maxPalmDistance - (elSlotSize * 3))
         {
             currEl = Element.light;
             // activate corresponding element
@@ -198,7 +226,7 @@ public class OrbManager : MonoBehaviour
                 Debug.Log("switch!");
             }
         }
-        else if (palmDist > maxPalmDistance - elSlotSize * 3 && palmDist <= maxPalmDistance - elSlotSize * 2)
+        else if (palmDist > maxPalmDistance - (elSlotSize * 3) && palmDist <= maxPalmDistance - (elSlotSize * 2))
         {
             currEl = Element.fire;
             // activate corresponding element
@@ -209,9 +237,9 @@ public class OrbManager : MonoBehaviour
             }
 
             // play soundfx as you leave the zone
-            if (palmDist == maxPalmDistance - elSlotSize * 2) audio.PlayOneShot(sound.elementSwitchFX);
+            if (palmDist == maxPalmDistance - (elSlotSize * 2)) audio.PlayOneShot(sound.elementSwitchFX);
         }
-        else if (palmDist > maxPalmDistance - elSlotSize * 2 && palmDist <= maxPalmDistance - elSlotSize)
+        else if (palmDist > maxPalmDistance - (elSlotSize * 2) && palmDist <= maxPalmDistance - elSlotSize)
         {
             currEl = Element.water;
             // activate corresponding element
@@ -245,8 +273,7 @@ public class OrbManager : MonoBehaviour
         fromOrbScaler = true;
 
         // activate master orb and position between palms
-        masterOrb.SetActive(true);
-        masterOrb.transform.position = midpointPalms;
+        
 
         // activate correct orb element
         for (int i = 0; i < spellBook.masterOrbElements.Count; i++)
@@ -256,14 +283,16 @@ public class OrbManager : MonoBehaviour
         }
 
         // determine scale
-        if (palmDist < maxPalmDistance) elementScale = 1 - palmDist / maxPalmDistance;
-        else if (palmDist >= maxPalmDistance) elementScale = 0;
+        if (palmDist >= palmDistOffset && palmDist <= maxPalmDistance) elementScale = 1 - (palmDist - palmDistOffset) / (maxPalmDistance - palmDistOffset);
+        else if (palmDist > maxPalmDistance) elementScale = 0;
+        else if (palmDist < palmDistOffset) elementScale = 1;
 
         // apply scale based on orb element
         if (currEl == Element.water)
         {
             LiquidVolumeAnimator liquidController = spellBook.masterOrbElements[elementID].GetComponentInChildren<LiquidVolumeAnimator>();
-            liquidController.level = elementScale;
+            if (elementScale <= 0.002f) liquidController.level = 0.002f;
+            else liquidController.level = elementScale;
         }
         else spellBook.masterOrbElements[elementID].transform.localScale = new Vector3(elementScale, elementScale, elementScale);
     }
@@ -402,17 +431,37 @@ public class OrbManager : MonoBehaviour
 
     public void SetOrbRateOfFire()
     {
-        var sliderVal = orbROFSlider.SliderValue;
+        float sliderVal = orbROFSlider.SliderValue;
         // rate of fire cannot go below 1
         if (sliderVal < 0.05f) sliderVal = 0.05f;
         orbsPerSecond = sliderVal * 20;
+
+        orbROFText.text = orbsPerSecond.ToString();
     }
 
     public void SetParticleRateOfFire()
     {
-        var sliderVal = particleROFSlider.SliderValue;
+        float sliderVal = particleROFSlider.SliderValue;
         // rate of fire cannot go below 1
         if (sliderVal < 0.05f) sliderVal = 0.05f;
         particlesPerSecond = sliderVal * 20;
+
+        particleROFText.text = particlesPerSecond.ToString();
+    }
+
+    public void SetPalmDistanceOffset()
+    {
+        float sliderVal = palmOffsetSlider.SliderValue;
+
+        palmDistOffset = sliderVal * 0.2f;
+
+        palmOffsetText.text = palmDistOffset.ToString();
+    }
+
+    public void SetMaxPalmDist()
+    {
+        float sliderVal = maxPalmDistSlider.SliderValue;
+        maxPalmDistance = sliderVal * 0.6f;
+        maxPalmDistText.text = maxPalmDistance.ToString();
     }
 }
